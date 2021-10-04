@@ -2,7 +2,7 @@
   import { loggedIn, jwt, user, loginRedirect } from '../store.js'
   const search = window.location.hash.split('?')[1]
   const getUserInfo = () => {
-    fetch('https://ggcms.herokuapp.com/auth/google/callback?' + search)
+    fetch('https://ggcms.herokuapp.com/auth/google/callback?' + search)  // IMPORTANT: this is not correct url, though it works lol
       .then((res) => res.json())
       .catch((err) => {
         console.log(err)

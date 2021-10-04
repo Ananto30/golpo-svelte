@@ -18,18 +18,4 @@
 		class="mr-5 flex text-md items-center gap-1 border border-gray-300 px-3 py-1 rounded-full hover:bg-gray-100 transition-colors focus:bg-gray-100 focus:outline-none focus-visible:border-gray-500">
 		<span>Share</span>
 	</button>
-	<div>
-		<!-- <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-7 w-7 cursor-pointer"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor">
-        <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
-    </svg> -->
-	</div>
 </div>

@@ -41,7 +41,7 @@
 <svelte:window on:hashchange={hashchange} />
 
 <body class="container max-w-6xl mx-auto">
-	{#if $loggedIn}
+	{#if $loggedIn}  <!-- TODO: fix the logic, this is done to continue development -->
 		<Login />
 	{:else}
 		<Nav />
