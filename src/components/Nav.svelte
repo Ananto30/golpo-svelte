@@ -11,31 +11,31 @@
 	<div class="my-auto flex gap-1">
 		<a
 			href="#/home"
-			class="hidden md:block transition duration-200 ease-in-out hover:bg-gray-100 cursor-pointer px-2 py-1 rounded-2xl
+			class="hidden md:block transition duration-200 ease-in-out hover:bg-gray-100 cursor-pointer px-2 py-1 rounded-xl
 			focus:border">
 			Home
 		</a>
 		<a
 			href="#/chat"
-			class="transition duration-200 ease-in-out hover:bg-gray-100 cursor-pointer px-2 py-1 rounded-2xl
+			class="transition duration-200 ease-in-out hover:bg-gray-100 cursor-pointer px-2 py-1 rounded-xl
 			focus:border">
 			Chat
 		</a>
 		<a
 			href="#/users"
-			class="hidden md:block transition duration-200 ease-in-out hover:bg-gray-100 cursor-pointer px-2 py-1 rounded-2xl
+			class="hidden md:block transition duration-200 ease-in-out hover:bg-gray-100 cursor-pointer px-2 py-1 rounded-xl
 		focus:border">
 			Users
 		</a>
 		<a
 			href="#/profile"
-			class="transition duration-200 ease-in-out hover:bg-gray-100 cursor-pointer px-2 py-1 rounded-2xl
+			class="transition duration-200 ease-in-out hover:bg-gray-100 cursor-pointer px-2 py-1 rounded-xl
 		focus:border">
 			Profile
 		</a>
 		<a
 			href="#/logout"
-			class="transition duration-200 ease-in-out hover:bg-gray-100 cursor-pointer px-2 py-1 rounded-2xl
+			class="transition duration-200 ease-in-out hover:bg-gray-100 cursor-pointer px-2 py-1 rounded-xl
 		focus:border">
 			Logout
 		</a>

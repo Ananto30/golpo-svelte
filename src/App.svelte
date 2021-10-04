@@ -3,13 +3,13 @@
 	import Nav from "./components/Nav.svelte";
 
 	import Home from "./page/Home.svelte";
-	import Footer from "./components/Footer.svelte";
 	import Chat from "./page/Chat.svelte";
 	import Users from "./page/Users.svelte";
 	import Login from "./page/Login.svelte";
 	import Profile from "./page/Profile.svelte";
 	import LoginRedirect from "./page/LoginRedirect.svelte";
-  
+	import MobileUserChat from "./components/MobileUserChat.svelte";
+
 	import { loggedIn } from "./store.js";
 
 	let currentPage;
@@ -21,6 +21,7 @@
 		"/users": Users,
 		"/profile": Profile,
 		"/loginredirect": LoginRedirect,
+		"/userchat": MobileUserChat,
 	};
 
 	function hashchange() {
@@ -45,7 +46,6 @@
 	{:else}
 		<Nav />
 		<svelte:component this={currentPage} />
-		<Footer />
 	{/if}
 </body>
 
@@ -56,16 +56,18 @@
 	body {
 		/* font-family: 'IBM Plex Sans', sans-serif; */
 		/* font-family: 'Handlee', cursive; */
-		/* font-family: 'Nunito', sans-serif; */
+		/* font-family: "Nunito", sans-serif; */
 		/* font-family: 'Open Sans', sans-serif; */
 		/* font-family: 'Ubuntu', sans-serif; */
 		/* font-family: 'Nanum Gothic', sans-serif; */
 		/* font-family: 'Dosis', sans-serif; */
 		/* font-family: 'Libre Franklin', sans-serif; */
 		/* font-family: 'Bitter', serif; */
-		font-family: "Exo 2", sans-serif;
+		/* font-family: "Exo 2", sans-serif; */
 		/* font-family: 'Maven Pro', sans-serif; */
 		/* max-width: 1152px; */
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+			"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 	}
 	* {
 		-webkit-tap-highlight-color: rgba(0, 0, 0, 0);

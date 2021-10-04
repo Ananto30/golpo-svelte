@@ -1,5 +1,7 @@
 <script>
 	import { fade, fly } from "svelte/transition";
+	import Footer from "../components/Footer.svelte";
+
 	let meats = [
 		{
 			id: "goat1",
@@ -140,3 +142,5 @@
 		</div>
 	</div>
 </div>
+
+<Footer />
