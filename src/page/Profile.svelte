@@ -18,72 +18,119 @@
 </script>
 
 <div in:fade class="p-5 pt-16 antialiased my-auto min-h-screen">
+	<div class="fixed max-w-sm pt-4">
+		<div class="bg-gray-100 rounded-2xl py-3">
+			<div class="photo-wrapper p-2">
+				<img
+					class="w-32 h-32 rounded-full mx-auto"
+					src="https://www.gravatar.com/avatar/2acfb745ecf9d4dccb3364752d17f65f?s=260&d=mp"
+					alt="John Doe" />
+			</div>
+			<div class="p-2">
+				<h3 class="text-center text-xl text-gray-900 font-medium leading-8">Joh Doe</h3>
+				<div class="text-center text-gray-400 text-xs font-semibold">
+					<p>Web Developer</p>
+				</div>
+				<table class="text-xs my-3">
+					<tbody
+						><tr>
+							<td class="px-2 py-2 text-gray-500 font-semibold">Address</td>
+							<td class="px-2 py-2">Chatakpur-3, Dhangadhi Kailali</td>
+						</tr>
+						<tr>
+							<td class="px-2 py-2 text-gray-500 font-semibold">Phone</td>
+							<td class="px-2 py-2">+977 9955221114</td>
+						</tr>
+						<tr>
+							<td class="px-2 py-2 text-gray-500 font-semibold">Email</td>
+							<td class="px-2 py-2">john@exmaple.com</td>
+						</tr>
+					</tbody>
+				</table>
 
-  <div class="min-h-screen flex justify-center items-center">
-    <div class="w-48 h-64 rounded-xl bg-gray-200 flex flex-col shadow">
-      <img class="w-auto rounded-t-xl" src="https://avatars.githubusercontent.com/u/16485031?v=4" alt="avatar" />
-      <div class="text-center flex flex-col p-2">
-        <span class="text-base font-bold">Dendi Handian</span>
-        <span class="text-xs italic">Software Engineer</span>
-      </div>
-    </div>
-  </div>
-
-  
-	<div
-		class="max-w-3xl text-xl md:text-2xl font-medium my-2 md:my-2 pb-1 border-b
-    flex">
-		Your bazar lists
-	</div>
-	<p class="text-sm md:text-base mb-4">Choose from your saved bazar list -</p>
-	<div class="max-w-3xl grid gap-3">
-		{#each bazarList as bazar}
-			<div class="rounded-sm flex border text-xs md:text-base">
-				<svg
-					class="m-2 h-7 md:h-12"
-					version="1.1"
-					id="Layer_1"
-					xmlns="http://www.w3.org/2000/svg"
-					xmlns:xlink="http://www.w3.org/1999/xlink"
-					x="0px"
-					y="0px"
-					viewBox="0 0 512 512"
-					style="enable-background:new 0 0 512 512;"
-					xml:space="preserve">
-					<rect x="175.941" y="111.89" style="fill:#FEB860;" width="272.201" height="392.286" />
-					<rect x="175.941" y="111.89" style="fill:#FEC986;" width="224.165" height="392.286" />
-					<rect x="55.856" y="272.013" style="fill:#9B4573;" width="168.121" height="232.173" />
-					<rect x="55.856" y="272.013" style="fill:#C8546F;" width="96.072" height="232.173" />
-					<g>
-						<path
-							style="fill:#1D1D1B;"
-							d="M227.794,512H52.038V264.191h175.756V512z
-              M67.678,496.36h144.475V279.831H67.678V496.36z" />
-						<path
-							style="fill:#1D1D1B;"
-							d="M187.951,296.214h-32.023v15.64h8.191v40.215c0,13.346-10.857,24.204-24.204,24.204
-              c-13.345,0-24.203-10.857-24.203-24.204v-40.215h8.191v-15.64H91.881v15.64h8.191v40.215c0,21.969,17.874,39.844,39.843,39.844
-              c21.97,0,39.844-17.875,39.844-39.844v-40.215h8.191v-15.64H187.951z" />
-						<polygon
-							style="fill:#1D1D1B;"
-							points="459.962,512 235.986,512 235.986,496.36 444.322,496.36
-              444.322,119.715 187.765,119.715 187.765,255.999 172.125,255.999
-              172.125,104.075 459.962,104.075 " />
-						<rect x="260.002" y="136.101" style="fill:#1D1D1B;" width="16.011" height="15.64" />
-						<rect x="356.074" y="136.101" style="fill:#1D1D1B;" width="16.011" height="15.64" />
-						<path
-							style="fill:#1D1D1B;"
-							d="M371.899,95.883h-15.64V55.854c0-22.175-18.04-40.214-40.215-40.214s-40.215,18.04-40.215,40.214
-              v40.029h-15.64V55.854C260.188,25.056,285.245,0,316.044,0s55.855,25.056,55.855,55.854V95.883z" />
-					</g>
-				</svg>
-				<div class="mx-0 my-2">
-					<div class="md:text-lg font-semibold">{bazar.name}</div>
-					<div class="gap-2 md:gap-3">
-						<p>{bazar.items.join(", ")}</p>
-					</div>
+				<div class="text-center my-3">
+					<a class="text-xs text-indigo-500 italic hover:underline hover:text-indigo-600 font-medium" href="#"
+						>View Profile</a>
 				</div>
 			</div>
-		{/each}
+		</div>
+	</div>
+
+	<div class="ml-72 mt-1 border-b md:border-0 py-5 md:py-0">
+		<div
+			class="bg-white mx-auto w-80 max-w-3xl sm:w-full sm:p-4 h-auto sm:h-52 rounded-2xl flex flex-col sm:flex-row gap-5 select-none">
+			<div
+				style="background: url('https://images.unsplash.com/photo-1426604966848-d7adac402bff?ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8bmF0dXJlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60')"
+				class="h-40 sm:h-full sm:w-60 rounded bg-gray-100 bg-center bg-cover" />
+			<div class="flex sm:flex-1 flex-col gap-2 p-1">
+				<div class="flex items-center justify-between">
+					<div class="flex justify-between items-center">
+						<img
+							class="w-12 rounded-full"
+							src="https://d2qp0siotla746.cloudfront.net/img/use-cases/profile-picture/template_0.jpg"
+							alt="Alex" />
+						<div class="ml-3">
+							<h1 class=" font-bold text-gray-800 cursor-pointer">Stuar Manson</h1>
+							<p class="text-xs text-gray-800 hover:underline cursor-pointer">#Publicado hace 2 horas</p>
+						</div>
+					</div>
+					<div>
+						<!-- <svg
+							xmlns="http://www.w3.org/2000/svg"
+							class="h-7 w-7 cursor-pointer"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor">
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+						</svg> -->
+					</div>
+				</div>
+				<h1 class="text-lg sm:text-lg font-semibold  text-gray-600">
+					This is the title for your card. This is really cool
+				</h1>
+				<p class="text-gray-500 text-sm line-clamp-3">
+					This is the desctiption for your card. This is really really long. This is used to describe the
+					content of the card. I hope you like the design...
+				</p>
+				<div class="flex gap-4 mt-auto">
+					<button
+						class="flex text-sm items-center gap-1 border border-gray-300 px-3 py-1 rounded-full hover:bg-gray-50 transition-colors focus:bg-gray-100 focus:outline-none focus-visible:border-gray-500">
+						<svg
+							stroke="currentColor"
+							fill="currentColor"
+							stroke-width="0"
+							viewBox="0 0 1024 1024"
+							height="1em"
+							width="1em"
+							xmlns="http://www.w3.org/2000/svg"
+							><path
+								d="M923 283.6a260.04 260.04 0 0 0-56.9-82.8 264.4 264.4 0 0 0-84-55.5A265.34 265.34 0 0 0 679.7 125c-49.3 0-97.4 13.5-139.2 39-10 6.1-19.5 12.8-28.5 20.1-9-7.3-18.5-14-28.5-20.1-41.8-25.5-89.9-39-139.2-39-35.5 0-69.9 6.8-102.4 20.3-31.4 13-59.7 31.7-84 55.5a258.44 258.44 0 0 0-56.9 82.8c-13.9 32.3-21 66.6-21 101.9 0 33.3 6.8 68 20.3 103.3 11.3 29.5 27.5 60.1 48.2 91 32.8 48.9 77.9 99.9 133.9 151.6 92.8 85.7 184.7 144.9 188.6 147.3l23.7 15.2c10.5 6.7 24 6.7 34.5 0l23.7-15.2c3.9-2.5 95.7-61.6 188.6-147.3 56-51.7 101.1-102.7 133.9-151.6 20.7-30.9 37-61.5 48.2-91 13.5-35.3 20.3-70 20.3-103.3.1-35.3-7-69.6-20.9-101.9zM512 814.8S156 586.7 156 385.5C156 283.6 240.3 201 344.3 201c73.1 0 136.5 40.8 167.7 100.4C543.2 241.8 606.6 201 679.7 201c104 0 188.3 82.6 188.3 184.5 0 201.2-356 429.3-356 429.3z" /></svg>
+						<span>556</span>
+					</button>
+					<button
+						class="flex text-sm items-center gap-1 border border-gray-300 px-3 py-1 rounded-full hover:bg-gray-50 transition-colors focus:bg-gray-100 focus:outline-none focus-visible:border-gray-500">
+						<svg
+							stroke="currentColor"
+							fill="currentColor"
+							stroke-width="0"
+							viewBox="0 0 1024 1024"
+							height="1em"
+							width="1em"
+							xmlns="http://www.w3.org/2000/svg"
+							><path
+								d="M464 512a48 48 0 1 0 96 0 48 48 0 1 0-96 0zm200 0a48 48 0 1 0 96 0 48 48 0 1 0-96 0zm-400 0a48 48 0 1 0 96 0 48 48 0 1 0-96 0zm661.2-173.6c-22.6-53.7-55-101.9-96.3-143.3a444.35 444.35 0 0 0-143.3-96.3C630.6 75.7 572.2 64 512 64h-2c-60.6.3-119.3 12.3-174.5 35.9a445.35 445.35 0 0 0-142 96.5c-40.9 41.3-73 89.3-95.2 142.8-23 55.4-34.6 114.3-34.3 174.9A449.4 449.4 0 0 0 112 714v152a46 46 0 0 0 46 46h152.1A449.4 449.4 0 0 0 510 960h2.1c59.9 0 118-11.6 172.7-34.3a444.48 444.48 0 0 0 142.8-95.2c41.3-40.9 73.8-88.7 96.5-142 23.6-55.2 35.6-113.9 35.9-174.5.3-60.9-11.5-120-34.8-175.6zm-151.1 438C704 845.8 611 884 512 884h-1.7c-60.3-.3-120.2-15.3-173.1-43.5l-8.4-4.5H188V695.2l-4.5-8.4C155.3 633.9 140.3 574 140 513.7c-.4-99.7 37.7-193.3 107.6-263.8 69.8-70.5 163.1-109.5 262.8-109.9h1.7c50 0 98.5 9.7 144.2 28.9 44.6 18.7 84.6 45.6 119 80 34.3 34.3 61.3 74.4 80 119 19.4 46.2 29.1 95.2 28.9 145.8-.6 99.6-39.7 192.9-110.1 262.7z" /></svg>
+						<span>56</span>
+					</button>
+					<button
+						class="ml-auto flex text-sm items-center gap-1 border border-gray-300 px-3 py-1 rounded-full hover:bg-gray-50 transition-colors focus:bg-gray-100 focus:outline-none focus-visible:border-gray-500">
+						<span>Read more</span>
+					</button>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>

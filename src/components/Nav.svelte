@@ -8,21 +8,36 @@
 	<div class="flex-1 my-auto ">
 		<a href="#/home" class="text-md font-bold focus:outline-none">Golpo</a>
 	</div>
-	<div class="my-auto flex gap-6">
+	<div class="my-auto flex gap-1">
 		<a
 			href="#/home"
-			class="hidden md:block hover:underline cursor-pointer focus:outline-none
-      focus:underline">
+			class="hidden md:block transition duration-200 ease-in-out hover:bg-gray-100 cursor-pointer px-2 py-1 rounded-2xl
+			focus:border">
 			Home
 		</a>
 		<a
 			href="#/chat"
-			class="transition duration-300 ease-in-out md:hover:underline
-      focus:outline-none focus:underline">
+			class="transition duration-200 ease-in-out hover:bg-gray-100 cursor-pointer px-2 py-1 rounded-2xl
+			focus:border">
 			Chat
 		</a>
-		<a href="#/users" class="hidden md:block hover:underline focus:outline-none focus:underline"> Users </a>
-		<a href="#/profile" class="hover:underline focus:outline-none focus:underline"> Profile </a>
-		<a href="#/logout" class="hover:underline focus:outline-none focus:underline"> Logout </a>
+		<a
+			href="#/users"
+			class="hidden md:block transition duration-200 ease-in-out hover:bg-gray-100 cursor-pointer px-2 py-1 rounded-2xl
+		focus:border">
+			Users
+		</a>
+		<a
+			href="#/profile"
+			class="transition duration-200 ease-in-out hover:bg-gray-100 cursor-pointer px-2 py-1 rounded-2xl
+		focus:border">
+			Profile
+		</a>
+		<a
+			href="#/logout"
+			class="transition duration-200 ease-in-out hover:bg-gray-100 cursor-pointer px-2 py-1 rounded-2xl
+		focus:border">
+			Logout
+		</a>
 	</div>
 </div>
