@@ -78,7 +78,7 @@
 				</a> -->
                 <a
                 href={post.link}
-                _blank="true"
+                target="_blank"
                 class="flex text-sm items-center gap-1 border border-gray-300 px-3 py-1 rounded-full hover:bg-gray-100 transition-colors focus:bg-gray-100 focus:outline-none focus-visible:border-gray-500">
                 <span>See</span>
             </a>

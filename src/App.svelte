@@ -54,18 +54,6 @@
 	@tailwind components;
 	@tailwind utilities;
 	body {
-		/* font-family: 'IBM Plex Sans', sans-serif; */
-		/* font-family: 'Handlee', cursive; */
-		/* font-family: "Nunito", sans-serif; */
-		/* font-family: 'Open Sans', sans-serif; */
-		/* font-family: 'Ubuntu', sans-serif; */
-		/* font-family: 'Nanum Gothic', sans-serif; */
-		/* font-family: 'Dosis', sans-serif; */
-		/* font-family: 'Libre Franklin', sans-serif; */
-		/* font-family: 'Bitter', serif; */
-		/* font-family: "Exo 2", sans-serif; */
-		/* font-family: 'Maven Pro', sans-serif; */
-		/* max-width: 1152px; */
 		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
 			"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 	}
