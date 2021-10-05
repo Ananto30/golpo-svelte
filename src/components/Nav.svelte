@@ -1,5 +1,10 @@
 <script>
-	import { loggedIn } from "../store.js";
+	import { loggedIn, jwt } from "../store.js";
+
+	const logout = () => {
+		$loggedIn = false;
+		$jwt = null;
+	};
 </script>
 
 <div
@@ -33,8 +38,9 @@
 			Profile
 		</a>
 
+		<!-- svelte-ignore a11y-missing-attribute -->
 		<a
-			href="#/logout"
+			on:click={logout}
 			class="transition duration-200 ease-in-out hover:bg-gray-200 cursor-pointer p-2 rounded-xl focus:border ">
 			<div class="my-auto">Logout</div>
 		</a>
