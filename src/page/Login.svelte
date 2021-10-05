@@ -1,39 +1,57 @@
 <script>
 	import { fade } from "svelte/transition";
+	import { loggedIn, jwt } from "../store";
+	import client from "../client";
+
+	let username = "";
+	let password = "";
+	let error = "";
+
+	const generalLogin = () => {
+		client.Auth.login(username, password)
+			.then((res) => {
+				$loggedIn = true;
+				$jwt = res.data.access_token;
+				// window.location.href = "/";
+			})
+			.catch((err) => {
+				if (err.response && err.response.data) {
+					error = err.response.data.error;
+				}
+			});
+	};
 </script>
 
-<div in:fade class=" flex">
+<div in:fade class="flex">
 	<div
-		class="bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 h-screen px-6 lg:px-16 xl:px-12
-  flex items-center justify-center">
+		class="bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 h-screen px-6 lg:px-16 xl:px-12 flex items-center justify-center">
 		<div class="w-full h-100 bg-gray-100 px-10 pb-10 rounded-3xl">
-			<img class=" h-32 mx-auto mt-6" src="images/charliebrown.png" />
+			<img alt="Charlie Brown with Snoopy" class=" h-32 mx-auto mt-6" src="images/charliebrown.png" />
 			<h1 class="text-xl md:text-2xl font-bold leading-tight mt-4">Log in to Golpo</h1>
 
-			<form class="mt-6" action="#" method="POST">
+			<div class="mt-6">
 				<div>
-					<label class="block text-gray-700">Email Address</label>
+					<label for="username" class="block text-gray-700">Username</label>
 					<input
-						type="email"
+						bind:value={username}
+						type="text"
 						name=""
-						id=""
-						placeholder="Enter Email Address"
+						id="username"
+						placeholder="Enter Username"
 						class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
-						autofocus
 						autocomplete
 						required />
 				</div>
 
 				<div class="mt-4">
-					<label class="block text-gray-700">Password</label>
+					<label for="password" class="block text-gray-700">Password</label>
 					<input
+						bind:value={password}
 						type="password"
 						name=""
-						id=""
+						id="password"
 						placeholder="Enter Password"
-						minlength="6"
-						class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
-          focus:bg-white focus:outline-none"
+						class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
 						required />
 				</div>
 
@@ -43,10 +61,10 @@
 				</div> -->
 
 				<button
-					type="submit"
-					class="w-full block bg-indigo-500 hover:bg-indigo-400 focus:bg-indigo-400 text-white font-semibold rounded-lg
-        px-4 py-3 mt-6">Log In</button>
-			</form>
+					on:click={generalLogin}
+					class="w-full block bg-indigo-500 hover:bg-indigo-400 focus:bg-indigo-400 text-white font-semibold rounded-lg px-4 py-3 mt-6"
+					>Log In</button>
+			</div>
 
 			<hr class="my-6 border-gray-300 w-full" />
 
@@ -81,10 +99,10 @@
 			</button>
 
 			<p class="mt-8">
-				Need an account? 
-        <!-- <a href="#" class="text-blue-500 hover:text-blue-700 font-semibold"
+				Need an account?
+				<!-- <a href="#" class="text-blue-500 hover:text-blue-700 font-semibold"
 					>Create an account</a> -->
-          Login with google 👆
+				Login with google 👆
 			</p>
 		</div>
 	</div>
