@@ -30,6 +30,8 @@ npm install
 npm run dev
 ```
 
+Follow this login hack for faster development - https://github.com/Ananto30/golpo-svelte/blob/main/src/App.svelte#L44
+
 ## Svelte tasks
 
 Please note that most of the frontend data model is already there, I will add more soon.
