@@ -8,6 +8,13 @@ So here is our plan -
 
 ## Change plan
 
+### Frontend
+
+*   Convert from React to Svelte.
+*   Separate page for chats and user chat. (Chats are list of users who I have chat with in the past and UserChat is a single user chatting interface)
+*   Profile edit page or modal.
+*   Send message to user button and modal.
+
 ### Backend
 
 *   Verify post is only a link.
@@ -16,12 +23,6 @@ So here is our plan -
 *   Add like count and people who liked the post.
 *   Add follow functionality.
 
-### Frontend
-
-*   Convert from React to Svelte.
-*   Separate page for chats and user chat. (Chats are list of users who I have chat with in the past and UserChat is a single user chatting interface)
-*   Profile edit page or modal.
-*   Send message to user button and modal.
 
 ## Run the project
 
