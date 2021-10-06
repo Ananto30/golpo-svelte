@@ -1,5 +1,21 @@
 <script>
-	let tags = ["music", "pink floyd", "wall"];
+	import { onMount } from "svelte";
+	import client from "../client";
+	let tags = [];
+
+	const getTags = () => {
+		client.Post.getAllTags()
+			.then((res) => {
+				tags = res.data.tags;
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
+
+	onMount(async () => {
+		getTags();
+	});
 </script>
 
 <div class="hidden md:block mx-10 fixed w-96 top-12 md:top-20" style="margin-left: 760px;">

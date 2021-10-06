@@ -63,6 +63,7 @@ const Post = {
 	createPost: (text) => api.post("/post", { text: text }, getHeader()).catch(errorHandler),
 	createComment: (postId, text) =>
 		api.post(`/post/${postId}/comment`, { text: text }, getHeader()).catch(errorHandler),
+	getAllTags: () => api.get("/post/tags", getHeader()).catch(errorHandler),
 };
 
 const Chat = {

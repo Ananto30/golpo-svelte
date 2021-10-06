@@ -1,79 +1,21 @@
 <script>
-	export let username;
-	let me = "ananto";
+	import { onMount } from "svelte";
+	import { fade } from "svelte/transition";
+	import client from "../client";
+	import moment from "moment";
 
-	let chats = [
-		{
-			id: 1,
-			time: "2 mins ago",
-			from: "ananto",
-			seen: false,
-			text: "How are you? 😃",
-		},
-		{
-			id: 2,
-			time: "1 mins ago",
-			from: "Mama",
-			seen: false,
-			text: "Fine what about you?",
-		},
-		{
-			id: 3,
-			time: "1 mins ago",
-			from: "ananto",
-			seen: true,
-			text: "I'm fine, thank you. How are you?",
-		},
-		{
-			id: 4,
-			time: "1 mins ago",
-			from: "Mama",
-			seen: true,
-			text: "I'm fine, thank you. How are you?",
-		},
-		{
-			id: 5,
-			time: "1 mins ago",
-			from: "ananto",
-			seen: true,
-			text: "I'm fine, thank you. How are you? asdfas asdg asdfasdg aseg asdfasdga seg asdgasdfasega sd",
-		},
-		{
-			id: 6,
-			time: "1 mins ago",
-			from: "Mama",
-			seen: true,
-			text: "I'm fine, thank you. How are you?",
-		},
-		{
-			id: 7,
-			time: "1 mins ago",
-			from: "ananto",
-			seen: true,
-			text: "I'm fine, thank you. How are you?",
-		},
-		{
-			id: 8,
-			time: "1 mins ago",
-			from: "Mama",
-			seen: true,
-			text: "I'm fine, thank you. How are you?",
-		},
-		{
-			id: 9,
-			time: "1 mins ago",
-			from: "ananto",
-			seen: true,
-			text: "I'm fine, thank you. How are you?",
-		},
-		{
-			id: 10,
-			time: "1 mins ago",
-			from: "Mama",
-			seen: true,
-			text: "I'm fine, thank you. How are you?",
-		},
-	];
+	export let chatNow;
+	let chats = [];
+
+	const getUserChats = () => {
+		client.Chat.getChatsByReceiver(chatNow).then((res) => {
+			chats = res.data.chats;
+		});
+	};
+
+	$: if (chatNow) {
+		getUserChats();
+	}
 </script>
 
 <div class="md: border-l-2 w-full">
@@ -82,7 +24,7 @@
 			class="h-6 w-6 md:h-10 md:w-10 rounded-full object-cover"
 			src="https://images.pexels.com/photos/3777931/pexels-photo-3777931.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
 			alt="username" />
-		<span class="block ml-2 font-bold text-base text-gray-600">{username}</span>
+		<span class="block ml-2 font-bold text-base text-gray-600">{chatNow}</span>
 		<span class="connected text-green-500 ml-2">
 			<svg width="6" height="6">
 				<circle cx="3" cy="3" r="3" fill="currentColor" />
@@ -93,12 +35,12 @@
 		<ul>
 			<li class="clearfix2">
 				{#each chats as chat}
-					<div class="w-full flex {chat.from == username ? 'justify-start' : 'justify-end'}">
+					<div in:fade class="w-full flex {chat.from == chatNow ? 'justify-start' : 'justify-end'}">
 						<div
 							class="bg-gray-100 rounded-xl px-5 py-2 my-2 text-gray-700 relative"
 							style="max-width: 300px;">
 							<span class="block text-sm md:text-base">{chat.text}</span>
-							<span class="block text-xs text-right">{chat.time}</span>
+							<span class="block text-xs text-right">{moment(chat.date).fromNow()}</span>
 						</div>
 					</div>
 				{/each}
@@ -106,7 +48,8 @@
 		</ul>
 	</div>
 
-	<div class="w-full md:max-w-2xl xl:max-w-3xl p-2 md:p-3 flex items-center justify-between border-t fixed bottom-0 z-10 bg-white">
+	<div
+		class="w-full md:max-w-2xl xl:max-w-3xl p-2 md:p-3 flex items-center justify-between border-t fixed bottom-0 z-10 bg-white">
 		<button class="outline-none focus:outline-none">
 			<svg
 				class="text-gray-400 h-6 w-6"
