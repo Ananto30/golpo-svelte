@@ -89,7 +89,7 @@
 
 <div in:fade class="pt-14 antialiased my-auto min-h-screen">
 	<div class="md:fixed md:max-w-sm py-4 px-5">
-		<div class="bg-gray-100 rounded-2xl py-3">
+		<div class="bg-gray-100 rounded-2xl py-3 md:w-60">
 			<div class="photo-wrapper p-2">
 				<img
 					class="w-32 h-32 rounded-full mx-auto"
@@ -98,7 +98,7 @@
 			</div>
 			<div class="p-2">
 				<h3 class="text-center text-xl text-gray-900 font-medium leading-8">Joh Doe</h3>
-				<div class="text-center text-gray-500 text-xs">
+				<div class="text-center text-gray-500 text-xs ">
 					<p>Google Inc.</p>
 					<p><i>Work hard, play nice :)</i></p>
 				</div>

@@ -25,6 +25,7 @@
   "dependencies": {
     "@tailwindcss/line-clamp": "^0.2.2",
     "axios": "^0.22.0",
+    "moment": "^2.29.1",
     "sirv-cli": "^1.0.0"
   }
 }
