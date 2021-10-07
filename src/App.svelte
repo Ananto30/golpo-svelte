@@ -13,15 +13,21 @@
 	import { loggedIn } from "./store.js";
 
 	let currentPage;
+	let props;
 
 	const pageMapping = {
 		"": Home,
-		"/home": Home,
-		"/chat": Chat,
-		"/users": Users,
-		"/profile": Profile,
-		"/loginredirect": LoginRedirect,
-		"/userchat": MobileUserChat,
+		home: Home,
+		chat: Chat,
+		users: Users,
+		profile: Profile,
+		loginredirect: LoginRedirect,
+		userchat: MobileUserChat,
+	};
+
+	const slugPageMapping = {
+		chat: Chat,
+		profile: Profile,
 	};
 
 	function hashchange() {
@@ -29,10 +35,19 @@
 		let path = window.location.hash.slice(1);
 		path = path.split("?")[0];
 		console.log(path);
-		setTimeout(() => {
-			currentPage = pageMapping[path];
-			window.scrollTo(0, 0);
-		}, 200);
+		path = path.split("/");
+		if (path.length == 3 && path[2] != "") {
+			setTimeout(() => {
+				currentPage = slugPageMapping[path[1]];
+				props = { slug: path[2] };
+				window.scrollTo(0, 0);
+			}, 200);
+		} else {
+			setTimeout(() => {
+				currentPage = pageMapping[path[1]];
+				window.scrollTo(0, 0);
+			}, 200);
+		}
 	}
 
 	onMount(hashchange);
@@ -41,11 +56,12 @@
 <svelte:window on:hashchange={hashchange} />
 
 <body class="container max-w-6xl mx-auto">
-	{#if !$loggedIn}  <!-- HINT: remove the ! for easy developemnt without login everytime -->
+	{#if !$loggedIn}
+		<!-- HINT: remove the ! for easy developemnt without login everytime -->
 		<Login />
 	{:else}
 		<Nav />
-		<svelte:component this={currentPage} />
+		<svelte:component this={currentPage} {...props} />
 	{/if}
 </body>
 
