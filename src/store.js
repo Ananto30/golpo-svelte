@@ -5,3 +5,4 @@ export const user = writable(JSON.parse(localStorage.getItem("user")) || {});
 export const loggedIn = writable(false);
 export const loginRedirect = writable(null);
 export const jwt = writable(null);
+export const loggedUsername = writable(null);

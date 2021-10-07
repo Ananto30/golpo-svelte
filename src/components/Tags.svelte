@@ -1,6 +1,7 @@
 <script>
 	import { onMount } from "svelte";
 	import client from "../client";
+
 	let tags = [];
 
 	const getTags = () => {

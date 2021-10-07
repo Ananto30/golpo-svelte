@@ -22,10 +22,11 @@
 					</div>
 					<h2 class="font-bold text-gray-800 cursor-pointer">{user.username}</h2>
 					<span class="text-gray-500 text-sm line-clamp-2 block mb-4">{user.work ? user.work : WORK}</span>
-					<button
+					<a
+						href="#/profile/{user.username}"
 						class="text-sm items-center gap-1 border border-gray-300 px-3 py-1 rounded-full hover:bg-gray-50 transition-colors focus:bg-gray-100 focus:outline-none focus-visible:border-gray-500">
-						<span>Read more</span>
-					</button>
+						<span>View profile</span>
+					</a>
 				</div>
 			</div>
 		{/each}

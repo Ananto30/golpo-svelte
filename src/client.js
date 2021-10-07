@@ -40,6 +40,7 @@ const Auth = {
 };
 
 const User = {
+	getMe: () => api.get("/user/me", getHeader()).catch(errorHandler),
 	getAllUsers: () => api.get("/user", getHeader()).catch(errorHandler),
 	getByUsername: (username) => api.get(`/user/${username}`, getHeader()).catch(errorHandler),
 	updateMeta: (meta) => api.post("/user/me/update", meta, getHeader()).catch(errorHandler),

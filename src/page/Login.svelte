@@ -1,6 +1,6 @@
 <script>
 	import { fade } from "svelte/transition";
-	import { loggedIn, jwt } from "../store";
+	import { loggedIn, jwt, loggedUsername } from "../store";
 	import client from "../client";
 
 	let username = "";
@@ -12,7 +12,9 @@
 			.then((res) => {
 				$loggedIn = true;
 				$jwt = res.data.access_token;
-				// window.location.href = "/";
+				client.User.getMe().then((res) => {
+					$loggedUsername = res.data.username;
+				});
 			})
 			.catch((err) => {
 				if (err.response && err.response.data) {

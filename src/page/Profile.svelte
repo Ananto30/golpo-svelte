@@ -1,90 +1,40 @@
 <script>
 	import { fade } from "svelte/transition";
 	import PostBox from "../components/PostBox.svelte";
-
+	import { loggedUsername } from "../store";
 	import Footer from "../components/Footer.svelte";
 	import Post from "../components/Post.svelte";
+	import { onMount } from "svelte";
+	import client from "../client";
+	import { TAGLINE, WORK } from "../defaults";
 
-	let posts = [
-		{
-			author: "Jalil",
-			time: "2 hours ago",
-			title: "Pink Floyd - Mother",
-			desctiption:
-				"From the motion picture The Wall, by Pink Floyd.asdfasdgasdf a asdgasdfg asdgfa sdgas dgasdga sdg asdgas dgasdga asd gasdgasdg asdga sdga sdgasd gas g asdgasdgasfgasegasdfgad fgadf gasdg asdga sgasdg",
-			loveCount: 123,
-			commentCount: 12,
-			link: "https://www.youtube.com/watch?v=lX3uCuFKlqw",
-			tags: ["music", "pink floyd", "wall"],
-			image: "https://i.ytimg.com/vi/lX3uCuFKlqw/maxresdefault.jpg",
-		},
-		{
-			author: "Jalil",
-			time: "2 hours ago",
-			title: "Pink Floyd - Mother",
-			desctiption: "From the motion picture The Wall, by Pink Floyd.",
-			loveCount: 123,
-			commentCount: 12,
-			link: "https://www.youtube.com/watch?v=lX3uCuFKlqw",
-			tags: ["music", "pink floyd", "wall"],
-			image: "https://i.ytimg.com/vi/lX3uCuFKlqw/maxresdefault.jpg",
-		},
-		{
-			author: "Jalil",
-			time: "2 hours ago",
-			title: "Pink Floyd - Mother",
-			desctiption: "From the motion picture The Wall, by Pink Floyd.",
-			loveCount: 123,
-			commentCount: 12,
-			link: "https://www.youtube.com/watch?v=lX3uCuFKlqw",
-			tags: ["music", "pink floyd", "wall"],
-			image: "https://i.ytimg.com/vi/lX3uCuFKlqw/maxresdefault.jpg",
-		},
-		{
-			author: "Jalil",
-			time: "2 hours ago",
-			title: "Pink Floyd - Mother",
-			desctiption: "From the motion picture The Wall, by Pink Floyd.",
-			loveCount: 123,
-			commentCount: 12,
-			link: "https://www.youtube.com/watch?v=lX3uCuFKlqw",
-			tags: ["music", "pink floyd", "wall"],
-			image: "https://i.ytimg.com/vi/lX3uCuFKlqw/maxresdefault.jpg",
-		},
-		{
-			author: "Jalil",
-			time: "2 hours ago",
-			title: "Pink Floyd - Mother",
-			desctiption: "From the motion picture The Wall, by Pink Floyd.",
-			loveCount: 123,
-			commentCount: 12,
-			link: "https://www.youtube.com/watch?v=lX3uCuFKlqw",
-			tags: ["music", "pink floyd", "wall"],
-			image: "https://i.ytimg.com/vi/lX3uCuFKlqw/maxresdefault.jpg",
-		},
-		{
-			author: "Jalil",
-			time: "2 hours ago",
-			title: "Pink Floyd - Mother",
-			desctiption: "From the motion picture The Wall, by Pink Floyd.",
-			loveCount: 123,
-			commentCount: 12,
-			link: "https://www.youtube.com/watch?v=lX3uCuFKlqw",
-			tags: ["music", "pink floyd", "wall"],
-			image: "https://i.ytimg.com/vi/lX3uCuFKlqw/maxresdefault.jpg",
-		},
-		{
-			author: "Jalil",
-			time: "2 hours ago",
-			title: "Pink Floyd - Mother",
-			desctiption: "From the motion picture The Wall, by Pink Floyd.",
-			loveCount: 123,
-			commentCount: 12,
-			link: "https://www.youtube.com/watch?v=lX3uCuFKlqw",
-			tags: ["music", "pink floyd", "wall"],
-			image: "https://i.ytimg.com/vi/lX3uCuFKlqw/maxresdefault.jpg",
-		},
-	];
+	export let slug;
+	let posts = [];
+	let editable = false;
+	let work;
+	let tagline;
+
+	if (slug == "" || slug == $loggedUsername) {
+		editable = true;
+		slug = $loggedUsername;
+	}
+	const getProfileInfo = () => {
+		client.User.getByUsername(slug).then((res) => {
+			work = res.data.work;
+			tagline = res.data.tagline;
+		});
+	};
+	const getPosts = () => {
+		client.Post.getByUsername(slug).then((res) => {
+			posts = res.data.posts;
+			console.log(posts);
+		});
+	};
+
+	onMount(async () => {
+		getProfileInfo();
+		getPosts();
+	});
 </script>
 
 <div in:fade class="pt-14 antialiased my-auto min-h-screen">
@@ -97,10 +47,10 @@
 					alt="John Doe" />
 			</div>
 			<div class="p-2">
-				<h3 class="text-center text-xl text-gray-900 font-medium leading-8">Joh Doe</h3>
+				<h3 class="text-center text-xl text-gray-900 font-medium leading-8">{slug}</h3>
 				<div class="text-center text-gray-500 text-xs ">
-					<p>Google Inc.</p>
-					<p><i>Work hard, play nice :)</i></p>
+					<p>{work ? work : WORK}</p>
+					<p><i>{tagline ? tagline : TAGLINE}</i></p>
 				</div>
 
 				<div class="text-center my-3">

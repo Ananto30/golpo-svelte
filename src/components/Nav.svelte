@@ -1,5 +1,5 @@
 <script>
-	import { loggedIn, jwt } from "../store.js";
+	import { loggedIn, jwt, loggedUsername } from "../store.js";
 
 	const logout = () => {
 		$loggedIn = false;
@@ -33,7 +33,7 @@
 		</a>
 
 		<a
-			href="#/profile"
+			href="#/profile/{$loggedUsername}"
 			class="transition duration-200 ease-in-out hover:bg-gray-200 cursor-pointer p-2 rounded-xl focus:border">
 			Profile
 		</a>

@@ -1,4 +1,6 @@
 <script>
+	import moment from "moment";
+
 	export let post;
 </script>
 
@@ -6,7 +8,7 @@
 	<div
 		class="bg-white mx-auto w-80 max-w-3xl sm:w-full sm:p-4 h-auto sm:h-52 rounded-2xl flex flex-col sm:flex-row gap-5 select-none">
 		<div
-			style="background: url('https://images.unsplash.com/photo-1426604966848-d7adac402bff?ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8bmF0dXJlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60')"
+			style="background: url('{post.image}')"
 			class="h-40 sm:h-full sm:w-60 rounded bg-gray-100 bg-center bg-cover" />
 		<div class="flex sm:flex-1 flex-col gap-2 p-1">
 			<div class="flex items-center justify-between">
@@ -17,7 +19,7 @@
 						alt="Alex" />
 					<div class="ml-3">
 						<h1 class=" font-bold text-gray-800 cursor-pointer">{post.author}</h1>
-						<p class="text-xs text-gray-800 hover:underline cursor-pointer">{post.time}</p>
+						<p class="text-xs text-gray-800 hover:underline cursor-pointer">{moment(post.created_at).fromNow()}</p>
 					</div>
 				</div>
 				<div>
@@ -78,7 +80,7 @@
 					<span>See</span>
 				</a> -->
                 <a
-                href={post.link}
+                href={post.url}
                 target="_blank"
                 class="flex text-sm items-center gap-1 border border-gray-300 px-3 py-1 rounded-full hover:bg-gray-100 transition-colors focus:bg-gray-100 focus:outline-none focus-visible:border-gray-500">
                 <span>See</span>
