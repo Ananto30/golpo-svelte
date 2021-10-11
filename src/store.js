@@ -1,8 +1,9 @@
 import { writable } from "svelte/store";
 
-// TODO: Add a store for the current user
-export const user = writable(JSON.parse(localStorage.getItem("user")) || {});
 export const loggedIn = writable(false);
 export const loginRedirect = writable(null);
-export const jwt = writable(null);
-export const loggedUsername = writable(null);
+export const jwt = writable(localStorage.getItem("jwt") || "");
+export const loggedUsername = writable(localStorage.getItem("loggedUsername") || "");
+
+loggedUsername.subscribe((username) => localStorage.setItem("loggedUsername", username));
+jwt.subscribe((jwt) => localStorage.setItem("jwt", jwt));

@@ -10,7 +10,7 @@
 	import LoginRedirect from "./page/LoginRedirect.svelte";
 	import MobileUserChat from "./components/MobileUserChat.svelte";
 
-	import { loggedIn } from "./store.js";
+	import { loggedIn, loggedUsername } from "./store.js";
 
 	let currentPage;
 	let props;
@@ -34,8 +34,9 @@
 		// the poor man's router!
 		let path = window.location.hash.slice(1);
 		path = path.split("?")[0];
-		console.log(path);
 		path = path.split("/");
+		
+		console.log(path);
 		if (path.length == 3 && path[2] != "") {
 			setTimeout(() => {
 				currentPage = slugPageMapping[path[1]];
@@ -44,7 +45,8 @@
 			}, 200);
 		} else {
 			setTimeout(() => {
-				currentPage = pageMapping[path[1]];
+				path = path[1] || path[0]
+				currentPage = pageMapping[path];
 				window.scrollTo(0, 0);
 			}, 200);
 		}
@@ -56,7 +58,7 @@
 <svelte:window on:hashchange={hashchange} />
 
 <body class="container max-w-6xl mx-auto">
-	{#if !$loggedIn}
+	{#if !$loggedUsername}
 		<!-- HINT: remove the ! for easy developemnt without login everytime -->
 		<Login />
 	{:else}

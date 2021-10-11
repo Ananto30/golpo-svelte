@@ -1,8 +1,8 @@
 <script>
-	import { loggedIn, jwt, loggedUsername } from "../store.js";
+	import { loggedUsername, jwt } from "../store.js";
 
 	const logout = () => {
-		$loggedIn = false;
+		$loggedUsername = "";
 		$jwt = null;
 	};
 </script>

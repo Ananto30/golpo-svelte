@@ -26,7 +26,7 @@
 	};
 	const getPosts = () => {
 		client.Post.getByUsername(slug).then((res) => {
-			posts = res.data.posts;
+			posts = res.data.posts.reverse();
 			console.log(posts);
 		});
 	};
@@ -60,17 +60,20 @@
 			</div>
 		</div>
 	</div>
-
-	<div class="md:ml-80 py-5 border-b border-l border-t md:border-t-0">
-		<div class="pl-5 md:pl-10">
-			<PostBox />
+	{#if editable}
+		<div class="md:ml-72 py-5 md:border-t-0">
+			<div class="pl-5 md:pl-5">
+				<PostBox />
+			</div>
 		</div>
-	</div>
-	<div class="md:ml-80 border-l py-5 md:py-0">
+	{/if}
+	<div class="md:ml-72 py-5 md:py-0">
 		{#each posts as post}
 			<Post {post} />
 		{/each}
 	</div>
 </div>
 
-<Footer />
+<div class="mt-20">
+	<Footer />
+</div>

@@ -19,7 +19,7 @@
 	});
 </script>
 
-<div class="hidden md:block mx-10 fixed w-96 top-12 md:top-20" style="margin-left: 760px;">
+<div class="hidden md:block mx-10 fixed w-64 top-12 md:top-20" style="margin-left: 900px;">
 	<div class="ml-7 p-2  rounded-2xl bg-gray-100">
 		<h2 class="px-3 pb-2 border-b-2 text-lg">Tags</h2>
 		<div class="flex flex-wrap pt-2">
