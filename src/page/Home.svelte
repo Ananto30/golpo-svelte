@@ -90,9 +90,8 @@
 <div in:fade class="pt-12 md:pt-14 antialiased my-auto min-h-screen">
 	<Tags />
 
-	<div class="max-w-3xl grid gap-1 border-r">
-		
-		<div class="pl-5 py-2 md:py-5 border-b ">
+	<div class="max-w-4xl grid gap-1">
+		<div class="pl-5 py-2 md:py-5">
 			<PostBox />
 		</div>
 		{#each posts as post}
@@ -100,4 +99,7 @@
 		{/each}
 	</div>
 </div>
-<Footer />
+
+<div class="mt-20">
+	<Footer />
+</div>

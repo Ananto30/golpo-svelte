@@ -1,6 +1,6 @@
 import axios from "axios";
 import { get } from "svelte/store";
-import { jwt, user } from "./store";
+import { jwt, loggedUsername } from "./store";
 
 const api = axios.create({
 	baseURL: "http://localhost:8080/api",
@@ -20,8 +20,8 @@ const getHeader = () => {
 
 const errorHandler = (err) => {
 	if (err.response && (err.response.status === 401 || err.response.status === 403)) {
-		jwt.set(null);
-		user.set(null);
+		jwt.set("");
+		loggedUsername.set("");
 	}
 };
 
@@ -61,10 +61,11 @@ const Post = {
 	getAll: () => api.get("/post", getHeader()).catch(errorHandler),
 	getById: (id) => api.get(`/post/${id}`, getHeader()).catch(errorHandler),
 	getByUsername: (username) => api.get(`/post/user/${username}`, getHeader()).catch(errorHandler),
-	createPost: (text) => api.post("/post", { text: text }, getHeader()).catch(errorHandler),
+	createPost: (url) => api.post("/post", { url: url }, getHeader()).catch(errorHandler),
 	createComment: (postId, text) =>
 		api.post(`/post/${postId}/comment`, { text: text }, getHeader()).catch(errorHandler),
 	getAllTags: () => api.get("/post/tags", getHeader()).catch(errorHandler),
+	reactLove: (postId) => api.post(`/post/${postId}/love`, {}, getHeader()).catch(errorHandler),
 };
 
 const Chat = {
