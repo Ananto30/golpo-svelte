@@ -18,7 +18,7 @@
 	<div class="grid md:grid-cols-2 lg:grid-cols-4">
 		{#each users as user}
 			<div class="p-2">
-				<div class="bg-white p-4 rounded-2xl border-2 text-center h-full">
+				<div class="bg-white p-4 rounded-2xl border md:shadow-sm text-center h-full">
 					<div class="mb-3">
 						<img class="w-auto mx-auto rounded-full" src="https://i.pravatar.cc/150?img=66" alt="" />
 					</div>

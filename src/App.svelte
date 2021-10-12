@@ -64,10 +64,10 @@
 	{:else}
 		<div>
 			<div class="max-w-7xl mx-auto grid grid-cols-12">
-				<div class="col-span-2">
+				<div class="col-span-12 md:col-span-2">
 					<Nav />
 				</div>
-				<div class="col-span-10">
+				<div class="col-span-12 md:col-span-10">
 					<svelte:component this={currentPage} {...props} />
 				</div>
 			</div>

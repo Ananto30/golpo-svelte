@@ -16,7 +16,7 @@
 	let work;
 	let tagline;
 
-	if (slug == "" || slug == $loggedUsername) {
+	$: if (slug == "" || slug == $loggedUsername) {
 		editable = true;
 		slug = $loggedUsername;
 	}
@@ -33,16 +33,16 @@
 		});
 	};
 
-	onMount(async () => {
+	$: if (slug) {
 		getProfileInfo();
 		getPosts();
-	});
+	}
 </script>
 
-<div in:fade class="grid grid-cols-12">
-	<div class="col-span-8">
+<div in:fade class="grid grid-cols-12 min-h-screen">
+	<div class="col-span-12 md:col-span-8">
 		<div class="w-full mx-auto">
-			<div class="flex flex-row md:py-7 w-full mx-auto md:mx-16">
+			<div class="flex flex-row mt-14 md:mt-0 py-5 md:py-7 w-full px-3 md:px-16">
 				<div class="w-auto h-auto rounded-full border-2 border-blue-500">
 					<img
 						class="w-32 h-32 object-cover rounded-full shadow cursor-pointer"
@@ -57,8 +57,11 @@
 				</div>
 			</div>
 		</div>
-		<div class="px-3 md:px-0 md:py-7 min-w-full">
-			<PostBox />
+
+		<div class="px-3 md:px-0 pt-5 md:py-7 min-w-full border-t md:border-t-0">
+			{#if editable}
+				<PostBox />
+			{/if}
 		</div>
 		{#each posts as post}
 			<Post {post} />
@@ -66,51 +69,6 @@
 	</div>
 	<div class="col-span-4">
 		<Tags />
-	</div>
-</div>
-
-<div class="mt-20">
-	<Footer />
-</div>
-
-<div in:fade class="md:ml-28 antialiased my-auto min-h-screen pt-14 md:pt-5">
-	<div class="top-12 md:top-20" style="margin-left: 760px;">
-		<Tags />
-	</div>
-
-	<div class="w-full md:max-w-4xl mx-auto">
-		<div class="bg-gray-100 rounded-2xl py-3 md:w-60">
-			<div class="photo-wrapper p-2">
-				<img
-					class="w-32 h-32 rounded-full mx-auto"
-					src="https://www.gravatar.com/avatar/2acfb745ecf9d4dccb3364752d17f65f?s=260&d=mp"
-					alt="John Doe" />
-			</div>
-			<div class="p-2">
-				<h3 class="text-center text-xl text-gray-900 font-medium leading-8">{slug}</h3>
-				<div class="text-center text-gray-500 text-xs ">
-					<p>{work ? work : WORK}</p>
-					<p><i>{tagline ? tagline : TAGLINE}</i></p>
-				</div>
-
-				<div class="text-center my-3">
-					<a class="text-xs text-indigo-500 italic hover:underline hover:text-indigo-600 font-medium" href="#"
-						>View Profile</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	{#if editable}
-		<div class="">
-			<div class="pl-5 md:pl-5">
-				<PostBox />
-			</div>
-		</div>
-	{/if}
-	<div class=" py-5 md:py-0">
-		{#each posts as post}
-			<Post {post} />
-		{/each}
 	</div>
 </div>
 
