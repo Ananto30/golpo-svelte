@@ -35,7 +35,7 @@
 		let path = window.location.hash.slice(1);
 		path = path.split("?")[0];
 		path = path.split("/");
-		
+
 		console.log(path);
 		if (path.length == 3 && path[2] != "") {
 			setTimeout(() => {
@@ -45,7 +45,7 @@
 			}, 200);
 		} else {
 			setTimeout(() => {
-				path = path[1] || path[0]
+				path = path[1] || path[0];
 				currentPage = pageMapping[path];
 				window.scrollTo(0, 0);
 			}, 200);
@@ -57,13 +57,21 @@
 
 <svelte:window on:hashchange={hashchange} />
 
-<body class="container max-w-6xl mx-auto">
+<body class="container max-w-7xl mx-auto">
 	{#if !$loggedUsername}
 		<!-- HINT: remove the ! for easy developemnt without login everytime -->
 		<Login />
 	{:else}
-		<Nav />
-		<svelte:component this={currentPage} {...props} />
+		<div>
+			<div class="max-w-7xl mx-auto grid grid-cols-12">
+				<div class="col-span-2">
+					<Nav />
+				</div>
+				<div class="col-span-10">
+					<svelte:component this={currentPage} {...props} />
+				</div>
+			</div>
+		</div>
 	{/if}
 </body>
 

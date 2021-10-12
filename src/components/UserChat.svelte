@@ -18,7 +18,7 @@
 	}
 </script>
 
-<div class="md: border-l-2 w-full">
+<div class="md:border-l-2 w-full">
 	<div class="flex items-center border-b pl-3 py-3">
 		<img
 			class="h-6 w-6 md:h-10 md:w-10 rounded-full object-cover"
@@ -31,7 +31,7 @@
 			</svg>
 		</span>
 	</div>
-	<div id="chat" class="w-full overflow-y-auto p-2 md:p-10 relative pb-10" style="height: 80vh;" ref="toolbarChat">
+	<div id="chat" class="w-full overflow-y-auto p-2 md:p-10 relative pb-10" style="height: 90vh;" ref="toolbarChat">
 		<ul>
 			<li class="clearfix2">
 				{#each chats as chat}
