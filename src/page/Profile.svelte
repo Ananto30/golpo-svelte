@@ -1,12 +1,14 @@
 <script>
 	import { fade } from "svelte/transition";
-	import PostBox from "../components/PostBox.svelte";
 	import { loggedUsername } from "../store";
-	import Footer from "../components/Footer.svelte";
-	import Post from "../components/Post.svelte";
 	import { onMount } from "svelte";
 	import client from "../client";
 	import { TAGLINE, WORK } from "../defaults";
+
+	import PostBox from "../components/PostBox.svelte";
+	import Footer from "../components/Footer.svelte";
+	import Post from "../components/Post.svelte";
+	import Tags from "../components/Tags.svelte";
 
 	export let slug;
 	let posts = [];
@@ -37,8 +39,46 @@
 	});
 </script>
 
-<div in:fade class="pt-14 antialiased my-auto min-h-screen">
-	<div class="md:fixed md:max-w-sm py-4 px-5">
+<div in:fade class="grid grid-cols-12">
+	<div class="col-span-8">
+		<div class="w-full mx-auto">
+			<div class="flex flex-row md:py-7 w-full mx-auto md:mx-16">
+				<div class="w-auto h-auto rounded-full border-2 border-blue-500">
+					<img
+						class="w-32 h-32 object-cover rounded-full shadow cursor-pointer"
+						alt="User avatar"
+						src="https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=200" />
+				</div>
+				<div class="flex flex-col mb-2 ml-4 mt-1">
+					<div class=" text-2xl font-bold">{slug}</div>
+
+					<div class=" font-base mr-1">{work ? work : WORK}</div>
+					<div class="text-gray-500 text-sm">{tagline ? tagline : TAGLINE}</div>
+				</div>
+			</div>
+		</div>
+		<div class="px-3 md:px-0 md:py-7 min-w-full">
+			<PostBox />
+		</div>
+		{#each posts as post}
+			<Post {post} />
+		{/each}
+	</div>
+	<div class="col-span-4">
+		<Tags />
+	</div>
+</div>
+
+<div class="mt-20">
+	<Footer />
+</div>
+
+<div in:fade class="md:ml-28 antialiased my-auto min-h-screen pt-14 md:pt-5">
+	<div class="top-12 md:top-20" style="margin-left: 760px;">
+		<Tags />
+	</div>
+
+	<div class="w-full md:max-w-4xl mx-auto">
 		<div class="bg-gray-100 rounded-2xl py-3 md:w-60">
 			<div class="photo-wrapper p-2">
 				<img
@@ -61,13 +101,13 @@
 		</div>
 	</div>
 	{#if editable}
-		<div class="md:ml-72 py-5 md:border-t-0">
+		<div class="">
 			<div class="pl-5 md:pl-5">
 				<PostBox />
 			</div>
 		</div>
 	{/if}
-	<div class="md:ml-72 py-5 md:py-0">
+	<div class=" py-5 md:py-0">
 		{#each posts as post}
 			<Post {post} />
 		{/each}
