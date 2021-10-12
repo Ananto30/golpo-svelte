@@ -22,8 +22,8 @@
 </script>
 
 <div in:fade class="grid grid-cols-12">
-	<div class="col-span-8">
-		<div class="px-3 md:px-0 md:py-7 min-w-full">
+	<div class="col-span-12 md:col-span-8">
+		<div class="px-3 md:px-0 pt-20 md:py-7 min-w-full">
 			<PostBox />
 		</div>
 		{#each posts as post}

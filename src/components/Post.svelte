@@ -9,12 +9,11 @@
 	};
 </script>
 
-<!-- This is an example component -->
 <div class="">
-	<div class="flex max-w-xl my-5 bg-white shadow-sm rounded-lg overflow-hidden mx-auto border">
+	<div class="flex max-w-xl my-5 bg-white md:shadow-sm md:rounded-lg overflow-hidden mx-auto border-t border-b md:border">
 		<div class="flex items-center w-full">
 			<div class="w-full">
-				<div class="flex flex-row mt-2 px-2 py-3 mx-3">
+				<div class="flex flex-row px-5 py-3">
 					<div class="w-auto h-auto rounded-full border-2 border-blue-500">
 						<img
 							class="w-12 h-12 object-cover rounded-full shadow cursor-pointer"
@@ -30,13 +29,13 @@
 					</div>
 				</div>
 				<div class="border-b border-gray-100" />
-				<div class="text-gray-400 font-medium text-sm mb-7 mt-6 mx-3 px-2">
+				<div class="text-gray-400 font-medium text-sm mb-7 mt-6 px-5">
 					<img class="rounded" alt={post.title} src={post.image} />
 				</div>
-				<div class="text-gray-600 font-semibold text-lg mb-2 mx-3 px-2">
+				<div class="text-gray-600 font-semibold text-lg mb-2 px-5">
 					{post.title}
 				</div>
-				<div class="text-gray-500 text-sm mb-6 mx-3 px-2">
+				<div class="text-gray-500 text-sm mb-6 px-5">
 					{post.description}
 				</div>
 				<div class="flex justify-start mb-4 border-t border-gray-100">
