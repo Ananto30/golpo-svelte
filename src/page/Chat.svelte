@@ -12,7 +12,9 @@
 	const getChats = () => {
 		client.Chat.getChats().then((res) => {
 			chats = res.data.chats.reverse();
-			chatNow = chats[0].participants[1];
+			if (chats.length > 0) {
+				chatNow = chats[0].participants[1];
+			}
 		});
 	};
 
@@ -21,7 +23,7 @@
 	});
 </script>
 
-<div in:fade class="grid grid-cols-12 min-w-full">
+<div in:fade class="grid grid-cols-12 min-w-full md:pt-7">
 	<div class="col-span-4">
 		<div class="my-3 mx-3 ">
 			<div class="relative text-gray-600 focus-within:text-gray-400">
@@ -46,7 +48,7 @@
 			</div>
 		</div>
 
-		<ul class="overflow-auto" style="height: 90vh;">
+		<ul class="overflow-auto" style="height: 80vh;">
 			<h2 class="ml-2 mb-2 text-gray-600 text-lg my-2">Chats</h2>
 			<li>
 				{#each chats as chat}

@@ -55,13 +55,14 @@ const User = {
 				},
 			})
 			.catch(errorHandler),
+	followUser: (username) => api.post("/user/me/follow", { username: username }, getHeader()).catch(errorHandler),
 };
 
 const Post = {
 	getAll: () => api.get("/post", getHeader()).catch(errorHandler),
 	getById: (id) => api.get(`/post/${id}`, getHeader()).catch(errorHandler),
 	getByUsername: (username) => api.get(`/post/user/${username}`, getHeader()).catch(errorHandler),
-	createPost: (url) => api.post("/post", { url: url }, getHeader()).catch(errorHandler),
+	createPost: (url, tags) => api.post("/post", { url: url, tags: tags }, getHeader()).catch(errorHandler),
 	createComment: (postId, text) =>
 		api.post(`/post/${postId}/comment`, { text: text }, getHeader()).catch(errorHandler),
 	getAllTags: () => api.get("/post/tags", getHeader()).catch(errorHandler),

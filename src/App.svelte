@@ -7,10 +7,11 @@
 	import Users from "./page/Users.svelte";
 	import Login from "./page/Login.svelte";
 	import Profile from "./page/Profile.svelte";
-	import LoginRedirect from "./page/LoginRedirect.svelte";
 	import MobileUserChat from "./components/MobileUserChat.svelte";
+	import ErrorAlert from "./components/ErrorAlert.svelte";
+	import InfoAlert from "./components/InfoAlert.svelte";
 
-	import { loggedIn, loggedUsername } from "./store.js";
+	import { loggedUsername, error, info } from "./store.js";
 
 	let currentPage;
 	let props;
@@ -21,7 +22,6 @@
 		chat: Chat,
 		users: Users,
 		profile: Profile,
-		loginredirect: LoginRedirect,
 		userchat: MobileUserChat,
 	};
 
@@ -39,8 +39,8 @@
 		console.log(path);
 		if (path.length == 3 && path[2] != "") {
 			setTimeout(() => {
-				currentPage = slugPageMapping[path[1]];
 				props = { slug: path[2] };
+				currentPage = slugPageMapping[path[1]];
 				window.scrollTo(0, 0);
 			}, 200);
 		} else {
@@ -58,8 +58,19 @@
 <svelte:window on:hashchange={hashchange} />
 
 <body class="container max-w-7xl mx-auto">
+	<div class="grid mx-auto">
+		{#if $error}
+			<ErrorAlert />
+		{/if}
+	</div>
+	<div class="grid mx-auto">
+		{#if $info}
+			<InfoAlert />
+		{/if}
+	</div>
+
+	<!-- HINT: remove the ! for easy developemnt without login everytime -->
 	{#if !$loggedUsername}
-		<!-- HINT: remove the ! for easy developemnt without login everytime -->
 		<Login />
 	{:else}
 		<div>
