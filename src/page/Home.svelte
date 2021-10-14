@@ -8,13 +8,30 @@
 	import Footer from "../components/Footer.svelte";
 	import PostBox from "../components/PostBox.svelte";
 
-	let posts = [];
+	let allPosts = [];
+	let filteredPosts = [];
+	let selectedTag = "";
 
 	const getPosts = () => {
 		client.Post.getAll().then((res) => {
-			posts = res.data.posts.reverse();
+			allPosts = res.data.posts.reverse();
+			filteredPosts = allPosts;
 		});
 	};
+
+	const filterByTag = (tag) => {
+		if (tag == "All") {
+			filteredPosts = allPosts;
+		} else {
+			filteredPosts = allPosts.filter((post) => {
+				return post.tags.includes(tag);
+			});
+		}
+	};
+
+	$: if (selectedTag) {
+		filterByTag(selectedTag);
+	}
 
 	onMount(async () => {
 		getPosts();
@@ -26,12 +43,12 @@
 		<div class="px-3 md:px-0 pt-20 md:py-7 min-w-full">
 			<PostBox />
 		</div>
-		{#each posts as post}
+		{#each filteredPosts as post}
 			<Post {post} />
 		{/each}
 	</div>
 	<div class="col-span-4">
-		<Tags />
+		<Tags bind:selectedTag />
 	</div>
 </div>
 

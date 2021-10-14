@@ -14,7 +14,7 @@
 
 
 
-<div in:fade class="pt-16 min-h-screen">
+<div in:fade class="pt-16 md:pt-7 min-h-screen">
 	<div class="grid md:grid-cols-2 lg:grid-cols-4">
 		{#each users as user}
 			<div class="p-2">

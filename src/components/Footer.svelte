@@ -1,4 +1,4 @@
-
+<!-- 
 
 <div
   class="text-sm md:text-base bottom-0 max-w-6xl p-3 md:p-4 px-8 w-screen
@@ -14,4 +14,4 @@
     <a href="" class="hover:underline">Privacy Policy</a>
     <a href="" class="hover:underline">Terms of Services</a>
   </div>
-</div>
+</div> -->
