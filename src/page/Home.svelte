@@ -20,7 +20,7 @@
 	};
 
 	const filterByTag = (tag) => {
-		if (tag == "All") {
+		if (tag == "") {
 			filteredPosts = allPosts;
 		} else {
 			filteredPosts = allPosts.filter((post) => {

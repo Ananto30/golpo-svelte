@@ -14,7 +14,7 @@
 	}
 </script>
 
-<div class="mx-auto fixed top-10 z-50">
+<div class="mx-2 md:mx-auto fixed top-10 z-50">
 	<div
 		in:fly={{ y: -200, duration: 500 }}
 		class="{hide ? 'hidden' : 'flex'}  bg-red-100 rounded-lg p-4 mb-4 text-sm text-red-700 "

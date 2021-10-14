@@ -1,11 +1,10 @@
 <script>
 	import { fade } from "svelte/transition";
-	import { jwt, loggedUsername, loggedUserImage } from "../store";
+	import { jwt, loggedUsername, loggedUserImage, error } from "../store";
 	import client from "../client";
 
 	let username = "";
 	let password = "";
-	let error = "";
 	let redirecting = false;
 
 	const searchParams = new URLSearchParams(window.location.search);
@@ -37,7 +36,7 @@
 			})
 			.catch((err) => {
 				if (err.response && err.response.data) {
-					error = err.response.data.error;
+					$error = err.response.data.error;
 				}
 			});
 	};
@@ -54,13 +53,26 @@
 		<h3 class="text-center text-md">Please wait a bit while we are talking with Google 😉</h3>
 	</div>
 {:else}
-	<div in:fade class="flex">
-		<div
-			class="bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 h-screen px-6 lg:px-16 xl:px-12 flex items-center justify-center">
-			<div class="w-full h-100 bg-gray-100 px-10 pb-10 rounded-3xl">
-				<img alt="Charlie Brown with Snoopy" class=" h-32 mx-auto mt-6" src="images/charliebrown.png" />
-				<h1 class="text-xl md:text-2xl font-bold leading-tight mt-4">Log in to Golpo</h1>
-
+	<div class="grid gap-5 grid-cols-5 h-screen">
+		<div class="col-span-5 md:col-span-3 p-10 grid my-auto">
+			<img alt="Charlie Brown with Snoopy" class="h-44" src="images/charliebrown.png" />
+			<h2 class="text-6xl font-extrabold text-indigo-500">Golpo</h2>
+			<p class="mt-10 text-xl font-medium text-gray-700 max-w-2xl">
+				Golpo is a clutter free platform for sharing links. We support people and content makers to share their
+				work and nothing more. Stay simple!
+			</p>
+			<div class="p-10 border shadow-sm rounded-2xl mt-10 max-w-md">
+				<div class="text-xl md:text-2xl font-bold leading-tight">Why Golpo?</div>
+				<div class="mt-3 text-gray-700 py-2">✔️ Clutter free</div>
+				<div class="text-gray-700 py-2">✔️ Ad free & focused</div>
+				<div class="text-gray-700 py-2">✔️ Promote your content</div>
+				<div class="text-gray-700 py-2">✔️ Follow creators and like minded people</div>
+				<div class="text-gray-700 py-2">✔️ Chat with them</div>
+			</div>
+		</div>
+		<div class="col-span-5 md:col-span-2 grid my-auto p-10">
+			<div class="w-full h-100 border shadow-sm p-10 rounded-3xl">
+				<h1 class="text-xl md:text-2xl font-bold leading-tight">Join Us!</h1>
 				<div class="mt-6">
 					<div>
 						<label for="username" class="block text-gray-700">Username</label>
@@ -87,11 +99,6 @@
 							required />
 					</div>
 
-					<!-- <div class="text-right mt-2">
-					<a href="#" class="text-sm font-semibold text-gray-700 hover:text-blue-700 focus:text-blue-700"
-						>Forgot Password?</a>
-				</div> -->
-
 					<button
 						on:click={generalLogin}
 						class="w-full block bg-indigo-500 hover:bg-indigo-400 focus:bg-indigo-400 text-white font-semibold rounded-lg px-4 py-3 mt-6"
@@ -103,7 +110,7 @@
 				<button
 					on:click={handleGetGoogleAuthUrl}
 					type="button"
-					class="w-full block bg-white hover:bg-indigo-300 focus:bg-indigo-200 text-gray-900 font-semibold rounded-lg px-4 py-3 border border-gray-300">
+					class="w-full block bg-white hover:bg-indigo-100 focus:bg-indigo-200 text-gray-900 font-semibold rounded-lg px-4 py-3 border border-gray-300">
 					<div class="flex items-center justify-center">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -134,7 +141,7 @@
 				<p class="mt-8">
 					Need an account?
 					<!-- <a href="#" class="text-blue-500 hover:text-blue-700 font-semibold"
-					>Create an account</a> -->
+				>Create an account</a> -->
 					Login with google 👆
 				</p>
 			</div>

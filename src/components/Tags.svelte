@@ -3,6 +3,7 @@
 	import client from "../client";
 	import { fade } from "svelte/transition";
 	import { tags } from "../store";
+	import { showTag } from "../helpers";
 
 	export let selectedTag = "";
 
@@ -10,11 +11,18 @@
 		client.Post.getAllTags()
 			.then((res) => {
 				$tags = res.data.tags;
-				$tags = [...$tags, "All"];
 			})
 			.catch((err) => {
 				console.log(err);
 			});
+	};
+
+	const selectTag = (tag) => {
+		if (selectedTag === tag) {
+			selectedTag = "";
+		} else {
+			selectedTag = tag;
+		}
 	};
 
 	onMount(async () => {
@@ -28,11 +36,11 @@
 		<div class="flex flex-wrap pt-10">
 			{#each $tags as tag}
 				<button
-					on:click={() => (selectedTag = tag)}
+					on:click={() => selectTag(tag)}
 					class="{selectedTag == tag
 						? 'bg-indigo-200'
 						: ''} m-2 text-sm items-center gap-1 border border-indigo-200 px-3 py-1 rounded-full hover:bg-indigo-100 transition-colors focus:bg-indigo-200 focus:outline-none focus-visible:border-gray-500">
-					<span>{tag}</span>
+					<span>{showTag(tag)}</span>
 				</button>
 			{/each}
 		</div>
