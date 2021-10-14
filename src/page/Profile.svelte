@@ -59,7 +59,7 @@
 
 <div in:fade class="grid grid-cols-12 min-h-screen">
 	<div class="col-span-12 md:col-span-8">
-		<div class="sticky top-14 md:top-0 bg-white z-10">
+		<div class="md:sticky top-14 md:top-0 bg-white z-10">
 			<div class="w-full mx-auto">
 				<div class="flex mt-14 md:mt-20 py-5 w-full px-3 md:px-16">
 					<div class="flex-none w-16 md:w-32 h-16 md:h-32 rounded-full">
