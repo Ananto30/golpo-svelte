@@ -36,21 +36,21 @@
 	}
 </script>
 
-<div class="border rounded-lg max-w-xl mx-auto shadow-sm p-5">
-	<div class="flex  items-center max-w-xl mx-auto">
-		<div class="w-full max-w-xl flex gap-2 items-center">
-			<img class="w-12 rounded-full border-2 border-indigo-400" src={$loggedUserImage} alt="Alex" />
+<div class="max-w-xl p-5 mx-auto border rounded-lg shadow-sm">
+	<div class="flex items-center max-w-xl mx-auto">
+		<div class="flex items-center w-full max-w-xl gap-2">
+			<img class="w-12 border-2 border-indigo-400 rounded-full" src={$loggedUserImage} alt="Alex" />
 			<div class="w-full">
 				<input
 					bind:value={url}
 					aria-placeholder="Share a link"
 					placeholder="Share a link"
-					class="w-full py-2 px-5 block rounded-full focus:outline-none border-gray-300 focus:border-indigo-400 border bg-white focus:text-gray-700  text-sm md:text-base" />
+					class="block w-full px-5 py-2 text-sm bg-white border border-gray-300 rounded-full focus:shadow-md focus:outline-none focus:border-indigo-400 focus:text-gray-700 md:text-base" />
 			</div>
 
 			<button
 				on:click={sharePost}
-				class="flex items-center gap-1 border border-gray-300 p-2 rounded-full hover:bg-indigo-100 transition-colors focus:bg-gray-100 focus:outline-none focus-visible:border-gray-500">
+				class="flex items-center gap-1 p-2 transition-colors border border-gray-300 rounded-full hover:shadow-lg hover:bg-indigo-100 focus:bg-gray-100 focus:outline-none focus-visible:border-gray-500">
 				<span
 					><img
 						alt=""
@@ -60,7 +60,7 @@
 			</button>
 		</div>
 	</div>
-	<div class="w-full max-w-sm mx-auto pt-2">
+	<div class="w-full max-w-sm pt-2 mx-auto">
 		{#if $tags.length > 0}
 			<Multiselect id="tags" bind:value={selectedTags} placeholder="+ Add Tags">
 				{#each $tags as tag}

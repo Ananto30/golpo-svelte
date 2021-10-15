@@ -114,8 +114,16 @@
 				<span>{s.name}</span>
 				{#if !readonly}
 					<div class="token-remove rounded-full hover:bg-indigo-400 ml-1" title="Remove {s.name}">
-						<img
-							src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAABBklEQVQ4jaXTvzJDQRQG8N/F1ShV0iAZnVBoVHqTjNfIjBmkUPjzBPIEvENu5QW8AIXRMWM0erUZUdwNa3MjMb5m9zvnO3t2zzmbqUaGDSwH/oJ7DFLhbMLncYhjLOAtaLbRxRLu8FGVdRF97I65FbRQBO1I5j7qvwQP0QjaPDZ2J2RO0cbRkGThxBgXqEW8FmwxihBrEyeJs4brsMb7GGdozmEFT4nzFR1cBd4JthiPqM/4HwaUTzhNHNM84RxNykIUibNntIi9RPNVRMqWtP5w9T0cxIZc2crGFMGVg8T3KLcnZP4xylkiyLGPHdwqWwVr2MINLvE+7oDYvo7VwJ/xoOI7fwJNxCuQl6lZRgAAAABJRU5ErkJggg==" />
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							x="0px"
+							y="0px"
+							width="16"
+							height="16"
+							viewBox="0 0 16 16"
+							style=" fill:#000000;"
+							><path
+								d="M 7.5 1 C 3.917969 1 1 3.917969 1 7.5 C 1 11.082031 3.917969 14 7.5 14 C 11.082031 14 14 11.082031 14 7.5 C 14 3.917969 11.082031 1 7.5 1 Z M 7.5 2 C 10.542969 2 13 4.457031 13 7.5 C 13 10.542969 10.542969 13 7.5 13 C 4.457031 13 2 10.542969 2 7.5 C 2 4.457031 4.457031 2 7.5 2 Z M 5.5 4.792969 L 4.792969 5.5 L 5.148438 5.851563 L 6.792969 7.5 L 5.148438 9.148438 L 4.792969 9.5 L 5.5 10.207031 L 5.851563 9.851563 L 7.5 8.207031 L 9.148438 9.851563 L 9.5 10.207031 L 10.207031 9.5 L 9.851563 9.148438 L 8.207031 7.5 L 9.851563 5.851563 L 10.207031 5.5 L 9.5 4.792969 L 9.148438 5.148438 L 7.5 6.792969 L 5.851563 5.148438 Z" /></svg>
 					</div>
 				{/if}
 			</div>
@@ -134,8 +142,16 @@
 					class="remove-all rounded-full hover:bg-indigo-300 ml-1"
 					title="Remove All"
 					class:hidden={!Object.keys(selected).length}>
-					<img
-						src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAABBklEQVQ4jaXTvzJDQRQG8N/F1ShV0iAZnVBoVHqTjNfIjBmkUPjzBPIEvENu5QW8AIXRMWM0erUZUdwNa3MjMb5m9zvnO3t2zzmbqUaGDSwH/oJ7DFLhbMLncYhjLOAtaLbRxRLu8FGVdRF97I65FbRQBO1I5j7qvwQP0QjaPDZ2J2RO0cbRkGThxBgXqEW8FmwxihBrEyeJs4brsMb7GGdozmEFT4nzFR1cBd4JthiPqM/4HwaUTzhNHNM84RxNykIUibNntIi9RPNVRMqWtP5w9T0cxIZc2crGFMGVg8T3KLcnZP4xylkiyLGPHdwqWwVr2MINLvE+7oDYvo7VwJ/xoOI7fwJNxCuQl6lZRgAAAABJRU5ErkJggg==" />
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						x="0px"
+						y="0px"
+						width="16"
+						height="16"
+						viewBox="0 0 16 16"
+						style=" fill:#000000;"
+						><path
+							d="M 7.5 1 C 3.917969 1 1 3.917969 1 7.5 C 1 11.082031 3.917969 14 7.5 14 C 11.082031 14 14 11.082031 14 7.5 C 14 3.917969 11.082031 1 7.5 1 Z M 7.5 2 C 10.542969 2 13 4.457031 13 7.5 C 13 10.542969 10.542969 13 7.5 13 C 4.457031 13 2 10.542969 2 7.5 C 2 4.457031 4.457031 2 7.5 2 Z M 5.5 4.792969 L 4.792969 5.5 L 5.148438 5.851563 L 6.792969 7.5 L 5.148438 9.148438 L 4.792969 9.5 L 5.5 10.207031 L 5.851563 9.851563 L 7.5 8.207031 L 9.148438 9.851563 L 9.5 10.207031 L 10.207031 9.5 L 9.851563 9.148438 L 8.207031 7.5 L 9.851563 5.851563 L 10.207031 5.5 L 9.5 4.792969 L 9.148438 5.148438 L 7.5 6.792969 L 5.851563 5.148438 Z" /></svg>
 				</div>
 			{/if}
 		</div>

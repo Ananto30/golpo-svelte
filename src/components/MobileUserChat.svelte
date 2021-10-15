@@ -3,5 +3,5 @@
 </script>
 
 <div class="pt-12">
-	<UserChat username="Mama" />
+  <UserChat username="Mama" />
 </div>
