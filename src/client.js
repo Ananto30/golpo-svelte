@@ -55,7 +55,8 @@ const User = {
 				},
 			})
 			.catch(errorHandler),
-	followUser: (username) => api.post("/user/me/follow", { username: username }, getHeader()).catch(errorHandler),
+	followUser: (username) => api.post(`/user/${username}/follow`, {}, getHeader()).catch(errorHandler),
+	unFollowUser: (username) => api.post(`/user/${username}/unfollow`, {}, getHeader()).catch(errorHandler),
 };
 
 const Post = {

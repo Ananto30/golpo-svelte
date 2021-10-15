@@ -70,7 +70,7 @@
 
 <svelte:window on:hashchange="{hashchange}" />
 
-<body class="container mx-auto max-w-7xl">
+<body class="container mx-auto max-w-7xl antialised">
   <div class="grid mx-auto">
     {#if $error}
       <ErrorAlert />

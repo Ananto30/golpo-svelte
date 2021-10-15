@@ -1,26 +1,28 @@
 <script>
-	import { onMount } from "svelte";
-	import { fade } from "svelte/transition";
-	import client from "../client";
-	import moment from "moment";
+  import { onMount } from "svelte";
+  import { fade } from "svelte/transition";
+  import { page } from "../store";
+  import client from "../client";
+  import moment from "moment";
 
-	import UserChat from "../components/UserChat.svelte";
+  import UserChat from "../components/UserChat.svelte";
 
-	let chats = [];
-	let chatNow = null;
+  let chats = [];
+  let chatNow = null;
 
-	const getChats = () => {
-		client.Chat.getChats().then((res) => {
-			chats = res.data.chats.reverse();
-			if (chats.length > 0) {
-				chatNow = chats[0].participants[1];
-			}
-		});
-	};
+  const getChats = () => {
+    client.Chat.getChats().then(res => {
+      chats = res.data.chats.reverse();
+      if (chats.length > 0) {
+        chatNow = chats[0].participants[1];
+      }
+    });
+  };
 
-	onMount(async () => {
-		getChats();
-	});
+  onMount(async () => {
+    $page = "chat";
+    getChats();
+  });
 </script>
 
 <div in:fade class="grid min-w-full grid-cols-12 md:pt-7">
