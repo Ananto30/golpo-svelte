@@ -20,43 +20,43 @@
 
 <div in:fade class="">
 	<div
-		class="flex max-w-xl my-5 bg-white md:shadow-sm md:rounded-lg overflow-hidden mx-auto border-t border-b md:border">
+		class="flex max-w-xl mx-auto my-5 overflow-hidden bg-white border-t border-b md:shadow-sm md:rounded-lg md:border">
 		<div class="flex items-center w-full">
 			<div class="w-full">
 				<div class="flex flex-row px-5 py-3">
-					<div class="w-auto h-auto rounded-full border-2 border-indigo-500">
+					<div class="w-auto h-auto border-2 border-indigo-500 rounded-full">
 						<img
-							class="w-12 h-12 object-cover rounded-full shadow cursor-pointer"
+							class="object-cover w-12 h-12 rounded-full shadow cursor-pointer"
 							alt="User avatar"
 							src="https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=200" />
 					</div>
-					<div class="flex flex-col mb-2 ml-4 mt-1">
-						<div class="text-gray-600 text-sm font-semibold">{post.author}</div>
+					<div class="flex flex-col mt-1 mb-2 ml-4">
+						<div class="text-sm font-semibold text-gray-600">{post.author}</div>
 						<div class="flex w-full mt-1">
-							<div class="text-indigo-700 font-base text-xs mr-1 cursor-pointer">
+							<div class="mr-1 text-xs text-indigo-700 cursor-pointer font-base">
 								{post.tags.map((tag) => showTag(tag)).join(" • ")}
 							</div>
 
-							<div class="text-gray-400 text-xs">• {moment(post.created_at).fromNow()}</div>
+							<div class="text-xs text-gray-400">• {moment(post.created_at).fromNow()}</div>
 						</div>
 					</div>
 				</div>
 				<div class="border-b border-gray-100" />
-				<div class="text-gray-400 font-medium text-sm mb-7 mt-6 px-5">
+				<div class="px-5 mt-6 text-sm font-medium text-gray-400 mb-7">
 					<img class="rounded" alt={post.title} src={post.image} />
 				</div>
-				<div class="text-gray-600 font-semibold text-lg mb-2 px-5">
+				<div class="px-5 mb-2 text-lg font-semibold text-gray-600">
 					{post.title}
 				</div>
-				<div class="text-gray-500 text-sm mb-6 px-5">
+				<div class="px-5 mb-6 text-sm text-gray-500">
 					{post.description ? post.description : ""}
 				</div>
 				<div class="flex justify-start mb-4 border-t border-gray-100">
-					<div class="flex pl-5 gap-4 mt-3">
+					<div class="flex gap-4 pl-5 mt-3">
 						<button
 							title="loves"
 							on:click={() => lovePost(post._id)}
-							class="flex text-sm items-center gap-1 border border-indigo-200 px-3 py-1 rounded-full hover:bg-indigo-100 transition duration-200 ease-in-out focus:bg-indigo-100 focus:outline-none focus-visible:border-gray-500">
+							class="flex items-center gap-1 px-3 py-1 text-sm transition duration-200 ease-in-out border border-indigo-200 rounded-full hover:bg-indigo-100 focus:bg-indigo-100 focus:outline-none focus-visible:border-gray-500">
 							{#if post.isLovedByMe}
 								<img
 									alt=""
@@ -72,7 +72,7 @@
 						</button>
 						<button
 							title="comments"
-							class="flex text-sm items-center gap-1 border border-gray-300 px-3 py-1 rounded-full hover:bg-indigo-100 transition duration-200 ease-in-out focus:bg-indigo-100 focus:outline-none focus-visible:border-gray-500">
+							class="flex items-center gap-1 px-3 py-1 text-sm transition duration-200 ease-in-out border border-gray-300 rounded-full hover:bg-indigo-100 focus:bg-indigo-100 focus:outline-none focus-visible:border-gray-500">
 							<img
 								alt=""
 								src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAAeElEQVQ4jdWSQQqAIBBFn9EJPENna9shkg7WlSJo2thGRCYRrU09GITv8OcvPnyFBRDAV4wAThsIYCuPWeDQom9MHPf70mcGo4WcwW2pxD8SFA1fJ+jCe9LWA9GiI9/EHZjCobSJc23CAVjDtJYtYoAR2J4apGluXAfjI7lbYdmVAAAAAElFTkSuQmCC" /><span
@@ -82,7 +82,7 @@
 							title="visit link"
 							href={post.url}
 							target="_blank"
-							class="flex text-sm items-center gap-1 border border-gray-300 px-3 py-1 rounded-full hover:bg-indigo-100 transition duration-200 ease-in-out focus:bg-indigo-100 focus:outline-none focus-visible:border-gray-500">
+							class="flex items-center gap-1 px-3 py-1 text-sm transition duration-200 ease-in-out border border-gray-300 rounded-full hover:bg-indigo-100 focus:bg-indigo-100 focus:outline-none focus-visible:border-gray-500">
 							<span
 								><img
 									alt=""

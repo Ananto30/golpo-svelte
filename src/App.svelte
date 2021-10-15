@@ -1,3 +1,16 @@
+<style global>
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  }
+  * {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+</style>
+
 <script>
 	import { onMount } from "svelte";
 	import Nav from "./components/Nav.svelte";
@@ -55,46 +68,33 @@
 	onMount(hashchange);
 </script>
 
-<svelte:window on:hashchange={hashchange} />
+<svelte:window on:hashchange="{hashchange}" />
 
-<body class="container max-w-7xl mx-auto">
-	<div class="grid mx-auto">
-		{#if $error}
-			<ErrorAlert />
-		{/if}
-	</div>
-	<div class="grid mx-auto">
-		{#if $info}
-			<InfoAlert />
-		{/if}
-	</div>
+<body class="container mx-auto max-w-7xl">
+  <div class="grid mx-auto">
+    {#if $error}
+      <ErrorAlert />
+    {/if}
+  </div>
+  <div class="grid mx-auto">
+    {#if $info}
+      <InfoAlert />
+    {/if}
+  </div>
 
-	<!-- HINT: remove the ! for easy developemnt without login everytime -->
-	{#if !$loggedUsername}
-		<Login />
-	{:else}
-		<div>
-			<div class="max-w-7xl mx-auto grid grid-cols-12">
-				<div class="col-span-12 md:col-span-2">
-					<Nav />
-				</div>
-				<div class="col-span-12 md:col-span-10">
-					<svelte:component this={currentPage} {...props} />
-				</div>
-			</div>
-		</div>
-	{/if}
+  <!-- HINT: remove the ! for easy developemnt without login everytime -->
+  {#if !$loggedUsername}
+    <Login />
+  {:else}
+    <div>
+      <div class="grid grid-cols-12 mx-auto max-w-7xl">
+        <div class="col-span-12 md:col-span-2">
+          <Nav />
+        </div>
+        <div class="col-span-12 md:col-span-10">
+          <svelte:component this="{currentPage}" {...props} />
+        </div>
+      </div>
+    </div>
+  {/if}
 </body>
-
-<style global>
-	@tailwind base;
-	@tailwind components;
-	@tailwind utilities;
-	body {
-		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
-			"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-	}
-	* {
-		-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-	}
-</style>
