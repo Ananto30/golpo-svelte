@@ -1,6 +1,6 @@
 <script>
   import { fade } from "svelte/transition";
-  import { loggedUsername, error } from "../store";
+  import { loggedUsername, error, page } from "../store";
   import client from "../client";
   import { TAGLINE, WORK } from "../defaults";
 
@@ -17,6 +17,7 @@
   let tagline;
   let image;
   let followed = false;
+  let userDetailsOnTop = false;
 
   $: if (slug == "" || slug == $loggedUsername) {
     editable = true;
@@ -24,41 +25,51 @@
   }
   const getProfileInfo = async () => {
     const res = await client.User.getByUsername(slug);
+    console.log(res.data);
     work = res.data.work;
     tagline = res.data.tagline;
     image = res.data.image;
+    followed = res.data.followers.includes($loggedUsername);
   };
   const getPosts = async () => {
     const res = await client.Post.getByUsername(slug);
     posts = res.data.posts.reverse();
   };
-  const followUser = () => {
-    client.User.followUser(slug)
-      .then(res => {
-        if (res.status == 200) {
-          followed = true;
-        } else {
-          $error = "You are already following this user";
-        }
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-        $error = err;
-      });
+  const followButtonHandler = async () => {
+    if (followed) {
+      await client.User.unFollowUser(slug);
+      followed = false;
+    } else {
+      await client.User.followUser(slug);
+      followed = true;
+    }
   };
 
   $: if (slug) {
+    $page = "profile";
     getProfileInfo();
     getPosts();
   }
+
+  window.addEventListener("scroll", function () {
+    let element = document.getElementById("user-details");
+    let atTop = element.getBoundingClientRect().top;
+    if (atTop == 0) {
+      userDetailsOnTop = true;
+    } else {
+      userDetailsOnTop = false;
+    }
+  });
 </script>
 
 <div in:fade class="grid min-h-screen grid-cols-12">
   <div class="col-span-12 md:col-span-8">
     <div class="z-10 bg-white md:sticky top-14 md:top-0">
       <div class="w-full mx-auto">
-        <div class="flex w-full px-3 py-5 mt-14 md:mt-20 md:px-16">
+        <div
+          id="user-details"
+          class="{userDetailsOnTop ? 'border-b-2' : ''} flex w-full px-3 py-5 mt-14 md:mt-20 md:px-16"
+        >
           <div class="flex-none w-16 h-16 rounded-full md:w-32 md:h-32">
             <img
               class="object-cover w-16 h-16 border-2 border-indigo-500 rounded-full shadow cursor-pointer md:w-32 md:h-32"
@@ -74,14 +85,25 @@
             </div>
             {#if !editable}
               <div class="mt-5">
+                {#if followed}
+                  <button
+                    in:fade
+                    on:click="{followButtonHandler}"
+                    class="flex-none px-3 py-1 text-sm text-white transition duration-200 bg-indigo-500 border border-indigo-200 rounded-full hover:shadow-md hover:bg-indigo-600 focus:bg-indigo-400 focus:outline-none focus-visible:border-gray-500"
+                  >
+                    <span>{followed ? "Following" : "Follow"}</span>
+                  </button>
+                {:else}
+                  <button
+                    in:fade
+                    on:click="{followButtonHandler}"
+                    class="flex-none px-3 py-1 text-sm transition duration-200 border border-indigo-200 rounded-full hover:shadow-md hover:bg-indigo-100 focus:bg-gray-100 focus:outline-none focus-visible:border-gray-500"
+                  >
+                    <span>{followed ? "Following" : "Follow"}</span>
+                  </button>
+                {/if}
                 <button
-                  on:click="{followUser}"
-                  class="flex-none px-3 py-1 text-sm transition-colors border border-indigo-200 rounded-full hover:bg-indigo-100 focus:bg-gray-100 focus:outline-none focus-visible:border-gray-500"
-                >
-                  <span>Follow</span>
-                </button>
-                <button
-                  class="flex-none px-3 py-1 text-sm transition-colors border border-indigo-200 rounded-full hover:bg-indigo-100 focus:bg-gray-100 focus:outline-none focus-visible:border-gray-500"
+                  class="flex-none px-3 py-1 text-sm transition duration-200 border border-indigo-200 rounded-full hover:shadow-md hover:bg-indigo-100 focus:bg-gray-100 focus:outline-none focus-visible:border-gray-500"
                 >
                   <span>Send Message</span>
                 </button>

@@ -1,6 +1,7 @@
 <script>
   import { fade } from "svelte/transition";
   import { onMount } from "svelte";
+  import { page } from "../store.js";
   import client from "../client";
 
   import Tags from "../components/Tags.svelte";
@@ -33,6 +34,7 @@
   }
 
   onMount(async () => {
+    $page = "home";
     getPosts();
   });
 </script>

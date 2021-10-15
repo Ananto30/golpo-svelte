@@ -1,25 +1,25 @@
 <script>
-	import { loggedUsername, jwt } from "../store.js";
+  import { loggedUsername, jwt, page } from "../store.js";
 
-	import { fade } from "svelte/transition";
+  import { fade } from "svelte/transition";
 
-	let sideBarVisible = true;
+  let sideBarVisible = true;
 
-	const logout = () => {
-		$loggedUsername = "";
-		$jwt = null;
-	};
+  const logout = () => {
+    $loggedUsername = "";
+    $jwt = null;
+  };
 
-	const toggleSideBar = () => {
-		sideBarVisible = !sideBarVisible;
-	};
+  const toggleSideBar = () => {
+    sideBarVisible = !sideBarVisible;
+  };
 </script>
 
 <div in:fade class="sticky top-0 z-10 w-full md:min-h-screen md:flex md:w-auto">
   <!-- mobile menu bar -->
   <div class="fixed z-50 flex justify-between w-full text-gray-100 bg-gray-800 md:hidden">
     <!-- logo -->
-    <a href="#/home" class="block p-4 font-bold">Golpo</a>
+    <a href="#/home" class="block px-4 py-2 text-2xl font-bold">Golpo</a>
 
     <!-- mobile menu button -->
     <button on:click="{toggleSideBar}" class="p-4 mobile-menu-button focus:outline-none focus:bg-gray-700">
@@ -37,7 +37,6 @@
   >
     <!-- logo -->
     <a href="#/home" class="flex items-center px-4 space-x-2 ">
-      <img alt="Charlie Brown with Snoopy" class="h-10" src="images/charliebrown.png" />
       <span class="text-4xl font-extrabold text-indigo-500">Golpo</span>
     </a>
 
@@ -46,7 +45,9 @@
       <a
         on:click="{toggleSideBar}"
         href="#/home"
-        class="flex items-center gap-2 px-4 py-5 transition duration-200 rounded-full hover:bg-indigo-100"
+        class="{$page == 'home'
+          ? 'font-bold'
+          : ''} flex items-center gap-2 px-4 py-5 transition duration-200 rounded-full hover:bg-indigo-100"
       >
         <img
           alt=""
@@ -58,7 +59,9 @@
       <a
         on:click="{toggleSideBar}"
         href="#/chat"
-        class="flex items-center gap-2 px-4 py-5 transition duration-200 rounded-full hover:bg-indigo-100"
+        class="{$page == 'chat'
+          ? 'font-bold'
+          : ''} flex items-center gap-2 px-4 py-5 transition duration-200 rounded-full hover:bg-indigo-100"
       >
         <img
           alt=""
@@ -70,7 +73,9 @@
       <a
         on:click="{toggleSideBar}"
         href="#/profile/{$loggedUsername}"
-        class="flex items-center gap-2 px-4 py-5 transition duration-200 rounded-full hover:bg-indigo-100"
+        class="{$page == 'profile'
+          ? 'font-bold'
+          : ''} flex items-center gap-2 px-4 py-5 transition duration-200 rounded-full hover:bg-indigo-100"
       >
         <img
           alt=""
@@ -82,7 +87,9 @@
       <a
         on:click="{toggleSideBar}"
         href="#/users"
-        class="flex items-center gap-2 px-4 py-5 transition duration-200 rounded-full hover:bg-indigo-100"
+        class="{$page == 'users'
+          ? 'font-bold'
+          : ''} flex items-center gap-2 px-4 py-5 transition duration-200 rounded-full hover:bg-indigo-100"
       >
         <img
           alt=""
