@@ -18,8 +18,8 @@
   };
 
   const selectTag = tag => {
-    if (selectedTag == tag) {
-      selectedTag = "all";
+    if (selectedTag === tag) {
+      selectedTag = "";
     } else {
       selectedTag = tag;
     }
@@ -39,7 +39,7 @@
           on:click="{() => selectTag(tag)}"
           class="{selectedTag == tag
             ? 'bg-indigo-200'
-            : ''} hover:shadow-md m-1 text-sm items-center border border-gray-300 px-3 py-1 rounded-full hover:bg-indigo-100 transition duration-200 focus:outline-none focus-visible:border-gray-500"
+            : ''} hover:shadow-md m-1 text-sm items-center border border-indigo-200 px-3 py-1 rounded-full hover:bg-indigo-100 transition duration-200 focus:bg-indigo-200 focus:outline-none focus-visible:border-gray-500"
         >
           <span>{showTag(tag)}</span>
         </button>

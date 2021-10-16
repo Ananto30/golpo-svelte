@@ -1,11 +1,12 @@
 <script>
   import { fade } from "svelte/transition";
-  import { info } from "../store";
+  import { info, loggedUsername } from "../store";
   import moment from "moment";
   import client from "../client";
   import { showTag } from "../helpers";
 
   export let post;
+  export let onDelete;
 
   const lovePost = postId => {
     if (!post.isLovedByMe) {
@@ -19,9 +20,7 @@
 </script>
 
 <div in:fade class="">
-  <div
-    class="flex max-w-xl mx-auto my-5 overflow-hidden bg-white border-t border-b md:shadow-sm md:rounded-lg md:border"
-  >
+  <div class="flex max-w-xl py-3 overflow-hidden bg-white border-b-2 ">
     <div class="flex items-center w-full">
       <div class="w-full">
         <div class="flex flex-row px-5 py-3">
@@ -45,22 +44,22 @@
             </div>
           </div>
         </div>
-        <div class="border-b border-gray-100"></div>
+        <div class="border-gray-100 md:border-none"></div>
         <div class="px-5 mt-6 text-sm font-medium text-gray-400 mb-7">
           <img class="rounded" alt="{post.title}" src="{post.image}" />
         </div>
         <div class="px-5 mb-2 text-lg font-semibold text-gray-600">
           {post.title}
         </div>
-        <div class="px-5 mb-6 text-sm text-gray-500">
+        <div class="px-5 mb-3 text-sm text-gray-500">
           {post.description ? post.description : ""}
         </div>
-        <div class="flex justify-start mb-4 border-t border-gray-100">
+        <div class="flex justify-start mb-4 border-gray-100 md:border-none">
           <div class="flex gap-4 pl-5 mt-3">
             <button
               title="loves"
               on:click="{() => lovePost(post._id)}"
-              class="flex items-center gap-1 px-3 py-1 text-sm transition duration-200 ease-in-out border border-indigo-200 rounded-full hover:bg-indigo-100 focus:bg-indigo-100 focus:outline-none focus-visible:border-gray-500"
+              class="flex items-center gap-1 px-3 py-1 text-sm transition duration-200 ease-in-out border border-gray-300 rounded-full hover:bg-indigo-100 focus:bg-indigo-100 focus:outline-none focus-visible:border-gray-500"
             >
               {#if post.isLovedByMe}
                 <img
@@ -77,7 +76,8 @@
               {/if}
               <span>{post.loveCount}</span>
             </button>
-            <button
+            <a
+              href="#/post/{post._id}"
               title="comments"
               class="flex items-center gap-1 px-3 py-1 text-sm transition duration-200 ease-in-out border border-gray-300 rounded-full hover:bg-indigo-100 focus:bg-indigo-100 focus:outline-none focus-visible:border-gray-500"
             >
@@ -95,7 +95,7 @@
                 ></path>
               </svg>
               <span>{post.commentCount}</span>
-            </button>
+            </a>
             <a
               title="visit link"
               href="{post.url}"
@@ -119,6 +119,27 @@
                 </svg>
               </span>
             </a>
+
+            {#if post.author == $loggedUsername}
+              <button
+                title="delete"
+                on:click="{onDelete}"
+                class="flex items-center gap-1 px-3 py-1 text-sm transition duration-200 ease-in-out border border-gray-300 rounded-full hover:bg-indigo-100 focus:bg-indigo-100 focus:outline-none focus-visible:border-gray-500"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  x="0px"
+                  y="0px"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  style=" fill:#000000;"
+                  ><path
+                    d="M 6.496094 1 C 5.675781 1 5 1.675781 5 2.496094 L 5 3 L 2 3 L 2 4 L 3 4 L 3 12.5 C 3 13.324219 3.675781 14 4.5 14 L 10.5 14 C 11.324219 14 12 13.324219 12 12.5 L 12 4 L 13 4 L 13 3 L 10 3 L 10 2.496094 C 10 1.675781 9.324219 1 8.503906 1 Z M 6.496094 2 L 8.503906 2 C 8.785156 2 9 2.214844 9 2.496094 L 9 4 L 11 4 L 11 12.5 C 11 12.78125 10.78125 13 10.5 13 L 4.5 13 C 4.21875 13 4 12.78125 4 12.5 L 4 4 L 6 4 L 6 2.496094 C 6 2.214844 6.214844 2 6.496094 2 Z M 5 5 L 5 12 L 6 12 L 6 5 Z M 7 5 L 7 12 L 8 12 L 8 5 Z M 9 5 L 9 12 L 10 12 L 10 5 Z"
+                  ></path></svg
+                >
+              </button>
+            {/if}
           </div>
         </div>
       </div>

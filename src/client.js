@@ -3,8 +3,8 @@ import { get } from "svelte/store";
 import { jwt, loggedUsername } from "./store";
 
 const api = axios.create({
-	baseURL: "http://localhost:8080/api",
-	// baseURL: "/api",
+	// baseURL: "http://localhost:8080/api",
+	baseURL: "/api",
 	headers: {
 		"Content-Type": "application/json",
 	},
@@ -68,6 +68,7 @@ const Post = {
 		api.post(`/post/${postId}/comment`, { text: text }, getHeader()).catch(errorHandler),
 	getAllTags: () => api.get("/post/tags", getHeader()).catch(errorHandler),
 	reactLove: (postId) => api.post(`/post/${postId}/love`, {}, getHeader()).catch(errorHandler),
+	deletePost: (postId) => api.post(`/post/${postId}/delete`,{}, getHeader()).catch(errorHandler),
 };
 
 const Chat = {

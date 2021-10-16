@@ -1,5 +1,4 @@
 <script>
-	import { onMount } from "svelte";
 	import { fade } from "svelte/transition";
 	import client from "../client";
 	import moment from "moment";

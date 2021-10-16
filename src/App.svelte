@@ -3,8 +3,9 @@
   @tailwind components;
   @tailwind utilities;
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
-      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; */
+    font-family: "Proxima Nova", sans-serif;
   }
   * {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -12,60 +13,62 @@
 </style>
 
 <script>
-	import { onMount } from "svelte";
-	import Nav from "./components/Nav.svelte";
+  import { onMount } from "svelte";
+  import Nav from "./components/Nav.svelte";
 
-	import Home from "./page/Home.svelte";
-	import Chat from "./page/Chat.svelte";
-	import Users from "./page/Users.svelte";
-	import Login from "./page/Login.svelte";
-	import Profile from "./page/Profile.svelte";
-	import MobileUserChat from "./components/MobileUserChat.svelte";
-	import ErrorAlert from "./components/ErrorAlert.svelte";
-	import InfoAlert from "./components/InfoAlert.svelte";
+  import Home from "./page/Home.svelte";
+  import Chat from "./page/Chat.svelte";
+  import Users from "./page/Users.svelte";
+  import Login from "./page/Login.svelte";
+  import Profile from "./page/Profile.svelte";
+  import Post from "./page/Post.svelte";
+  import MobileUserChat from "./components/MobileUserChat.svelte";
+  import ErrorAlert from "./components/ErrorAlert.svelte";
+  import InfoAlert from "./components/InfoAlert.svelte";
 
-	import { loggedUsername, error, info } from "./store.js";
+  import { loggedUsername, error, info } from "./store.js";
 
-	let currentPage;
-	let props;
+  let currentPage;
+  let props;
 
-	const pageMapping = {
-		"": Home,
-		home: Home,
-		chat: Chat,
-		users: Users,
-		profile: Profile,
-		userchat: MobileUserChat,
-	};
+  const pageMapping = {
+    "": Home,
+    home: Home,
+    chat: Chat,
+    users: Users,
+    profile: Profile,
+    userchat: MobileUserChat,
+  };
 
-	const slugPageMapping = {
-		chat: Chat,
-		profile: Profile,
-	};
+  const slugPageMapping = {
+    chat: Chat,
+    profile: Profile,
+    post: Post,
+  };
 
-	function hashchange() {
-		// the poor man's router!
-		let path = window.location.hash.slice(1);
-		path = path.split("?")[0];
-		path = path.split("/");
+  function hashchange() {
+    // the poor man's router!
+    let path = window.location.hash.slice(1);
+    path = path.split("?")[0];
+    path = path.split("/");
 
-		console.log(path);
-		if (path.length == 3 && path[2] != "") {
-			setTimeout(() => {
-				props = { slug: path[2] };
-				currentPage = slugPageMapping[path[1]];
-				window.scrollTo(0, 0);
-			}, 200);
-		} else {
-			setTimeout(() => {
-				path = path[1] || path[0];
-				currentPage = pageMapping[path];
-				window.scrollTo(0, 0);
-			}, 200);
-		}
-	}
+    console.log(path);
+    if (path.length == 3 && path[2] != "") {
+      setTimeout(() => {
+        props = { slug: path[2] };
+        currentPage = slugPageMapping[path[1]];
+        window.scrollTo(0, 0);
+      }, 200);
+    } else {
+      setTimeout(() => {
+        path = path[1] || path[0];
+        currentPage = pageMapping[path];
+        window.scrollTo(0, 0);
+      }, 200);
+    }
+  }
 
-	onMount(hashchange);
+  onMount(hashchange);
 </script>
 
 <svelte:window on:hashchange="{hashchange}" />

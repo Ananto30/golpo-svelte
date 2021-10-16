@@ -23,7 +23,11 @@
             class="h-full p-4 text-center transition duration-200 transform bg-white border rounded-xl md:shadow-sm hover:shadow-lg"
           >
             <div class="mb-3">
-              <img class="w-auto mx-auto border-2 border-indigo-400 rounded-full h-28" src="{user.image}" alt="" />
+              <img
+                class="w-auto mx-auto border-2 border-indigo-400 rounded-full h-28"
+                src="{user.image ? user.image : IMAGE_LARGE}"
+                alt="{user.username}"
+              />
             </div>
             <h2 class="font-bold text-indigo-500 cursor-pointer">{user.username}</h2>
             <span class="block mb-2 text-sm text-gray-500 line-clamp-2">{user.work ? user.work : WORK}</span>
