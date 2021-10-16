@@ -75,7 +75,7 @@
 
   onMount(() => {
     slot.querySelectorAll("option").forEach(o => {
-      o.selected && !value.includes(o.value) && (value = [...value, o.value]);
+      // o.selected && !value.includes(o.value) && (value = [...value, o.value]);
       options = [...options, { value: o.value, name: o.textContent }];
     });
     // value &&
@@ -83,7 +83,7 @@
     // first = false;
   });
 
-  $: if (!first) value = Object.values(selected).map(o => o.value);
+  $: if (selected) value = Object.values(selected).map(o => o.value);
   $: filtered = options.filter(o => (inputValue ? o.name.toLowerCase().includes(inputValue.toLowerCase()) : o));
   $: if ((activeOption && !filtered.includes(activeOption)) || (!activeOption && inputValue))
     activeOption = filtered[0];
@@ -161,13 +161,10 @@
   }
 </script>
 
-<div class="relative z-0 pr-2 bg-white border border-gray-300 rounded-full multiselect" class:readonly>
+<div class="relative z-0 pr-2 bg-white border-b border-gray-300 multiselect" class:readonly>
   <div class="flex flex-wrap items-center cursor-pointer tokens" class:showOptions on:click="{handleTokenClick}">
     {#each Object.values(selected) as s}
-      <div
-        class="flex items-center px-1 py-1 m-1 text-sm rounded-full token hover:bg-indigo-100"
-        data-id="{s.value}"
-      >
+      <div class="flex items-center px-1 py-1 m-1 text-sm rounded-full token hover:bg-indigo-100" data-id="{s.value}">
         <span>{s.name}</span>
         {#if !readonly}
           <div class="ml-1 rounded-full token-remove hover:bg-indigo-400" title="Remove {s.name}">
@@ -190,7 +187,7 @@
     <div class="flex items-center flex-1 actions">
       {#if !readonly}
         <input
-          class="w-full mx-5 outline-none h-9"
+          class="w-full text-sm outline-none h-9"
           id="{id}"
           autocomplete="off"
           bind:value="{inputValue}"
