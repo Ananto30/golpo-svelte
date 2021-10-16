@@ -1,6 +1,6 @@
 # Golpo Svelte
 
-This is the svelte build of the current [golpo project](https://github.com/Ananto30/golpo). Site - [golpo.dedsec.life](http://golpo.dedsec.life/)
+This is the svelte build of the current [golpo project](https://github.com/Ananto30/golpo). Old app - [golpo.dedsec.life](http://golpo.dedsec.life/) New app - [golpo2.herokuapp.com](https://golpo2.herokuapp.com)
 
 But there are things we are changing from the current Golpo. We will use Golpo as a link sharing platform. And it will be free for eveyone! Future plan involves link management (collection of links and sorting) and sharing collection.
 
