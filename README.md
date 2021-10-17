@@ -35,9 +35,7 @@ Follow this login hack for faster development - https://github.com/Ananto30/golp
 
 ## Svelte tasks
 
-Please note that most of the frontend data model is already there, I will add more soon.
-
-And to get actual api response, you need to run the backend too. Check the backend - [github.com/ananto30/golpo-express](https://github.com/Ananto30/golpo-express)
+To get actual api response, you need to run the backend too. Check the backend - [github.com/ananto30/golpo-express](https://github.com/Ananto30/golpo-express)
 
 Here are the tasks - [Hacktoberfest](https://github.com/Ananto30/golpo-svelte/issues?q=is%3Aissue+is%3Aopen+label%3AHacktoberfest)
 
