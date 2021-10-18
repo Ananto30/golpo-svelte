@@ -6,11 +6,11 @@
   export let allPosts;
   export let selectedTag;
 
-  let filteredPosts;
+  let filteredPosts = [];
 
   const deletePost = async id => {
     if (confirm("Are you sure you want to delete this post?")) {
-      const rest = await client.Post.deletePost(id);
+      const res = await client.Post.deletePost(id);
       allPosts = allPosts.filter(post => post._id !== id);
       filteredPosts = allPosts;
     }
@@ -26,8 +26,28 @@
     }
   };
 
+  const getPostUsersMeta = async () => {
+    const usernames = [...new Set(allPosts.map(i => i.author))];
+    const res = await client.User.getUsersMeta(usernames);
+
+    const users = res.data.users.reduce((acc, user) => {
+      acc[user.username] = user;
+      return acc;
+    }, {});
+
+    allPosts.forEach(post => {
+      post.authorName = users[post.author].display_name;
+      post.authorImage = users[post.author].image;
+    });
+
+    filteredPosts = allPosts;
+  };
+
   $: if (selectedTag) filterByTag(selectedTag);
-  $: if (allPosts) filteredPosts = allPosts;
+  $: if (allPosts && allPosts.length > 0) {
+    filteredPosts = allPosts;
+    getPostUsersMeta();
+  }
 </script>
 
 {#each filteredPosts as post}

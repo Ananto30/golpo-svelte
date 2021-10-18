@@ -5,6 +5,7 @@
   import { IMAGE_LARGE } from "../defaults";
 
   import Multiselect from "./Multiselect.svelte";
+  import ShareSvg from "../svgs/ShareSvg.svelte";
 
   let url = "";
   let selectedTags = [];
@@ -32,45 +33,30 @@
   };
 </script>
 
-<div class="max-w-xl mx-auto pb-7 md:p-5">
+<div class="max-w-xl pb-6 mx-auto md:p-4">
   <div class="flex items-center max-w-xl mx-auto">
     <div class="flex items-center w-full max-w-xl gap-2">
-      <img
-        class="w-12 border-2 border-indigo-400 rounded-full"
-        src="{$loggedUserImage ? $loggedUserImage : IMAGE_LARGE}"
-        alt="Alex"
-      />
+      <img class="w-12 rounded-full" src="{$loggedUserImage ? $loggedUserImage : IMAGE_LARGE}" alt="Alex" />
       <div class="w-full">
         <input
           bind:value="{url}"
           aria-placeholder="Share a link"
           placeholder="Share a link"
-          class="block w-full px-5 py-2 text-sm bg-white border border-gray-300 rounded-full focus:shadow-md focus:outline-none focus:border-indigo-400 focus:text-gray-700 md:text-base"
+          class="block w-full px-4 py-2 text-sm bg-white border border-gray-300 rounded-full focus:shadow-md focus:outline-none focus:border-indigo-400 focus:text-gray-700 md:text-base"
         />
       </div>
 
       <button
         on:click="{sharePost}"
-        class="flex items-center gap-1 p-2 transition-colors border border-gray-300 rounded-full hover:shadow-lg hover:bg-indigo-100 focus:bg-gray-100 focus:outline-none focus-visible:border-gray-500"
+        class="p-3 transition-colors border border-gray-300 rounded-full hover:shadow-lg hover:bg-indigo-100 focus:bg-gray-100 focus:outline-none focus-visible:border-gray-500"
       >
         <span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            x="0px"
-            y="0px"
-            width="20"
-            height="20"
-            viewBox="0 0 16 16"
-            style=" fill:#000000;"
-            ><path
-              d="M 12.5 1 C 11.125 1 10 2.125 10 3.5 C 10 3.671875 10.019531 3.835938 10.050781 4 L 5.519531 6.039063 C 5.0625 5.414063 4.328125 5 3.5 5 C 2.125 5 1 6.125 1 7.5 C 1 8.875 2.125 10 3.5 10 C 4.332031 10 5.074219 9.582031 5.527344 8.949219 L 10.0625 10.964844 C 10.023438 11.136719 10 11.316406 10 11.5 C 10 12.875 11.125 14 12.5 14 C 13.875 14 15 12.875 15 11.5 C 15 10.125 13.875 9 12.5 9 C 11.667969 9 10.925781 9.417969 10.472656 10.050781 L 5.9375 8.039063 C 5.976563 7.863281 6 7.683594 6 7.5 C 6 7.3125 5.976563 7.128906 5.9375 6.953125 L 10.445313 4.914063 C 10.898438 5.570313 11.652344 6 12.5 6 C 13.875 6 15 4.875 15 3.5 C 15 2.125 13.875 1 12.5 1 Z M 12.5 2 C 13.335938 2 14 2.664063 14 3.5 C 14 4.335938 13.335938 5 12.5 5 C 11.664063 5 11 4.335938 11 3.5 C 11 2.664063 11.664063 2 12.5 2 Z M 3.5 6 C 4.335938 6 5 6.664063 5 7.5 C 5 8.335938 4.335938 9 3.5 9 C 2.664063 9 2 8.335938 2 7.5 C 2 6.664063 2.664063 6 3.5 6 Z M 12.5 10 C 13.335938 10 14 10.664063 14 11.5 C 14 12.335938 13.335938 13 12.5 13 C 11.664063 13 11 12.335938 11 11.5 C 11 10.664063 11.664063 10 12.5 10 Z"
-            ></path></svg
-          >
+          <ShareSvg />
         </span>
       </button>
     </div>
   </div>
-  <div class="pt-3 mx-auto md:max-w-sm">
+  <div class="mx-auto mt-4">
     {#if $tags.length > 0}
       <Multiselect id="tags" bind:value="{selectedTags}" placeholder="+ Add tags">
         {#each $tags as tag}

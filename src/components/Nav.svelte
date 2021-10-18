@@ -5,6 +5,8 @@
 
   let sideBarVisible = true;
 
+  const navButtonClass = "flex items-center gap-2 p-4 transition duration-200 rounded-full hover:bg-indigo-100 text-gray-800";
+
   const logout = () => {
     $loggedUsername = "";
     $jwt = null;
@@ -15,7 +17,7 @@
   };
 </script>
 
-<div in:fade class="sticky top-0 z-10 w-full md:min-h-screen md:flex md:w-auto">
+<div in:fade class="sticky top-0 z-20 w-full md:min-h-screen md:flex md:w-auto">
   <!-- mobile menu bar -->
   <div class="fixed z-50 flex justify-between w-full text-gray-100 bg-gray-800 md:hidden">
     <!-- logo -->
@@ -33,7 +35,7 @@
   <div
     class="{sideBarVisible
       ? '-translate-x-full'
-      : 'shadow-lg'} z-30 md:shadow-none w-3/4 space-y-6 md:py-7 px-2 inset-y-0 left-0 transform fixed md:relative md:translate-x-0 transition duration-200 ease-in-out bg-white"
+      : 'shadow-lg'} z-30 md:shadow-none w-3/4 space-y-6 md:py-8 px-2 inset-y-0 left-0 transform fixed md:relative md:translate-x-0 transition duration-200 ease-in-out bg-white"
   >
     <!-- logo -->
     <a href="#/home" class="flex items-center px-4 space-x-2 ">
@@ -47,7 +49,7 @@
         href="#/home"
         class="{$page == 'home'
           ? 'font-bold'
-          : ''} flex items-center gap-2 px-4 py-5 transition duration-200 rounded-full hover:bg-indigo-100"
+          : ''} {navButtonClass}"
       >
         <img
           alt=""
@@ -61,7 +63,7 @@
         href="#/chat"
         class="{$page == 'chat'
           ? 'font-bold'
-          : ''} flex items-center gap-2 px-4 py-5 transition duration-200 rounded-full hover:bg-indigo-100"
+          : ''} {navButtonClass}"
       >
         <img
           alt=""
@@ -75,7 +77,7 @@
         href="#/profile/{$loggedUsername}"
         class="{$page == 'profile'
           ? 'font-bold'
-          : ''} flex items-center gap-2 px-4 py-5 transition duration-200 rounded-full hover:bg-indigo-100"
+          : ''} {navButtonClass}"
       >
         <img
           alt=""
@@ -89,7 +91,7 @@
         href="#/users"
         class="{$page == 'users'
           ? 'font-bold'
-          : ''} flex items-center gap-2 px-4 py-5 transition duration-200 rounded-full hover:bg-indigo-100"
+          : ''} {navButtonClass}"
       >
         <img
           alt=""
@@ -102,7 +104,7 @@
       <a
         on:click="{toggleSideBar}"
         on:click="{logout}"
-        class="flex items-center gap-2 px-4 py-5 transition duration-200 rounded-full cursor-pointer hover:bg-indigo-100"
+        class="{navButtonClass}"
       >
         <img
           width="36"

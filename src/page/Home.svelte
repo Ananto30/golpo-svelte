@@ -25,11 +25,11 @@
 
 <div in:fade class="grid grid-cols-12">
   <div class="col-span-12 md:col-span-8">
-    <div class="min-w-full px-3 mt-20 md:px-0 md:mt-7">
+    <div class="top-0 min-w-full px-4 mt-20 bg-white md:px-0 md:mt-8">
       <PostBox />
     </div>
     <div class="grid mx-auto">
-      <div class="mx-auto mt-5">
+      <div class="mx-auto mt-4">
         <Posts bind:allPosts bind:selectedTag />
       </div>
     </div>

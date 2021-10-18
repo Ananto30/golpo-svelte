@@ -1,11 +1,17 @@
-<style global>
+<style global lang="postcss">
   @tailwind base;
   @tailwind components;
   @tailwind utilities;
   body {
     /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
       "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; */
-    font-family: "Proxima Nova", sans-serif;
+    /* font-family: "Proxima Nova", sans-serif; */
+    /* font-family: 'Titillium Web', sans-serif; */
+    font-family: 'Source Sans Pro', sans-serif;
+    /* font-family: 'Encode Sans', sans-serif; */
+    /* font-family: 'Inter', sans-serif; */
+    /* font-family: 'Ubuntu', sans-serif; */
+    /* font-family: 'Lato', sans-serif; */
   }
   * {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
