@@ -3,8 +3,8 @@ import { get } from "svelte/store";
 import { jwt, loggedUsername } from "./store";
 
 const api = axios.create({
-	// baseURL: "http://localhost:8080/api",
-	baseURL: "/api",
+	baseURL: "http://localhost:8080/api",
+	// baseURL: "/api",
 	headers: {
 		"Content-Type": "application/json",
 	},
@@ -44,19 +44,11 @@ const User = {
 	getAllUsers: () => api.get("/user", getHeader()).catch(errorHandler),
 	getByUsername: (username) => api.get(`/user/${username}`, getHeader()).catch(errorHandler),
 	updateMeta: (meta) => api.post("/user/me/update", meta, getHeader()).catch(errorHandler),
-
-	//TODO: this one is pretty tricky, need to rethink about the header design
-	getUsersMeta: (usernames) =>
-		api
-			.get("/user/usersmeta", {
-				params: { usernames: usernames },
-				headers: {
-					Authorization: "Bearer " + get(jwt),
-				},
-			})
-			.catch(errorHandler),
+	getUsersMeta: (usernames) => api.post("/user/get_users_meta", { usernames: usernames }, getHeader()).catch(errorHandler),
 	followUser: (username) => api.post(`/user/${username}/follow`, {}, getHeader()).catch(errorHandler),
 	unFollowUser: (username) => api.post(`/user/${username}/unfollow`, {}, getHeader()).catch(errorHandler),
+	getFollowers: (username) => api.get(`/user/${username}/followers`, getHeader()).catch(errorHandler),
+	getFollowing: (username) => api.get(`/user/${username}/following`, getHeader()).catch(errorHandler),
 };
 
 const Post = {

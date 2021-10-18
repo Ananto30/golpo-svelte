@@ -1,40 +1,76 @@
 <script>
   import { fade } from "svelte/transition";
   import { onMount } from "svelte";
-  import Footer from "../components/Footer.svelte";
   import client from "../client";
-  import { page } from "../store";
-  import { IMAGE_LARGE, TAGLINE, WORK } from "../defaults";
+  import { page, loggedUsername } from "../store";
+
+  import UserCard from "../components/UserCard.svelte";
+  import Footer from "../components/Footer.svelte";
 
   let users = [];
-  onMount(async () => {
-    $page = "users";
+  let tab = "all";
+
+  const getAllUsers = async () => {
     const res = await client.User.getAllUsers();
     users = res.data.users;
+  };
+
+  const getFollowers = async () => {
+    const res = await client.User.getFollowers($loggedUsername);
+    users = res.data.users;
+  };
+
+  const getFollowing = async () => {
+    const res = await client.User.getFollowing($loggedUsername);
+    users = res.data.users;
+  };
+
+  $: if (tab === "all") {
+    getAllUsers();
+  } else if (tab === "followers") {
+    getFollowers();
+  } else if (tab === "following") {
+    getFollowing();
+  }
+
+  onMount(async () => {
+    $page = "users";
+    getAllUsers();
   });
 </script>
 
-<div in:fade class="min-h-screen pt-16 md:pt-7">
+<div in:fade class="min-h-screen">
+  <div class="sticky top-0 z-10 pt-16 mb-3 bg-white md:pt-7">
+    <nav class="flex flex-row justify-center">
+      <button
+        on:click="{() => (tab = 'all')}"
+        class="{tab == 'all'
+          ? 'text-blue-500 border-b-2 border-blue-500 font-medium'
+          : 'text-gray-600'} block px-5 py-2 border-blue-500 hover:text-blue-500 focus:outline-none"
+      >
+        All users
+      </button>
+      <button
+        on:click="{() => (tab = 'followers')}"
+        class="{tab == 'followers'
+          ? 'text-blue-500 border-b-2 border-blue-500 font-medium'
+          : 'text-gray-600'} block px-5 py-2 text-gray-600 hover:text-blue-500 focus:outline-none"
+      >
+        Followers
+      </button>
+      <button
+        on:click="{() => (tab = 'following')}"
+        class="{tab == 'following'
+          ? 'text-blue-500 border-b-2 border-blue-500 font-medium'
+          : 'text-gray-600'} block px-5 py-2 text-gray-600 hover:text-blue-500 focus:outline-none"
+      >
+        Following
+      </button>
+    </nav>
+  </div>
   <div class="grid grid-cols-2 lg:grid-cols-4">
     {#each users as user}
-      <a href="#/profile/{user.username}">
-        <div class="p-2">
-          <div
-            class="h-full p-4 text-center transition duration-200 transform bg-white border rounded-xl md:shadow-sm hover:shadow-lg"
-          >
-            <div class="mb-3">
-              <img
-                class="w-auto mx-auto border-2 border-indigo-400 rounded-full h-28"
-                src="{user.image ? user.image : IMAGE_LARGE}"
-                alt="{user.username}"
-              />
-            </div>
-            <h2 class="font-bold text-indigo-500 cursor-pointer">{user.username}</h2>
-            <span class="block mb-2 text-sm text-gray-500 line-clamp-2">{user.work ? user.work : WORK}</span>
-            <span class="block mb-4 text-sm text-gray-500 line-clamp-2">{user.tagline ? user.tagline : TAGLINE}</span>
-          </div>
-        </div>
-      </a>
+      <UserCard bind:user />
     {/each}
   </div>
 </div>
