@@ -1,6 +1,6 @@
 # Golpo Svelte
 
-This is the svelte build of the current [golpo project](https://github.com/Ananto30/golpo). Site - [golpo.dedsec.life](http://golpo.dedsec.life/)
+This is the svelte build of the current [golpo project](https://github.com/Ananto30/golpo). Old app - [golpo13.herokuapp.com](http://golpo13.herokuapp.com/) New app - [golpo2.herokuapp.com](https://golpo2.herokuapp.com)
 
 But there are things we are changing from the current Golpo. We will use Golpo as a link sharing platform. And it will be free for eveyone! Future plan involves link management (collection of links and sorting) and sharing collection.
 
@@ -35,9 +35,7 @@ Follow this login hack for faster development - https://github.com/Ananto30/golp
 
 ## Svelte tasks
 
-Please note that most of the frontend data model is already there, I will add more soon.
-
-And to get actual api response, you need to run the backend too. Check the backend - [github.com/ananto30/golpo-express](https://github.com/Ananto30/golpo-express)
+To get actual api response, you need to run the backend too. Check the backend - [github.com/ananto30/golpo-express](https://github.com/Ananto30/golpo-express)
 
 Here are the tasks - [Hacktoberfest](https://github.com/Ananto30/golpo-svelte/issues?q=is%3Aissue+is%3Aopen+label%3AHacktoberfest)
 
