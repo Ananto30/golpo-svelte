@@ -161,7 +161,7 @@
   }
 </script>
 
-<div class="relative z-0 pr-2 bg-white border-b border-gray-300 multiselect" class:readonly>
+<div class="relative z-0 px-4 bg-white rounded-2xl multiselect" class:readonly>
   <div class="flex flex-wrap items-center cursor-pointer tokens" class:showOptions on:click="{handleTokenClick}">
     {#each Object.values(selected) as s}
       <div class="flex items-center px-1 py-1 m-1 text-sm rounded-full token hover:bg-indigo-100" data-id="{s.value}">
@@ -184,7 +184,7 @@
         {/if}
       </div>
     {/each}
-    <div class="flex items-center flex-1 actions">
+    <div class="flex items-center flex-1 actions ">
       {#if !readonly}
         <input
           class="w-full text-sm outline-none h-9"

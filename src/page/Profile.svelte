@@ -16,6 +16,7 @@
   import Posts from "../components/Posts.svelte";
   import Tags from "../components/Tags.svelte";
   import UserCard from "../components/UserCard.svelte";
+  import Tab from "../components/Tab.svelte";
 
   export let slug;
 
@@ -28,8 +29,10 @@
   let userDetailsOnTop = false;
   let selectedTag = "";
   let displayName = "";
-  let tab = "posts";
   let users = [];
+
+  let tabs = ["Posts", "Followers", "Following"];
+  let selectedTab = "Posts";
 
   $: if (slug == "" || slug == $loggedUsername) {
     editable = true;
@@ -86,11 +89,11 @@
     getProfileInfo();
   }
 
-  $: if (tab == "posts") {
+  $: if (selectedTab == "Posts") {
     getPosts();
-  } else if (tab == "followers") {
+  } else if (selectedTab == "Followers") {
     getFollowers();
-  } else if (tab == "following") {
+  } else if (selectedTab == "Following") {
     getFollowing();
   }
 
@@ -151,36 +154,11 @@
         </div>
       </div>
       <div class="px-4 mt-2 bg-white md:px-16">
-        <nav class="flex flex-row">
-          <button
-            on:click="{() => (tab = 'posts')}"
-            class="{tab == 'posts'
-              ? 'text-blue-500 border-b-2 border-blue-500 font-medium'
-              : 'text-gray-600'} block px-5 py-2 border-blue-500 hover:text-blue-500 focus:outline-none"
-          >
-            Posts
-          </button>
-          <button
-            on:click="{() => (tab = 'followers')}"
-            class="{tab == 'followers'
-              ? 'text-blue-500 border-b-2 border-blue-500 font-medium'
-              : 'text-gray-600'} block px-5 py-2 text-gray-600 hover:text-blue-500 focus:outline-none"
-          >
-            Followers
-          </button>
-          <button
-            on:click="{() => (tab = 'following')}"
-            class="{tab == 'following'
-              ? 'text-blue-500 border-b-2 border-blue-500 font-medium'
-              : 'text-gray-600'} block px-5 py-2 text-gray-600 hover:text-blue-500 focus:outline-none"
-          >
-            Following
-          </button>
-        </nav>
+        <Tab items="{tabs}" bind:selectedItem="{selectedTab}" />
       </div>
     </div>
 
-    {#if tab == "followers" || tab == "following"}
+    {#if selectedTab == "Followers" || selectedTab == "Following"}
       <div in:fade class="grid grid-cols-2 px-4 pt-6 lg:grid-cols-3">
         {#each users as user}
           <UserCard bind:user />
@@ -188,9 +166,9 @@
       </div>
     {/if}
 
-    {#if tab == "posts"}
+    {#if selectedTab == "Posts"}
       {#if editable}
-        <div class="min-w-full px-4 pt-4 md:px-0">
+        <div class="min-w-full px-4 mt-8 md:px-0">
           <PostBox />
         </div>
       {/if}
