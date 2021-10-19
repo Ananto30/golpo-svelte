@@ -56,7 +56,7 @@
 
 <div in:fade class="grid grid-cols-12">
   <div class="col-span-12 md:col-span-10">
-    <div class="grid pt-16 md:pt-5">
+    <div class="grid mt-16 ml-12 md:mt-6">
       {#if post}
         <Post bind:post />
 

@@ -33,7 +33,7 @@
   };
 </script>
 
-<div class="max-w-xl pb-6 mx-auto md:p-4">
+<div class="max-w-xl p-2 mx-auto bg-gray-100 rounded-2xl md:p-4">
   <div class="flex items-center max-w-xl mx-auto">
     <div class="flex items-center w-full max-w-xl gap-2">
       <img class="w-12 rounded-full" src="{$loggedUserImage ? $loggedUserImage : IMAGE_LARGE}" alt="Alex" />
@@ -42,13 +42,13 @@
           bind:value="{url}"
           aria-placeholder="Share a link"
           placeholder="Share a link"
-          class="block w-full px-4 py-2 text-sm bg-white border border-gray-300 rounded-full focus:shadow-md focus:outline-none focus:border-indigo-400 focus:text-gray-700 md:text-base"
+          class="block w-full px-4 py-2 text-sm bg-white rounded-full focus:shadow-md focus:outline-none focus:border-indigo-400 focus:text-gray-700 md:text-base"
         />
       </div>
 
       <button
         on:click="{sharePost}"
-        class="p-3 transition-colors border border-gray-300 rounded-full hover:shadow-lg hover:bg-indigo-100 focus:bg-gray-100 focus:outline-none focus-visible:border-gray-500"
+        class="p-3 transition-colors bg-white rounded-full hover:shadow-lg hover:bg-indigo-100 focus:bg-indigo-200 focus:outline-none focus-visible:border-gray-500"
       >
         <span>
           <ShareSvg />
