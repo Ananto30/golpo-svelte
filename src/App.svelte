@@ -3,15 +3,12 @@
   @tailwind components;
   @tailwind utilities;
   body {
-    /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
-      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; */
-    /* font-family: "Proxima Nova", sans-serif; */
-    /* font-family: 'Titillium Web', sans-serif; */
-    font-family: 'Source Sans Pro', sans-serif;
-    /* font-family: 'Encode Sans', sans-serif; */
-    /* font-family: 'Inter', sans-serif; */
-    /* font-family: 'Ubuntu', sans-serif; */
-    /* font-family: 'Lato', sans-serif; */
+    /* font-family: "Source Sans Pro", sans-serif; */
+    /* font-family: 'Whitney', sans-serif; */
+    /* font-family: 'Balsamiq Sans', cursive; */
+    font-family: 'Averia Sans Libre', cursive;
+    /* font-family: 'Grandstander', cursive; */
+    /* font-family: 'Delius', cursive; */
   }
   * {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -28,6 +25,8 @@
   import Login from "./page/Login.svelte";
   import Profile from "./page/Profile.svelte";
   import Post from "./page/Post.svelte";
+  import Bookmarks from "./page/Bookmarks.svelte";
+
   import MobileUserChat from "./components/MobileUserChat.svelte";
   import ErrorAlert from "./components/ErrorAlert.svelte";
   import InfoAlert from "./components/InfoAlert.svelte";
@@ -44,6 +43,7 @@
     users: Users,
     profile: Profile,
     userchat: MobileUserChat,
+    bookmarks: Bookmarks,
   };
 
   const slugPageMapping = {
@@ -58,7 +58,6 @@
     path = path.split("?")[0];
     path = path.split("/");
 
-    console.log(path);
     if (path.length == 3 && path[2] != "") {
       setTimeout(() => {
         props = { slug: path[2] };

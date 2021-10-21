@@ -16,7 +16,7 @@
 <div class="fixed z-50 px-2 mx-auto top-10">
   <div
     in:fly="{{ y: -200, duration: 500 }}"
-    class="{hide ? 'hidden' : 'flex'}  bg-red-100 rounded-lg p-4 mb-4 text-sm text-red-700 "
+    class="{hide ? 'hidden' : 'flex'}  bg-red rounded-lg p-2 text-sm text-red-700 "
     role="alert"
   >
     <svg class="inline w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">

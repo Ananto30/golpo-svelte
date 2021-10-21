@@ -1,6 +1,6 @@
 <style>
   .navshadow {
-    box-shadow: 0px 15px 10px -18px rgb(109, 107, 107);
+    box-shadow: 0px 15px 10px -15px rgb(109, 107, 107);
   }
 </style>
 
@@ -17,6 +17,7 @@
   import Tags from "../components/Tags.svelte";
   import UserCard from "../components/UserCard.svelte";
   import Tab from "../components/Tab.svelte";
+  import ProfileEditModal from "../components/ProfileEditModal.svelte";
 
   export let slug;
 
@@ -30,6 +31,10 @@
   let selectedTag = "";
   let displayName = "";
   let users = [];
+  let editModalHide = true;
+
+  const profileButtonClass =
+    "flex-none px-3 py-1 text-sm transition duration-200 rounded-full bg-dark1 hover:shadow-md hover:bg-color1 focus:bg-gray-100 focus:outline-none focus-visible:border-gray-500";
 
   let tabs = ["Posts", "Followers", "Following"];
   let selectedTab = "Posts";
@@ -41,7 +46,6 @@
 
   const getProfileInfo = async () => {
     const res = await client.User.getByUsername(slug);
-    console.log(res.data);
     work = res.data.work;
     tagline = res.data.tagline;
     image = res.data.image;
@@ -77,7 +81,7 @@
   const topTracker = () => {
     let element = document.getElementById("user-details");
     let atTop = element.getBoundingClientRect().top;
-    if (atTop == 0) {
+    if (atTop == 0 || atTop == 40) {
       userDetailsOnTop = true;
     } else {
       userDetailsOnTop = false;
@@ -107,10 +111,14 @@
 </script>
 
 <div in:fade class="grid min-h-screen grid-cols-12">
+  <ProfileEditModal bind:hide="{editModalHide}" bind:work bind:tagline />
   <div class="col-span-12 md:col-span-8">
-    <div id="user-details" class="{userDetailsOnTop ? 'navshadow' : ''} z-10 bg-white md:sticky top-14 md:top-0">
+    <div
+      id="user-details"
+      class="{userDetailsOnTop ? ' border-light1' : ''} z-10 bg-dark2 sticky top-12 md:top-0 pt-6 mt-16 md:mt-20"
+    >
       <div class="w-full mx-auto">
-        <div class="flex flex-row w-full px-4 pt-6 mt-14 md:mt-20 md:px-16">
+        <div class="flex flex-row w-full px-4 md:px-16">
           <div class="flex-none w-20 h-20 rounded-full md:w-32 md:h-32">
             <img
               class="object-cover w-20 h-20 border-2 border-indigo-500 rounded-full shadow cursor-pointer md:w-32 md:h-32"
@@ -118,42 +126,37 @@
               src="{image ? image : IMAGE_LARGE}"
             />
           </div>
-          <div class="flex flex-col mt-2 mb-2 ml-6">
+          <div class="flex flex-col mb-2 ml-6 md:mt-2">
             <div class="text-2xl font-bold">{displayName || slug}</div>
             <div class="font-base">{work ? work : WORK}</div>
             <div class="text-sm text-gray-500">
               {tagline ? tagline : TAGLINE}
             </div>
-            {#if !editable}
-              <div class="mt-6">
+
+            <div class="mt-2 -mx-2 md:mt-6">
+              {#if !editable}
                 {#if followed}
-                  <button
-                    in:fade
-                    on:click="{followButtonHandler}"
-                    class="flex-none px-3 py-1 text-sm text-white transition duration-200 bg-indigo-500 border border-indigo-200 rounded-full hover:shadow-md hover:bg-indigo-600 focus:bg-indigo-400 focus:outline-none focus-visible:border-gray-500"
-                  >
-                    <span>{followed ? "Following" : "Follow"}</span>
+                  <button in:fade on:click="{followButtonHandler}" class="bg-color1 {profileButtonClass}">
+                    <span>Following</span>
                   </button>
                 {:else}
-                  <button
-                    in:fade
-                    on:click="{followButtonHandler}"
-                    class="flex-none px-3 py-1 text-sm transition duration-200 border border-gray-300 rounded-full hover:shadow-md hover:bg-indigo-100 focus:bg-gray-100 focus:outline-none focus-visible:border-gray-500"
-                  >
-                    <span>{followed ? "Following" : "Follow"}</span>
+                  <button in:fade on:click="{followButtonHandler}" class="{profileButtonClass}">
+                    <span>Follow</span>
                   </button>
                 {/if}
-                <button
-                  class="flex-none px-3 py-1 text-sm transition duration-200 border border-gray-300 rounded-full hover:shadow-md hover:bg-indigo-100 focus:bg-gray-100 focus:outline-none focus-visible:border-gray-500"
-                >
+                <button class="{profileButtonClass}">
                   <span>Send Message</span>
                 </button>
-              </div>
-            {/if}
+              {:else}
+                <button in:fade on:click="{() => (editModalHide = !editModalHide)}" class="{profileButtonClass}">
+                  <span>Edit profile</span>
+                </button>
+              {/if}
+            </div>
           </div>
         </div>
       </div>
-      <div class="px-4 mt-2 bg-white md:px-16">
+      <div class="px-4 mt-2 text-sm bg-white md:px-16">
         <Tab items="{tabs}" bind:selectedItem="{selectedTab}" />
       </div>
     </div>
@@ -168,7 +171,7 @@
 
     {#if selectedTab == "Posts"}
       {#if editable}
-        <div class="min-w-full px-4 mt-8 md:px-0">
+        <div class="px-4 mt-8 md:px-0">
           <PostBox />
         </div>
       {/if}
