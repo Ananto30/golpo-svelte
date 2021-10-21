@@ -3,6 +3,8 @@
   import { jwt, loggedUsername, loggedUserImage, error } from "../store";
   import client from "../client";
 
+  import TickSvg from "../svgs/TickSvg.svelte";
+
   let username = "";
   let password = "";
   let redirecting = false;
@@ -70,93 +72,38 @@
   <div class="grid h-screen grid-cols-5 gap-5">
     <div class="grid col-span-5 p-10 my-auto md:col-span-3">
       <img alt="Charlie Brown with Snoopy" class="h-44" src="images/charliebrown.png" />
-      <h2 class="text-6xl font-extrabold text-indigo-500">Golpo</h2>
+      <h2 class="text-6xl font-extrabold text-light2">Golpo</h2>
       <p class="max-w-2xl mt-10 text-xl font-medium text-gray-700">
         Golpo is a clutter free platform for sharing links. We support people and content makers to share their work and
         nothing more. Stay simple!
       </p>
-      <div class="max-w-md p-10 mt-10 border shadow-sm rounded-2xl">
+      <div class="max-w-md p-4 mt-10 shadow-sm bg-dark1 md:p-10 rounded-2xl">
         <div class="text-xl font-bold leading-tight md:text-2xl">Why Golpo?</div>
         <div class="flex items-center gap-2 py-2 mt-3 text-gray-700">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            x="0px"
-            y="0px"
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            style=" fill:#000000;"
-            ><path
-              d="M 14.5 2.792969 L 5.5 11.792969 L 1.851563 8.148438 L 1.5 7.792969 L 0.792969 8.5 L 1.148438 8.851563 L 5.5 13.207031 L 15.207031 3.5 Z"
-            ></path></svg
-          >
+          <TickSvg />
           Clutter free
         </div>
         <div class="flex items-center gap-2 py-2 text-gray-700">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            x="0px"
-            y="0px"
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            style=" fill:#000000;"
-            ><path
-              d="M 14.5 2.792969 L 5.5 11.792969 L 1.851563 8.148438 L 1.5 7.792969 L 0.792969 8.5 L 1.148438 8.851563 L 5.5 13.207031 L 15.207031 3.5 Z"
-            ></path></svg
-          >
+          <TickSvg />
           Ad free & focused
         </div>
         <div class="flex items-center gap-2 py-2 text-gray-700">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            x="0px"
-            y="0px"
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            style=" fill:#000000;"
-            ><path
-              d="M 14.5 2.792969 L 5.5 11.792969 L 1.851563 8.148438 L 1.5 7.792969 L 0.792969 8.5 L 1.148438 8.851563 L 5.5 13.207031 L 15.207031 3.5 Z"
-            ></path></svg
-          >
+          <TickSvg />
           Promote your content
         </div>
         <div class="flex items-center gap-2 py-2 text-gray-700">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            x="0px"
-            y="0px"
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            style=" fill:#000000;"
-            ><path
-              d="M 14.5 2.792969 L 5.5 11.792969 L 1.851563 8.148438 L 1.5 7.792969 L 0.792969 8.5 L 1.148438 8.851563 L 5.5 13.207031 L 15.207031 3.5 Z"
-            ></path></svg
-          >
+          <TickSvg />
           Follow creators and like minded people
         </div>
         <div class="flex items-center gap-2 py-2 text-gray-700">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            x="0px"
-            y="0px"
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            style=" fill:#000000;"
-            ><path
-              d="M 14.5 2.792969 L 5.5 11.792969 L 1.851563 8.148438 L 1.5 7.792969 L 0.792969 8.5 L 1.148438 8.851563 L 5.5 13.207031 L 15.207031 3.5 Z"
-            ></path></svg
-          >
+          <TickSvg />
           Chat with them
         </div>
         <div class="flex items-center gap-2 py-2 text-gray-500">More features coming soon...</div>
       </div>
     </div>
     <div class="grid col-span-5 p-10 my-auto md:col-span-2">
-      <div class="w-full p-10 border shadow-sm h-100 rounded-3xl">
+      <div class="w-full p-10 shadow-sm bg-dark1 h-100 rounded-3xl ">
         <h1 class="text-xl font-bold leading-tight md:text-2xl">Join Us!</h1>
         <div class="mt-6">
           <div>
@@ -167,7 +114,7 @@
               name=""
               id="username"
               placeholder="Enter Username"
-              class="w-full px-4 py-3 mt-2 bg-gray-200 border rounded-lg focus:border-blue-500 focus:bg-white focus:outline-none"
+              class="w-full px-4 py-3 mt-2 rounded-lg bg-light1 focus:border-blue-500 focus:bg-white focus:outline-none text-dark1"
               autocomplete
               required
             />
@@ -181,14 +128,14 @@
               name=""
               id="password"
               placeholder="Enter Password"
-              class="w-full px-4 py-3 mt-2 bg-gray-200 border rounded-lg focus:border-blue-500 focus:bg-white focus:outline-none"
+              class="w-full px-4 py-3 mt-2 rounded-lg bg-light1 focus:border-blue-500 focus:bg-white focus:outline-none text-dark1"
               required
             />
           </div>
 
           <button
             on:click="{generalLogin}"
-            class="block w-full px-4 py-3 mt-6 font-semibold text-white transition duration-200 bg-indigo-500 rounded-lg hover:bg-indigo-400 focus:bg-indigo-400"
+            class="block w-full px-4 py-3 mt-6 font-semibold text-white transition duration-200 rounded-lg bg-color1 hover:bg-light2 hover:text-dark1 focus:bg-indigo-400"
             >Log In</button
           >
         </div>
@@ -198,7 +145,7 @@
         <button
           on:click="{handleGetGoogleAuthUrl}"
           type="button"
-          class="block w-full px-4 py-3 font-semibold text-gray-900 transition duration-200 bg-white border border-gray-300 rounded-lg hover:bg-indigo-100 focus:bg-indigo-200"
+          class="block w-full px-4 py-3 font-semibold text-gray-900 transition duration-200 bg-white rounded-lg bg-color1 hover:bg-light2 hover:text-dark1 focus:bg-indigo-200"
         >
           <div class="flex items-center justify-center">
             <svg

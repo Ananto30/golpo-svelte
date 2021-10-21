@@ -1,5 +1,5 @@
 <script>
-  import { loggedUserImage, tags, error, info } from "../store";
+  import { loggedUserImage, tags, error, info, loggedUsername } from "../store";
   import client from "../client";
   import { showTag } from "../helpers";
   import { IMAGE_LARGE } from "../defaults";
@@ -33,36 +33,42 @@
   };
 </script>
 
-<div class="max-w-xl p-2 mx-auto bg-gray-100 rounded-2xl md:p-4">
-  <div class="flex items-center max-w-xl mx-auto">
-    <div class="flex items-center w-full max-w-xl gap-2">
-      <img class="w-12 rounded-full" src="{$loggedUserImage ? $loggedUserImage : IMAGE_LARGE}" alt="Alex" />
+<div class="flex max-w-xl p-2 mx-auto bg-dark1 rounded-2xl md:p-4">
+  <img
+    class="border-2 rounded-full border-light2 h-14 w-14"
+    src="{$loggedUserImage ? $loggedUserImage : IMAGE_LARGE}"
+    alt="{$loggedUsername}"
+  />
+  <div class="w-full ml-2">
+    <div class="flex max-w-xl mx-auto">
       <div class="w-full">
         <input
           bind:value="{url}"
           aria-placeholder="Share a link"
           placeholder="Share a link"
-          class="block w-full px-4 py-2 text-sm bg-white rounded-full focus:shadow-md focus:outline-none focus:border-indigo-400 focus:text-gray-700 md:text-base"
+          class="block w-full h-10 px-4 py-2 text-sm rounded-xl bg-light3 focus:outline-none focus:ring-1 focus:ring-light2"
         />
       </div>
-
-      <button
-        on:click="{sharePost}"
-        class="p-3 transition-colors bg-white rounded-full hover:shadow-lg hover:bg-indigo-100 focus:bg-indigo-200 focus:outline-none focus-visible:border-gray-500"
-      >
-        <span>
-          <ShareSvg />
-        </span>
-      </button>
     </div>
-  </div>
-  <div class="mx-auto mt-4">
-    {#if $tags.length > 0}
-      <Multiselect id="tags" bind:value="{selectedTags}" placeholder="+ Add tags">
-        {#each $tags as tag}
-          <option value="{tag}">{showTag(tag)}</option>
-        {/each}
-      </Multiselect>
-    {/if}
+    <div class="flex mx-auto mt-2 md:mt-4">
+      {#if $tags.length > 0}
+        <div class="flex flex-grow ">
+          <Multiselect id="tags" bind:value="{selectedTags}" placeholder="+ Add tags">
+            {#each $tags as tag}
+              <option value="{tag}">{showTag(tag)}</option>
+            {/each}
+          </Multiselect>
+        </div>
+      {/if}
+      <div class="flex justify-end">
+        <button
+          on:click="{sharePost}"
+          type="button"
+          class="inline-flex justify-center px-4 py-2 ml-2 text-sm transition duration-200 rounded-lg bg-color1 hover:bg-color1-dark focus:outline-none focus:bg-color1-dark"
+        >
+          Share
+        </button>
+      </div>
+    </div>
   </div>
 </div>

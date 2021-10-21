@@ -61,6 +61,8 @@ const Post = {
 	getAllTags: () => api.get("/post/tags", getHeader()).catch(errorHandler),
 	reactLove: (postId) => api.post(`/post/${postId}/love`, {}, getHeader()).catch(errorHandler),
 	deletePost: (postId) => api.post(`/post/${postId}/delete`,{}, getHeader()).catch(errorHandler),
+	getBookmarks: () => api.get("/post/bookmarks", getHeader()).catch(errorHandler),
+	bookmarkPost: (postId) => api.post(`/post/${postId}/bookmark`, {}, getHeader()).catch(errorHandler),
 };
 
 const Chat = {

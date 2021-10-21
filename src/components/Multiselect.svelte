@@ -21,7 +21,7 @@
     width: 100%;
   }
   li {
-    background-color: white;
+    background-color: #292b2f;
     cursor: pointer;
     padding: 0.5rem;
   }
@@ -30,7 +30,7 @@
     border-bottom-right-radius: 0.2rem;
   }
   li:not(.selected):hover {
-    background-color: hsl(214, 17%, 92%);
+    background-color: #36393f;
   }
   li.selected {
     background-color: rgb(68, 89, 224);
@@ -161,13 +161,13 @@
   }
 </script>
 
-<div class="relative z-0 px-4 bg-white rounded-2xl multiselect" class:readonly>
-  <div class="flex flex-wrap items-center cursor-pointer tokens" class:showOptions on:click="{handleTokenClick}">
+<div class="relative z-0 w-full px-4 bg-light3 rounded-xl multiselect" class:readonly>
+  <div class="flex flex-wrap items-center cursor-pointer tokens " class:showOptions on:click="{handleTokenClick}">
     {#each Object.values(selected) as s}
-      <div class="flex items-center px-1 py-1 m-1 text-sm rounded-full token hover:bg-indigo-100" data-id="{s.value}">
+      <div class="flex items-center px-1 py-1 m-1 text-sm rounded-full token" data-id="{s.value}">
         <span>{s.name}</span>
         {#if !readonly}
-          <div class="ml-1 rounded-full token-remove hover:bg-indigo-400" title="Remove {s.name}">
+          <div class="ml-1 rounded-full token-remove hover:bg-light2" title="Remove {s.name}">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               x="0px"
@@ -187,7 +187,7 @@
     <div class="flex items-center flex-1 actions ">
       {#if !readonly}
         <input
-          class="w-full text-sm outline-none h-9"
+          class="w-full h-8 text-sm outline-none bg-light3 "
           id="{id}"
           autocomplete="off"
           bind:value="{inputValue}"
@@ -197,7 +197,7 @@
           placeholder="{placeholder}"
         />
         <div
-          class="ml-1 rounded-full remove-all hover:bg-indigo-300"
+          class="ml-1 rounded-full remove-all hover:bg-light2"
           title="Remove All"
           class:hidden="{!Object.keys(selected).length}"
         >
@@ -218,11 +218,11 @@
     </div>
   </div>
 
-  <select bind:this="{slot}" type="multiple" class="hidden"><slot /></select>
+  <select bind:this="{slot}" type="multiple" class="hidden bg-dark1"><slot /></select>
 
   {#if showOptions}
     <ul
-      class="options rounded-xl"
+      class="options rounded-xl "
       transition:fly="{{ duration: 200, y: 5 }}"
       on:mousedown|preventDefault="{handleOptionMousedown}"
     >

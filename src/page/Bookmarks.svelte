@@ -7,29 +7,25 @@
   import Tags from "../components/Tags.svelte";
   import Posts from "../components/Posts.svelte";
   import Footer from "../components/Footer.svelte";
-  import PostBox from "../components/PostBox.svelte";
 
   let allPosts = [];
   let selectedTag = "";
 
   const getPosts = async () => {
-    const res = await client.Post.getAll();
-    allPosts = res.data.posts.reverse();
+    const res = await client.Post.getBookmarks();
+    allPosts = res.data.bookmarks.reverse();
   };
 
   onMount(async () => {
-    $page = "home";
+    $page = "bookmarks";
     getPosts();
   });
 </script>
 
 <div in:fade class="grid grid-cols-12">
   <div class="col-span-12 md:col-span-8">
-    <div class="min-w-full px-4 mt-24 md:px-0 md:mt-10">
-      <PostBox />
-    </div>
     <div class="grid mx-auto">
-      <div class="mx-auto mt-4">
+      <div class="mx-auto mt-16 md:mt-6">
         <Posts bind:allPosts bind:selectedTag />
       </div>
     </div>
