@@ -1,19 +1,24 @@
 <script>
   import client from "../client";
-
   import Post from "./Post.svelte";
+  import DeleteConfirmModal, { modal } from "../components/DeleteConfirmModal.svelte";
 
   export let allPosts;
   export let selectedTag;
 
   let filteredPosts = [];
+  let selectedId = null;
 
-  const deletePost = async id => {
-    if (confirm("Are you sure you want to delete this post?")) {
-      const res = await client.Post.deletePost(id);
-      allPosts = allPosts.filter(post => post._id !== id);
-      filteredPosts = allPosts;
-    }
+  const deletePost = async () => {
+    if (selectedId === null) return;
+
+    const id = selectedId;
+    const res = await client.Post.deletePost(id);
+
+    allPosts = allPosts.filter(post => post._id !== id);
+    filteredPosts = allPosts;
+
+    selectedId = null;
   };
 
   const filterByTag = tag => {
@@ -51,5 +56,17 @@
 </script>
 
 {#each filteredPosts as post}
-  <Post post="{post}" onDelete="{() => deletePost(post._id)}" />
+  <Post
+    post="{post}"
+    onDelete="{() => {
+      selectedId = post._id;
+      modal.open();
+    }}"
+  />
 {/each}
+
+<DeleteConfirmModal
+  onConfirm="{deletePost}"
+  title="Delete Post"
+  description="Are you sure you want to delete this post?"
+/>
