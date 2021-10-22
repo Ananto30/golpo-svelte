@@ -1,32 +1,51 @@
-<button class="ripple">
-	<span>Click me!</span>
+<button>
+	<span>Click Me!</span>
 </button>
 
+<script>
+var root = document.documentElement;
+	document.addEventListener('mousedown', ev => {
+		var el = ev.target;
+		var x = (ev.clientX - el.offsetLeft) / el.offsetWidth;
+		var y = (ev.clientY - el.offsetTop) / el.offsetHeight;
+		
+		root.style.setProperty('--ripple-x', x);
+		root.style.setProperty('--ripple-y', y);
+		
+	})
+</script>
 
 <style>
-.ripple {
-  background-position: center;
-  transition: background 0.8s;
-}
-.ripple:hover {
-  background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;
-}
-.ripple:active {
-  background-color: #ffffff;
-  background-size: 100%;
-  transition: background 0s;
-}
+	button{
+		border:none;
+		outline:none;
+		background-color:#8334eb;
+		color:white;
+		padding: 10px 20px;
+		border-radius:5px;
+		box-shadow: 0 2px 2px grey;
+		position:relative;
+		overflow:hidden;	
+	}
+	button:active{
+		background-color:#8334eb;
+	}
+	button:before{
+		content:"";
+		position:absolute;
+		background-color:white;
+		padding:50%;
+		border-radius:50%;
+		left:calc(100% * var(--ripple-x));
+		top:calc(100% * var(--ripple-y));
+		transform: translate(-50%, -50%) scale(1);
+		opacity:0;
+		transition:transform 1s, opacity 1s;
+	}
+	button:active::before{
+		transition:0s;
+		opacity:1;
+		transform:translate(-50%, -50%) scale(0);
+	}
 
-button {
-  border: none;
-  border-radius: 2px;
-  padding: 12px 18px;
-  font-size: 16px;
-  text-transform: uppercase;
-  cursor: pointer;
-  color: white;
-  background-color: #2196f3;
-  box-shadow: 0 0 4px #999;
-  outline: none;
-}
 </style>
