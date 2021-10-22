@@ -91,6 +91,7 @@
   $: if (slug) {
     $page = "profile";
     getProfileInfo();
+    selectedTab = "Posts";
   }
 
   $: if (selectedTab == "Posts") {
