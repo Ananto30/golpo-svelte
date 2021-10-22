@@ -6,7 +6,7 @@
     /* font-family: "Source Sans Pro", sans-serif; */
     /* font-family: 'Whitney', sans-serif; */
     /* font-family: 'Balsamiq Sans', cursive; */
-    font-family: 'Averia Sans Libre', cursive;
+    font-family: "Averia Sans Libre", cursive;
     /* font-family: 'Grandstander', cursive; */
     /* font-family: 'Delius', cursive; */
   }
@@ -27,9 +27,7 @@
   import Post from "./page/Post.svelte";
   import Bookmarks from "./page/Bookmarks.svelte";
 
-  import MobileUserChat from "./components/MobileUserChat.svelte";
-  import ErrorAlert from "./components/ErrorAlert.svelte";
-  import InfoAlert from "./components/InfoAlert.svelte";
+  import Alert from "./components/Alert.svelte";
 
   import { loggedUsername, error, info } from "./store.js";
 
@@ -42,7 +40,6 @@
     chat: Chat,
     users: Users,
     profile: Profile,
-    userchat: MobileUserChat,
     bookmarks: Bookmarks,
   };
 
@@ -81,12 +78,10 @@
 <body class="container mx-auto max-w-7xl antialised">
   <div class="grid mx-auto">
     {#if $error}
-      <ErrorAlert />
+      <Alert name="error" bind:message="{$error}" />
     {/if}
-  </div>
-  <div class="grid mx-auto">
     {#if $info}
-      <InfoAlert />
+      <Alert name="info" bind:message="{$info}" />
     {/if}
   </div>
 

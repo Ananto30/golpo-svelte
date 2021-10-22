@@ -1,24 +1,52 @@
 <script>
-	import { fade } from "svelte/transition";
-	import client from "../client";
-	import moment from "moment";
+  import { fade } from "svelte/transition";
+  import client from "../client";
+  import moment from "moment";
 
-	export let chatNow;
-	let chats = [];
+  export let chatNow;
+  let chats = [];
+  let innerHeight;
 
-	const getUserChats = () => {
-		client.Chat.getChatsByReceiver(chatNow).then((res) => {
-			chats = res.data.chats;
-		});
-	};
+  const getUserChats = () => {
+    client.Chat.getChatsByReceiver(chatNow).then(res => {
+      chats = res.data.chats;
+      // chats = [...chats, ...chats];
+      // chats = [...chats, ...chats];
+      // chats = [...chats, ...chats];
+      // chats = [...chats, ...chats];
+    });
+  };
 
-	$: if (chatNow) {
-		getUserChats();
-	}
+  $: if (chatNow) {
+    getUserChats();
+  }
 </script>
 
-<div class="w-full md:border-l-2">
-  <div class="flex items-center py-3 pl-3 border-b">
+<!-- 
+<div class="flex flex-col h-screen">
+  <div class="">
+    <div class="flex items-center pl-3 md:py-3 bg-dark3 md:rounded-t-xl">
+      <img
+        class="object-cover w-6 h-6 rounded-full md:h-10 md:w-10"
+        src="https://images.pexels.com/photos/3777931/pexels-photo-3777931.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
+        alt="username"
+      />
+      <span class="block ml-2 text-base font-bold text-gray-600">{chatNow}</span>
+      <span class="ml-2 text-green-500 connected">
+        <svg width="6" height="6">
+          <circle cx="3" cy="3" r="3" fill="currentColor"></circle>
+        </svg>
+      </span>
+      <button class="flex justify-end w-full p-2 px-6 md:hidden" on:click="{() => (chatNow = null)}"> back </button>
+    </div>
+  </div>
+  <div class="flex items-center justify-center flex-grow bg-green">this content is not centered on screen</div>
+</div> -->
+
+<svelte:window bind:innerHeight />
+
+<div class="w-full md:ml-4 bg-dark1 rounded-t-xl " style="height: {innerHeight-90}px;">
+  <div class="flex items-center pl-3 md:py-3 bg-dark3 md:rounded-t-xl">
     <img
       class="object-cover w-6 h-6 rounded-full md:h-10 md:w-10"
       src="https://images.pexels.com/photos/3777931/pexels-photo-3777931.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
@@ -30,13 +58,16 @@
         <circle cx="3" cy="3" r="3" fill="currentColor"></circle>
       </svg>
     </span>
+
+    
+    <button class="flex justify-end w-full p-2 px-6 md:hidden" on:click="{() => (chatNow = null)}"> back </button>
   </div>
-  <div id="chat" class="relative w-full p-2 pb-10 overflow-y-auto md:p-10" style="height: 90vh;" ref="toolbarChat">
+  <div id="chat" class="relative w-full p-2 overflow-y-auto md:p-6" ref="toolbarChat" style="height: {innerHeight-156}px;">
     <ul>
       <li class="clearfix2">
         {#each chats as chat}
           <div in:fade class="w-full flex {chat.from == chatNow ? 'justify-start' : 'justify-end'}">
-            <div class="relative px-5 py-2 my-2 text-gray-700 bg-gray-100 rounded-xl" style="max-width: 300px;">
+            <div class="relative px-5 py-2 my-2 text-gray-700 bg-light3 rounded-xl" style="max-width: 300px;">
               <span class="block text-sm md:text-base">{chat.text}</span>
               <span class="block text-xs text-right">{moment(chat.date).fromNow()}</span>
             </div>
@@ -46,9 +77,7 @@
     </ul>
   </div>
 
-  <div
-    class="fixed bottom-0 z-10 flex items-center justify-between w-full p-2 bg-white border-t md:max-w-2xl xl:max-w-3xl md:p-3"
-  >
+  <div class="z-10 flex items-center justify-between w-full p-2 bg-dark3 rounded-b-xl">
     <button class="outline-none focus:outline-none">
       <svg
         class="w-6 h-6 text-gray-400"
@@ -85,7 +114,7 @@
     <input
       aria-placeholder="Start a new message"
       placeholder="Start a new message"
-      class="block w-full py-2 pl-5 mx-3 text-sm bg-gray-100 rounded-full outline-none focus:text-gray-700 md:text-base"
+      class="block w-full py-2 pl-5 mx-3 text-sm rounded-full outline-none bg-light3 focus:text-gray-700 md:text-base"
       type="text"
       name="message"
       required

@@ -1,24 +1,31 @@
 <script>
   import { fly } from "svelte/transition";
-  import { error } from "../store.js";
 
-  let hide = false;
+  export let name;
+  export let message;
 
-  $: if ($error) {
-    hide = false;
+  let alertTypes = [
+    {
+      name: "error",
+      bgColor: "bg-red",
+    },
+    {
+      name: "info",
+      bgColor: "bg-color1",
+    },
+  ];
+
+  let alert = alertTypes.find(e => e.name === name);
+
+  $: if (message) {
     setTimeout(() => {
-      hide = true;
-      $error = "";
+      message = "";
     }, 5000);
   }
 </script>
 
-<div class="fixed z-50 px-2 mx-auto top-10">
-  <div
-    in:fly="{{ y: -200, duration: 500 }}"
-    class="{hide ? 'hidden' : 'flex'}  bg-red rounded-lg p-2 text-sm text-red-700 "
-    role="alert"
-  >
+<div in:fly="{{ y: -200, duration: 500 }}" class="fixed z-50 px-2 mx-auto top-10">
+  <div class="flex p-2 text-sm text-red-700 rounded-lg {alert.bgColor}" role="alert">
     <svg class="inline w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
       <path
         fill-rule="evenodd"
@@ -28,7 +35,7 @@
       </path>
     </svg>
     <div>
-      {$error}
+      {message}
     </div>
   </div>
 </div>
