@@ -5,7 +5,6 @@
   import { IMAGE_LARGE } from "../defaults";
 
   import Multiselect from "./Multiselect.svelte";
-  import ShareSvg from "../svgs/ShareSvg.svelte";
 
   let url = "";
   let selectedTags = [];

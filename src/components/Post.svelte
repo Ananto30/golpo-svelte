@@ -40,7 +40,7 @@
     <div class="flex items-center w-full">
       <div class="w-full">
         <div class="flex flex-row items-center w-full px-4 pb-4">
-          <div class="w-auto h-auto rounded-full">
+          <div class="w-12 h-12 rounded-full">
             <a href="#/profile/{post.author}" class="">
               <img
                 class="object-cover w-12 h-12 rounded-full shadow cursor-pointer"
