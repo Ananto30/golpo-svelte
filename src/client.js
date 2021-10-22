@@ -1,10 +1,10 @@
 import axios from "axios";
 import { get } from "svelte/store";
 import { jwt, loggedUsername } from "./store";
+import { BASE_URL } from "./defaults";
 
 const api = axios.create({
-	baseURL: "http://localhost:8080/api",
-	// baseURL: "/api",
+	baseURL: BASE_URL,
 	headers: {
 		"Content-Type": "application/json",
 	},
