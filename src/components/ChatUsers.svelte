@@ -40,7 +40,7 @@
           on:click="{() => (chatNow = chat.participants[1])}"
           class="{chatNow == chat.participants[1]
             ? 'bg-dark1'
-            : 'hover:bg-dark1'} rounded-xl px-3 py-2 cursor-pointer flex items-center text-sm focus:outline-none focus:border-blue-300 transition duration-200 ease-in-out"
+            : 'hover:bg-dark1'} rounded-xl px-3 py-2 cursor-pointer flex items-center text-sm focus:outline-none focus-visible:ring transition duration-200 ease-in-out"
         >
           <img
             class="object-cover w-10 h-10 rounded-full"

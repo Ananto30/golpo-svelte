@@ -34,7 +34,7 @@
   let editModalHide = true;
 
   const profileButtonClass =
-    "flex-none px-3 py-1 text-sm transition duration-200 rounded-full bg-dark1 hover:shadow-md hover:bg-color1 focus:bg-gray-100 focus:outline-none focus-visible:border-gray-500";
+    "flex-none px-3 py-1 text-sm transition duration-200 rounded-full bg-dark1 hover:bg-color1 focus:bg-gray-100 focus:outline-none focus-visible:border-gray-500";
 
   let tabs = ["Posts", "Followers", "Following"];
   let selectedTab = "Posts";
@@ -122,7 +122,7 @@
         <div class="flex flex-row w-full px-4 md:px-16">
           <div class="flex-none w-20 h-20 rounded-full md:w-32 md:h-32">
             <img
-              class="object-cover w-20 h-20 border-2 border-indigo-500 rounded-full shadow cursor-pointer md:w-32 md:h-32"
+              class="object-cover w-20 h-20 border-2 border-indigo-500 rounded-full cursor-pointer md:w-32 md:h-32"
               alt="User avatar"
               src="{image ? image : IMAGE_LARGE}"
             />

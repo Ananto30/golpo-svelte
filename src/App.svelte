@@ -2,17 +2,6 @@
   @tailwind base;
   @tailwind components;
   @tailwind utilities;
-  body {
-    /* font-family: "Source Sans Pro", sans-serif; */
-    /* font-family: 'Whitney', sans-serif; */
-    /* font-family: 'Balsamiq Sans', cursive; */
-    font-family: "Averia Sans Libre", cursive;
-    /* font-family: 'Grandstander', cursive; */
-    /* font-family: 'Delius', cursive; */
-  }
-  * {
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  }
 </style>
 
 <script>
