@@ -1,5 +1,7 @@
 # Golpo Svelte
 
+[![Depfu](https://badges.depfu.com/badges/1ec6ada5ad130ffb35b25c528a6eb5bd/count.svg)](https://depfu.com/github/Ananto30/golpo-svelte?project_id=32582)
+
 This is the svelte build of the [golpo.dedsec.life](https://golpo.dedsec.life). It's a rebuild of the old app - [golpo13.herokuapp.com](http://golpo13.herokuapp.com/) that was built on React.
 
 **Golpo is a link sharing platform without ads.**
