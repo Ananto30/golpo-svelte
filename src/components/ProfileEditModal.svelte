@@ -53,7 +53,7 @@
           To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
       -->
     <div
-      class="inline-block w-full overflow-hidden text-left align-bottom transition-all transform rounded-lg shadow-xl bg-dark3 sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+      class="inline-block w-full overflow-hidden text-left align-bottom transition-all transform rounded-lg bg-dark3 sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
     >
       <div class="px-4 pt-5 pb-4 bg-dark2 sm:p-6 sm:pb-4">
         <div class="sm:flex sm:items-start">
@@ -86,14 +86,14 @@
         <button
           on:click="{updateProfile}"
           type="button"
-          class="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white rounded-md shadow-sm bg-green hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
+          class="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white rounded-md bg-green hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
         >
           Save
         </button>
         <button
           on:click="{() => (hide = true)}"
           type="button"
-          class="inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-gray-700 bg-white rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+          class="inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-gray-700 bg-white rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
         >
           Cancel
         </button>

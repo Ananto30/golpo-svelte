@@ -35,7 +35,7 @@
   ];
 
   const navButtonClass =
-    "flex items-center gap-2 py-4 transition duration-200 rounded-xl md:hover:text-light2 cursor-pointer";
+    "flex items-center gap-2 py-4 transition duration-200 rounded-xl md:hover:text-yellow cursor-pointer";
 
   const logout = () => {
     $loggedUsername = "";
@@ -54,7 +54,7 @@
     <a href="#/home" class="block px-4 py-4 text-2xl font-bold">Golpo</a>
 
     <!-- mobile menu button -->
-    <button on:click="{toggleSideBar}" class="p-4 mobile-menu-button focus:outline-none focus:bg-dark1">
+    <button on:click="{toggleSideBar}" class="p-4 focus:outline-none active:bg-dark2">
       <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
       </svg>
@@ -69,7 +69,7 @@
   >
     <!-- logo -->
     <a href="#/home" class="flex items-center space-x-2">
-      <span class="text-4xl font-extrabold text-light2">Golpo</span>
+      <span class="text-4xl font-extrabold text-yellow">Golpo</span>
     </a>
 
     <!-- nav -->
@@ -77,7 +77,7 @@
       {#each navItems as item}
         <a
           on:click="{toggleSideBar}"
-          class="{$page == item.name.toLowerCase() ? 'font-bold text-light2' : ''} {navButtonClass}"
+          class="{$page == item.name.toLowerCase() ? 'font-bold text-yellow' : ''} {navButtonClass}"
           href="{item.href}"
         >
           <Svg name="{item.icon}" height="32" width="32" />

@@ -17,7 +17,7 @@
   export let onDelete;
 
   const mediaButtonClass =
-    "flex items-center gap-1 px-2 py-1 text-sm transition duration-200 ease-in-out rounded-full md:px-3 hover:bg-light2 hover:text-dark1 focus:bg-light2 focus:outline-none ";
+    "flex items-center gap-1 px-2 py-1 text-sm transition duration-200 ease-in-out rounded-full md:px-3 hover:bg-yellow hover:text-dark1 focus-visible:ring active:bg-yellow-dark";
 
   const lovePost = async postId => {
     if (!post.isLovedByMe) {
@@ -43,19 +43,21 @@
           <div class="w-12 h-12 rounded-full">
             <a href="#/profile/{post.author}" class="">
               <img
-                class="object-cover w-12 h-12 rounded-full shadow cursor-pointer"
+                class="object-cover w-12 h-12 rounded-full cursor-pointer"
                 alt="User avatar"
                 src="{post.authorImage || IMAGE_LARGE}"
               />
             </a>
           </div>
-          <div class="flex flex-col ml-4">
-            <div class="text-sm font-semibold text-gray-600">{post.authorName || post.author}</div>
+          <div class="flex flex-col ml-2 break-all">
+            <a href="#/profile/{post.author}" class="hover:underline">
+              <div class="text-sm font-semibold text-gray-600">{post.authorName || post.author}</div>
+            </a>
             <div class="flex w-full mt-1">
-              <div class="text-xs font-medium text-indigo-700 cursor-pointer">
-                {post.tags.map(tag => showTag(tag)).join(" • ")}
+              <div class="text-xs font-medium cursor-pointer">
+                {post.tags.map(tag => showTag(tag)).join(" ")}
               </div>
-              <div class="ml-1 text-xs text-gray-400">• {moment(post.created_at).fromNow()}</div>
+              <div class="text-xs text-gray-400">&nbsp;•&nbsp;{moment(post.created_at).fromNow()}</div>
             </div>
           </div>
         </div>

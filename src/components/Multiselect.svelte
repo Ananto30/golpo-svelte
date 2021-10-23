@@ -167,7 +167,7 @@
       <div class="flex items-center px-1 py-1 m-1 text-sm rounded-full token" data-id="{s.value}">
         <span>{s.name}</span>
         {#if !readonly}
-          <div class="ml-1 rounded-full token-remove hover:bg-light2" title="Remove {s.name}">
+          <div class="ml-1 rounded-full token-remove hover:bg-yellow" title="Remove {s.name}">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               x="0px"
@@ -197,7 +197,7 @@
           placeholder="{placeholder}"
         />
         <div
-          class="ml-1 rounded-full remove-all hover:bg-light2"
+          class="ml-1 rounded-full remove-all hover:bg-yellow"
           title="Remove All"
           class:hidden="{!Object.keys(selected).length}"
         >

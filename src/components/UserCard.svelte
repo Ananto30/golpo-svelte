@@ -7,11 +7,11 @@
 <a href="#/profile/{user.username}">
   <div class="p-2">
     <div
-      class="h-full p-2 text-center transition duration-200 transform bg-dark1 rounded-2xl md:shadow-sm hover:bg-dark3"
+      class="h-full p-2 text-center transition duration-200 transform bg-dark1 rounded-2xl hover:bg-dark3"
     >
       <div class="mt-2 mb-3">
         <img
-          class="w-auto mx-auto border-2 rounded-full border-light2 h-28"
+          class="w-auto mx-auto border-2 rounded-full border-yellow h-28"
           src="{user.image || IMAGE_LARGE}"
           alt="{user.username}"
         />

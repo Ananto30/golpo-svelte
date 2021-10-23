@@ -90,7 +90,7 @@
               <div class="flex w-full">
                 <div class="flex-none w-10 h-10 rounded-full">
                   <img
-                    class="object-cover w-10 h-10 rounded-full shadow cursor-pointer"
+                    class="object-cover w-10 h-10 rounded-full cursor-pointer"
                     alt="User avatar"
                     src="{comment.authorImage || IMAGE_LARGE}"
                   />

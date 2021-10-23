@@ -72,12 +72,12 @@
   <div class="grid h-screen grid-cols-5 gap-5">
     <div class="grid col-span-5 p-10 my-auto md:col-span-3">
       <img alt="Charlie Brown with Snoopy" class="h-44" src="images/charliebrown.png" />
-      <h2 class="text-6xl font-extrabold text-light2">Golpo</h2>
+      <h2 class="text-6xl font-extrabold text-yellow">Golpo</h2>
       <p class="max-w-2xl mt-10 text-xl font-medium text-gray-700">
         Golpo is a clutter free platform for sharing links. We support people and content makers to share their work and
         nothing more. Stay simple!
       </p>
-      <div class="max-w-md p-4 mt-10 shadow-sm bg-dark1 md:p-10 rounded-2xl">
+      <div class="max-w-md p-4 mt-10 bg-dark1 md:p-10 rounded-2xl">
         <div class="text-xl font-bold leading-tight md:text-2xl">Why Golpo?</div>
         <div class="flex items-center gap-2 py-2 mt-3 text-gray-700">
           <TickSvg />
@@ -103,7 +103,7 @@
       </div>
     </div>
     <div class="grid col-span-5 p-10 my-auto md:col-span-2">
-      <div class="w-full p-10 shadow-sm bg-dark1 h-100 rounded-3xl ">
+      <div class="w-full p-10 bg-dark1 h-100 rounded-3xl">
         <h1 class="text-xl font-bold leading-tight md:text-2xl">Join Us!</h1>
         <div class="mt-6">
           <div>
@@ -135,7 +135,7 @@
 
           <button
             on:click="{generalLogin}"
-            class="block w-full px-4 py-3 mt-6 font-semibold text-white transition duration-200 rounded-lg bg-color1 hover:bg-light2 hover:text-dark1 focus:bg-indigo-400"
+            class="block w-full px-4 py-3 mt-6 font-semibold text-white transition duration-200 rounded-lg bg-color1 hover:bg-yellow hover:text-dark1"
             >Log In</button
           >
         </div>
@@ -145,7 +145,7 @@
         <button
           on:click="{handleGetGoogleAuthUrl}"
           type="button"
-          class="block w-full px-4 py-3 font-semibold text-gray-900 transition duration-200 bg-white rounded-lg bg-color1 hover:bg-light2 hover:text-dark1 focus:bg-indigo-200"
+          class="block w-full px-4 py-3 font-semibold text-gray-900 transition duration-200 bg-white rounded-lg bg-color1 hover:bg-yellow hover:text-dark1"
         >
           <div class="flex items-center justify-center">
             <svg

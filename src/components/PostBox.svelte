@@ -34,7 +34,7 @@
 
 <div class="flex max-w-xl p-2 mx-auto bg-dark1 rounded-2xl md:p-4">
   <img
-    class="border-2 rounded-full border-light2 h-14 w-14"
+    class="border-2 rounded-full border-yellow h-14 w-14"
     src="{$loggedUserImage ? $loggedUserImage : IMAGE_LARGE}"
     alt="{$loggedUsername}"
   />
@@ -45,7 +45,7 @@
           bind:value="{url}"
           aria-placeholder="Share a link"
           placeholder="Share a link"
-          class="block w-full h-10 px-4 py-2 text-sm rounded-xl bg-light3 focus:outline-none focus:ring-1 focus:ring-light2"
+          class="block w-full h-10 px-4 py-2 text-sm rounded-xl bg-light3 focus:outline-none focus:ring-1 focus:ring-yellow"
         />
       </div>
     </div>
@@ -63,7 +63,7 @@
         <button
           on:click="{sharePost}"
           type="button"
-          class="inline-flex justify-center px-4 py-2 ml-2 text-sm transition duration-200 rounded-lg bg-color1 hover:bg-color1-dark focus:outline-none focus:bg-color1-dark"
+          class="inline-flex justify-center px-4 py-2 ml-2 text-sm transition duration-200 rounded-lg bg-color1 hover:bg-color1-dark active:bg-color1-darker focus-visible:ring"
         >
           Share
         </button>
