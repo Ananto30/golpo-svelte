@@ -1,28 +1,15 @@
 # Golpo Svelte
 
-This is the svelte build of the current [golpo project](https://github.com/Ananto30/golpo). Old app - [golpo13.herokuapp.com](http://golpo13.herokuapp.com/) New app - [golpo.dedsec.life](https://golpo.dedsec.life)
+This is the svelte build of the [golpo.dedsec.life](https://golpo.dedsec.life). It's a rebuild of the old app - [golpo13.herokuapp.com](http://golpo13.herokuapp.com/) that was built on React.
 
-But there are things we are changing from the current Golpo. We will use Golpo as a link sharing platform. And it will be free for eveyone! Future plan involves link management (collection of links and sorting) and sharing collection.
+**Golpo is a link sharing platform without ads.**
 
-So here is our plan -
+But we would like to have people's opinion on what Golpo can have in future. Please share your thoughts and feature request **[here](https://github.com/Ananto30/golpo-express/discussions/categories/request-feature).**
 
-## Change plan
+## Remaining tasks
 
-### Frontend
-
-*   Convert from React to Svelte.
-*   Separate page for chats and user chat. (Chats are list of users who I have chat with in the past and UserChat is a single user chatting interface)
-*   Profile edit page or modal.
+*   Notification page.
 *   Send message to user button and modal.
-
-### Backend
-
-*   Verify post is only a link.
-*   Extract meta data from link and save them in the database.
-*   Do not allow to share the same link in 24 hours.
-*   Add like count and people who liked the post.
-*   Add follow functionality.
-
 
 ## Run the project
 
@@ -33,9 +20,9 @@ npm run dev
 
 Follow this login hack for faster development - https://github.com/Ananto30/golpo-svelte/blob/main/src/App.svelte#L44
 
-## Svelte tasks
-
 To get actual api response, you need to run the backend too. Check the backend - [github.com/ananto30/golpo-express](https://github.com/Ananto30/golpo-express)
+
+## Svelte tasks
 
 Here are the tasks - [Hacktoberfest](https://github.com/Ananto30/golpo-svelte/issues?q=is%3Aissue+is%3Aopen+label%3AHacktoberfest)
 
