@@ -1,0 +1,6 @@
+{
+	"appId": "com.golpo.app",
+	"appName": "Golpo",
+	"webDir": "public",
+	"bundledWebRuntime": false
+}

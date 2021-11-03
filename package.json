@@ -22,6 +22,10 @@
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17"
   },
   "dependencies": {
+    "@capacitor/android": "^3.2.5",
+    "@capacitor/cli": "^3.2.5",
+    "@capacitor/core": "^3.2.5",
+    "@capacitor/ios": "^3.2.5",
     "@tailwindcss/line-clamp": "^0.2.2",
     "axios": "^0.23.0",
     "moment": "^2.29.1",
