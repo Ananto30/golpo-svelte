@@ -25,7 +25,7 @@
 <div in:fade class="grid grid-cols-12">
   <div class="col-span-12 md:col-span-8">
     <div class="grid mx-auto">
-      <div class="mx-auto mt-16 md:mt-6">
+      <div class="mx-auto mt-12 md:mt-6">
         <Posts bind:allPosts bind:selectedTag />
       </div>
     </div>
