@@ -21,7 +21,7 @@
     width: 100%;
   }
   li {
-    background-color: #292b2f;
+    background-color: #fff;
     cursor: pointer;
     padding: 0.5rem;
   }
@@ -30,22 +30,20 @@
     border-bottom-right-radius: 0.2rem;
   }
   li:not(.selected):hover {
-    background-color: #36393f;
+    background-color: rgba(243, 244, 246);
   }
   li.selected {
-    background-color: rgb(68, 89, 224);
-    color: white;
+    background-color: rgba(243, 244, 246);
   }
   li.selected:nth-child(even) {
-    background-color: hsl(232, 50%, 45%);
-    color: white;
+    background-color: rgba(229, 231, 235);
   }
   li.active {
     background-color: hsl(214, 17%, 88%);
   }
   li.selected.active,
   li.selected:hover {
-    background-color: hsl(232, 48%, 50%);
+    background-color: rgba(209, 213, 219);
   }
 
   .hidden {
@@ -63,6 +61,9 @@
   export let placeholder = "";
   export let limit = 3;
   import { error } from "../store";
+
+  import Svg from "../components/Svg.svelte";
+  import { getTagSvgName } from "../helpers";
 
   let input,
     inputValue,
@@ -161,11 +162,15 @@
   }
 </script>
 
-<div class="relative z-0 w-full px-4 bg-light3 rounded-xl multiselect" class:readonly>
+<div class="relative z-0 w-full px-4 border-b border-gray-300 multiselect" class:readonly>
   <div class="flex flex-wrap items-center cursor-pointer tokens " class:showOptions on:click="{handleTokenClick}">
     {#each Object.values(selected) as s}
       <div class="flex items-center px-1 py-1 m-1 text-sm rounded-full token" data-id="{s.value}">
-        <span>{s.name}</span>
+        <span
+          ><span class="flex items-center gap-1">
+            <Svg name="{getTagSvgName(s.name)}" height="16" width="16" />{s.name}</span
+          ></span
+        >
         {#if !readonly}
           <div class="ml-1 rounded-full token-remove hover:bg-yellow" title="Remove {s.name}">
             <svg
@@ -187,7 +192,7 @@
     <div class="flex items-center flex-1 actions ">
       {#if !readonly}
         <input
-          class="w-full h-8 text-sm outline-none bg-light3 "
+          class="w-full h-8 text-sm bg-white outline-none"
           id="{id}"
           autocomplete="off"
           bind:value="{inputValue}"
@@ -222,7 +227,7 @@
 
   {#if showOptions}
     <ul
-      class="options rounded-xl "
+      class="options"
       transition:fly="{{ duration: 200, y: 5 }}"
       on:mousedown|preventDefault="{handleOptionMousedown}"
     >
@@ -232,7 +237,9 @@
           class:active="{activeOption === option}"
           data-value="{option.value}"
         >
-          {option.name}
+          <span class="flex items-center gap-1" data-value="{option.value}">
+            <Svg name="{getTagSvgName(option.name)}" height="16" width="16" />{option.name}</span
+          >
         </li>
       {/each}
     </ul>

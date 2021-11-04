@@ -65,9 +65,9 @@
 <svelte:window on:hashchange="{hashchange}" />
 
 <body class="container mx-auto max-w-7xl antialised">
-  <div class="grid mx-auto">
+  <div class="flex mx-auto">
     {#if $error}
-      <Alert name="error" bind:message="{$error}" />
+     <Alert name="error" bind:message="{$error}" />
     {/if}
     {#if $info}
       <Alert name="info" bind:message="{$info}" />

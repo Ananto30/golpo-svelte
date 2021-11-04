@@ -23,6 +23,35 @@ const tagMap = {
 	Programming: "💻 Programming",
 };
 
+const tagSvgMap = {
+	Music: "music",
+	Game: "controller",
+	Nature: "tree",
+	Calm: "coffee",
+	Funny: "smile-wink",
+	Startup: "chart",
+	Life: "leaf",
+	Travel: "plane",
+	Food: "pizza",
+	Entrepreneurship: "crown",
+	Education: "grad-cap",
+	Health: "firstaid",
+	Love: "love",
+	Design: "palette",
+	Writing: "pen",
+	Technology: "wrench",
+	"Self-Improvement": "running",
+	Business: "briefcase",
+	Sports: "football",
+	Art: "paint-brush",
+	"Open-Source": "laptop",
+	Programming: "code",
+}
+
 exports.showTag = (tag) => {
 	return tagMap[tag];
 };
+
+exports.getTagSvgName = (tag) => {
+	return tagSvgMap[tag];
+}
