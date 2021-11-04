@@ -65,7 +65,7 @@
   <div
     class="{sideBarVisible
       ? '-translate-x-full'
-      : 'shadow-lg'} z-30 md:shadow-none w-2/4 space-y-6 py-4 md:py-8 px-2 inset-y-0 left-0 transform fixed md:relative md:translate-x-0 transition duration-200 ease-in-out bg-white"
+      : 'shadow-lg'} px-4 z-30 md:shadow-none w-2/4 space-y-6 py-4 md:py-8 inset-y-0 left-0 transform fixed md:relative md:translate-x-0 transition duration-200 ease-in-out bg-white"
   >
     <!-- logo -->
     <a href="#/home" class="flex items-center space-x-2">
