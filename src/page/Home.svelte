@@ -25,7 +25,7 @@
 
 <div in:fade class="grid grid-cols-12">
   <div class="col-span-12 md:col-span-8">
-    <div class="min-w-full px-4 mt-24 md:px-0 md:mt-10">
+    <div class="min-w-full px-4 mt-24 md:px-0 md:mt-6">
       <PostBox />
     </div>
     <div class="grid mx-auto">

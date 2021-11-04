@@ -3,21 +3,15 @@
   import { info, loggedUsername } from "../store";
   import moment from "moment";
   import client from "../client";
-  import { showTag } from "../helpers";
   import { IMAGE_LARGE } from "../defaults";
 
-  import LoveSvg from "../svgs/LoveSvg.svelte";
-  import DeleteSvg from "../svgs/DeleteSvg.svelte";
-  import OpenLinkSvg from "../svgs/OpenLinkSvg.svelte";
-  import CommentSvg from "../svgs/CommentSvg.svelte";
-  import RedLoveSvg from "../svgs/RedLoveSvg.svelte";
-  import BookmarkSvg from "../svgs/BookmarkSvg.svelte";
+  import Svg from "../components/Svg.svelte";
 
   export let post;
   export let onDelete;
 
   const mediaButtonClass =
-    "flex items-center gap-1 px-2 py-1 text-sm transition duration-200 ease-in-out rounded-full md:px-3 hover:bg-yellow hover:text-dark1 focus-visible:ring active:bg-yellow-dark";
+    "flex items-center gap-1 px-2 py-1 text-sm transition duration-200 ease-in-out md:px-3 border border-transparent hover:border-gray-400 focus-visible:ring active:border-current";
 
   const lovePost = async postId => {
     if (!post.isLovedByMe) {
@@ -36,7 +30,7 @@
 </script>
 
 <div in:fade class="">
-  <div class="flex max-w-xl py-4 my-4 overflow-hidden bg-dark1 md:rounded-2xl">
+  <div class="flex max-w-xl py-6 overflow-hidden border-b border-gray-300">
     <div class="flex items-center w-full">
       <div class="w-full">
         <div class="flex flex-row items-center w-full px-4 pb-4">
@@ -55,46 +49,46 @@
             </a>
             <div class="flex w-full mt-1">
               <div class="text-xs font-medium cursor-pointer">
-                {post.tags.map(tag => showTag(tag)).join(" ")}
+                {post.tags.join(", ")}
               </div>
               <div class="text-xs text-gray-400">&nbsp;•&nbsp;{moment(post.created_at).fromNow()}</div>
             </div>
           </div>
         </div>
-        <div class="px-4 mb-2 text-lg font-semibold leading-6 text-gray-800 line-clamp-2">
+        <div class="px-4 mb-2 text-lg font-bold leading-6 text-gray-800 line-clamp-2 font-montserrat">
           {post.title}
         </div>
-        <div class="px-4 mb-2 text-sm text-gray-600 break-all line-clamp-5">
+        <div class="px-4 mb-2 text-sm text-gray-700 break-all line-clamp-5 font-karla">
           {post.description || ""}
         </div>
         <div class="px-4 my-4 text-sm font-medium text-gray-400">
-          <img class="rounded" alt="{post.title}" src="{post.image}" />
+          <img class="" alt="{post.title}" src="{post.image}" />
         </div>
 
         <div class="flex justify-start mt-4">
-          <div class="flex gap-6 px-4">
+          <div class="flex gap-4 px-2">
             <button title="loves" on:click="{() => lovePost(post._id)}" class="{mediaButtonClass}">
               {#if post.isLovedByMe}
-                <RedLoveSvg />
+                <Svg name="red-love" height="16" width="16" />
               {:else}
-                <LoveSvg />
+                <Svg name="love" height="16" width="16" />
               {/if}
               <span>{post.loveCount}</span>
             </button>
             <a href="#/post/{post._id}" title="comments" class="{mediaButtonClass}">
-              <CommentSvg />
+              <Svg name="comment" height="16" width="16" />
               <span>{post.commentCount}</span>
             </a>
             {#if post.author == $loggedUsername}
               <button title="delete" on:click="{onDelete}" class="{mediaButtonClass}">
-                <DeleteSvg />
+                <Svg name="delete" height="16" width="16" />
               </button>
             {/if}
             <button title="bookmark" on:click="{() => bookmarkPost(post._id)}" class="{mediaButtonClass}">
-              <BookmarkSvg />
+              <Svg name="bookmark" height="16" width="16" />
             </button>
             <a title="visit link" href="{post.url}" target="_blank" class="{mediaButtonClass}">
-              <OpenLinkSvg />
+              <Svg name="external" height="16" width="16" />
             </a>
           </div>
         </div>
