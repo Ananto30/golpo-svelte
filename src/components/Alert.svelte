@@ -20,7 +20,7 @@
   $: if (message) {
     setTimeout(() => {
       message = "";
-    }, 50000);
+    }, 5000);
   }
 </script>
 

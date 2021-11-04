@@ -116,7 +116,7 @@
   <div class="col-span-12 md:col-span-8">
     <div
       id="user-details"
-      class="{userDetailsOnTop ? 'border-b border-gray-600' : ''} z-10 bg-white sticky top-12 md:top-0 pt-6 mt-16 md:mt-20"
+      class="{userDetailsOnTop ? 'border-b border-gray-600' : ''} z-10 bg-white sticky top-8 md:top-0 pt-6 mt-14 md:mt-20"
     >
       <div class="w-full mx-auto">
         <div class="flex flex-row w-full px-4 md:px-16">

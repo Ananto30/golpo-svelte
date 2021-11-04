@@ -49,12 +49,12 @@
 
 <div in:fade class="sticky top-0 z-20 w-full md:min-h-screen ">
   <!-- mobile menu bar -->
-  <div class="fixed z-50 flex justify-between w-full text-gray-100 bg-black md:hidden">
+  <div class="fixed z-50 flex justify-between w-full bg-white border-gray-300 md:hidden">
     <!-- logo -->
-    <a href="#/home" class="block px-4 py-4 text-2xl font-bold font-montserrat">Golpo</a>
+    <a href="#/home" class="block px-4 py-2 my-auto text-2xl font-bold font-montserrat">Golpo</a>
 
     <!-- mobile menu button -->
-    <button on:click="{toggleSideBar}" class="p-4 focus:outline-none active:bg-gray-900">
+    <button on:click="{toggleSideBar}" class="p-4 focus:outline-none active:bg-gray-100">
       <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
       </svg>
@@ -65,7 +65,7 @@
   <div
     class="{sideBarVisible
       ? '-translate-x-full'
-      : 'shadow-lg'} z-30 md:shadow-none w-2/4 space-y-6 py-4 md:py-8 px-2 inset-y-0 left-0 transform fixed md:relative md:translate-x-0 transition duration-200 ease-in-out bg-white"
+      : 'shadow-lg px-6'} z-30 md:shadow-none w-2/4 space-y-6 py-4 md:py-8 px-2 inset-y-0 left-0 transform fixed md:relative md:translate-x-0 transition duration-200 ease-in-out bg-white"
   >
     <!-- logo -->
     <a href="#/home" class="flex items-center space-x-2">
