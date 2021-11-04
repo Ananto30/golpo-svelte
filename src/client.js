@@ -53,6 +53,7 @@ const User = {
 
 const Post = {
 	getAll: () => api.get("/post", getHeader()).catch(errorHandler),
+	getFeed: () => api.get("/post/feed", getHeader()).catch(errorHandler),
 	getById: (id) => api.get(`/post/${id}`, getHeader()).catch(errorHandler),
 	getByUsername: (username) => api.get(`/post/user/${username}`, getHeader()).catch(errorHandler),
 	createPost: (url, tags) => api.post("/post", { url: url, tags: tags }, getHeader()).catch(errorHandler),
@@ -60,7 +61,7 @@ const Post = {
 		api.post(`/post/${postId}/comment`, { text: text }, getHeader()).catch(errorHandler),
 	getAllTags: () => api.get("/post/tags", getHeader()).catch(errorHandler),
 	reactLove: (postId) => api.post(`/post/${postId}/love`, {}, getHeader()).catch(errorHandler),
-	deletePost: (postId) => api.post(`/post/${postId}/delete`,{}, getHeader()).catch(errorHandler),
+	deletePost: (postId) => api.post(`/post/${postId}/delete`, {}, getHeader()).catch(errorHandler),
 	getBookmarks: () => api.get("/post/bookmarks", getHeader()).catch(errorHandler),
 	bookmarkPost: (postId) => api.post(`/post/${postId}/bookmark`, {}, getHeader()).catch(errorHandler),
 };
@@ -94,10 +95,16 @@ const Activity = {
 	getAll: () => api.get("/activity", getHeader()).catch(errorHandler),
 };
 
+const Notification = {
+	getAll: () => api.get("/notification/" + get(loggedUsername), getHeader()).catch(errorHandler),
+	click: (id) => api.post(`/notification/${id}/clicked`, {}, getHeader()).catch(errorHandler),
+};
+
 export default {
 	Auth,
 	User,
 	Post,
 	Chat,
 	Activity,
+	Notification,
 };

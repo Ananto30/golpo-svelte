@@ -13,14 +13,19 @@
       icon: "home",
     },
     {
-      name: "Chat",
-      href: "#/chat",
-      icon: "chat",
-    },
-    {
       name: "Profile",
       href: "#/profile/" + $loggedUsername,
       icon: "user",
+    },
+    {
+      name: "Notification",
+      href: "#/notification",
+      icon: "bell",
+    },
+    {
+      name: "Chat",
+      href: "#/chat",
+      icon: "chat",
     },
     {
       name: "Bookmarks",
@@ -55,9 +60,16 @@
 
     <!-- mobile menu button -->
     <button on:click="{toggleSideBar}" class="p-4 focus:outline-none active:bg-gray-100">
-      <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-      </svg>
+      <div class="flex my-auto">
+      <span class="relative inline-block ">
+        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+        <span
+          class="absolute top-0 right-0 inline-block w-2 h-2 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full"
+        ></span>
+      </span>
+    </div>
     </button>
   </div>
 
@@ -83,6 +95,13 @@
           >
             <Svg name="{item.icon}" height="24" width="24" />
             {item.name}
+            {#if item.name == "Notification"}
+              <span class="relative inline-block h-2">
+                <span
+                  class="absolute top-0 right-0 inline-block w-2 h-2 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full"
+                ></span>
+              </span>
+            {/if}
           </a>
         </div>
       {/each}
