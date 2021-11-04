@@ -70,9 +70,11 @@
   </div>
 {:else}
   <div class="grid h-screen grid-cols-5 gap-5">
-    <div class="grid col-span-5 my-auto md:col-span-3">
-      <img alt="Charlie Brown with Snoopy" class="h-44" src="images/charliebrown.png" />
-      <h2 class="text-6xl font-extrabold font-montserrat">Golpo</h2>
+    <div class="grid col-span-5 p-6 my-auto md:col-span-3">
+      <div class="mx-auto md:mx-0">
+        <img alt="Charlie Brown with Snoopy" class="h-44" src="images/charliebrown.png" />
+        <h2 class="text-6xl font-extrabold font-montserrat">Golpo</h2>
+      </div>
       <p class="max-w-2xl mt-10 text-xl font-bold text-gray-800 font-montserrat">
         Golpo is a clutter free platform for sharing links. We support people and content makers to share their work and
         nothing more. Stay simple!
@@ -99,20 +101,22 @@
           <TickSvg />
           Chat with them
         </div>
+        <div class="flex items-center gap-2 py-2 font-medium text-gray-700">
+          <TickSvg />
+          And yes we love Charlie Brown!
+        </div>
         <div class="flex items-center gap-2 py-2 text-gray-500">More features coming soon...</div>
       </div>
     </div>
-    <div class="grid col-span-5 p-10 my-auto md:col-span-2">
-      <div class="w-full p-10 bg-dark1 h-100 rounded-3xl">
+    <div class="grid col-span-5 p-6 my-auto md:col-span-2">
+      <div class="w-full md:p-10 bg-dark1 h-100 rounded-3xl">
         <h1 class="text-xl font-bold leading-tight md:text-2xl font-montserrat">Join Us!</h1>
-      
 
         <button
           on:click="{handleGetGoogleAuthUrl}"
           type="button"
           class="block w-full px-4 py-3 mt-6 mb-12 font-semibold text-gray-900 transition duration-200 bg-white border border-gray-400 hover:bg-black hover:text-white"
         >
-        
           <div class="flex items-center justify-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
