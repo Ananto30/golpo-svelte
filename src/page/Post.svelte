@@ -1,7 +1,7 @@
 <script>
   import { fade } from "svelte/transition";
   import { onMount } from "svelte";
-  import { info, loggedUsername } from "../store";
+  import { loggedUsername } from "../store";
   import client from "../client";
   import moment from "moment";
   import { IMAGE_LARGE } from "../defaults";
@@ -69,21 +69,23 @@
       {#if postComments}
         <Post bind:post />
 
-        <div class="max-w-xl p-4 mt-4 text-sm bg-dark1 rounded-2xl">
-          <div class="">
+        <div class="max-w-xl p-4 mt-4 text-sm">
+          <div class="mb-4 border-gray-300 ">
             <textarea
-              class="w-full px-2 py-2 outline-none rounded-xl bg-light3 focus:border-gray-400"
+              class="w-full outline-none focus:border-gray-800"
               placeholder="Add your comment"
               on:keyup="{handleKeyup}"
               bind:value="{postComment}"
+              rows="3"
               style="resize: none;"></textarea>
-
-            <button
-              on:click="{addComment}"
-              class="px-3 py-1 mb-2 text-sm transition duration-200 rounded-lg bg-color1 hover:bg-color1-dark focus:outline-none focus-visible:border-gray-500"
-            >
-              <span class="text-xs text-gray-500">Comment</span>
-            </button>
+            <div class="flex justify-end">
+              <button
+                on:click="{addComment}"
+                class="px-2 py-1 text-sm text-white transition duration-200 bg-black border border-transparent hover:bg-white hover:text-black hover:border-current focus-visible:ring"
+              >
+                <span class="text-xs ">Comment</span>
+              </button>
+            </div>
           </div>
           {#each postComments as comment}
             <div in:fade class="py-2">
@@ -95,12 +97,15 @@
                     src="{comment.authorImage || IMAGE_LARGE}"
                   />
                 </div>
-                <div class="flex flex-col mt-1 mb-2 ml-4">
+                <div class="flex flex-col mt-1 mb-2 ml-2">
                   <div class="text-sm font-semibold text-gray-600">{comment.authorName || comment.author}</div>
-                  <div class="text-xs font-thin text-gray-400">{moment(comment.created_at).fromNow()}</div>
+                  <div class="text-xs font-thin text-gray-500">{moment(comment.created_at).fromNow()}</div>
+
+                  <div class="text-sm text-gray-600 break-all">
+                    {comment.text}
+                  </div>
                 </div>
               </div>
-              <div class="text-sm text-gray-600 ">{comment.text}</div>
             </div>
           {/each}
         </div>

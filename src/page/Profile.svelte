@@ -7,7 +7,7 @@
 <script>
   import { fade } from "svelte/transition";
   import { onMount, onDestroy } from "svelte";
-  import { loggedUsername, error, page } from "../store";
+  import { loggedUsername, page } from "../store";
   import client from "../client";
   import { TAGLINE, WORK, IMAGE_LARGE } from "../defaults";
 
@@ -34,7 +34,7 @@
   let editModalHide = true;
 
   const profileButtonClass =
-    "flex-none px-3 py-1 text-sm transition duration-200 rounded-full bg-dark1 hover:bg-color1 focus:bg-gray-100 focus:outline-none focus-visible:border-gray-500";
+    "flex-none px-3 py-1 text-sm transition duration-200 text-white bg-black border border-transparent hover:bg-white hover:text-black hover:border-current focus-visible:ring";
 
   let tabs = ["Posts", "Followers", "Following"];
   let selectedTab = "Posts";
@@ -116,25 +116,25 @@
   <div class="col-span-12 md:col-span-8">
     <div
       id="user-details"
-      class="{userDetailsOnTop ? ' border-light1' : ''} z-10 bg-dark2 sticky top-12 md:top-0 pt-6 mt-16 md:mt-20"
+      class="{userDetailsOnTop ? 'border-b border-gray-600' : ''} z-10 bg-white sticky top-12 md:top-0 pt-6 mt-16 md:mt-20"
     >
       <div class="w-full mx-auto">
         <div class="flex flex-row w-full px-4 md:px-16">
           <div class="flex-none w-20 h-20 rounded-full md:w-32 md:h-32">
             <img
-              class="object-cover w-20 h-20 border-2 border-indigo-500 rounded-full cursor-pointer md:w-32 md:h-32"
+              class="object-cover w-20 h-20 border border-black rounded-full cursor-pointer md:w-32 md:h-32"
               alt="User avatar"
               src="{image ? image : IMAGE_LARGE}"
             />
           </div>
-          <div class="flex flex-col mb-2 ml-6 md:mt-2">
-            <div class="text-2xl font-bold">{displayName || slug}</div>
+          <div class="flex flex-col mb-2 ml-4 md:ml-6 md:mt-2">
+            <div class="font-bold md:text-2xl font-montserrat">{displayName || slug}</div>
             <div class="font-base">{work ? work : WORK}</div>
             <div class="text-sm text-gray-500">
               {tagline ? tagline : TAGLINE}
             </div>
 
-            <div class="mt-2 -mx-2 md:mt-6">
+            <div class="mt-2 md:mt-4">
               {#if !editable}
                 {#if followed}
                   <button in:fade on:click="{followButtonHandler}" class="bg-color1 {profileButtonClass}">

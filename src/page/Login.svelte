@@ -70,32 +70,32 @@
   </div>
 {:else}
   <div class="grid h-screen grid-cols-5 gap-5">
-    <div class="grid col-span-5 p-10 my-auto md:col-span-3">
+    <div class="grid col-span-5 my-auto md:col-span-3">
       <img alt="Charlie Brown with Snoopy" class="h-44" src="images/charliebrown.png" />
-      <h2 class="text-6xl font-extrabold text-yellow">Golpo</h2>
-      <p class="max-w-2xl mt-10 text-xl font-medium text-gray-700">
+      <h2 class="text-6xl font-extrabold font-montserrat">Golpo</h2>
+      <p class="max-w-2xl mt-10 text-xl font-bold text-gray-800 font-montserrat">
         Golpo is a clutter free platform for sharing links. We support people and content makers to share their work and
         nothing more. Stay simple!
       </p>
-      <div class="max-w-md p-4 mt-10 bg-dark1 md:p-10 rounded-2xl">
-        <div class="text-xl font-bold leading-tight md:text-2xl">Why Golpo?</div>
-        <div class="flex items-center gap-2 py-2 mt-3 text-gray-700">
+      <div class="max-w-md mt-10 bg-dark1 rounded-2xl">
+        <div class="text-xl font-bold leading-tight md:text-2xl font-montserrat">Why Golpo?</div>
+        <div class="flex items-center gap-2 py-2 mt-3 font-medium text-gray-700">
           <TickSvg />
           Clutter free
         </div>
-        <div class="flex items-center gap-2 py-2 text-gray-700">
+        <div class="flex items-center gap-2 py-2 font-medium text-gray-700">
           <TickSvg />
           Ad free & focused
         </div>
-        <div class="flex items-center gap-2 py-2 text-gray-700">
+        <div class="flex items-center gap-2 py-2 font-medium text-gray-700">
           <TickSvg />
           Promote your content
         </div>
-        <div class="flex items-center gap-2 py-2 text-gray-700">
+        <div class="flex items-center gap-2 py-2 font-medium text-gray-700">
           <TickSvg />
           Follow creators and like minded people
         </div>
-        <div class="flex items-center gap-2 py-2 text-gray-700">
+        <div class="flex items-center gap-2 py-2 font-medium text-gray-700">
           <TickSvg />
           Chat with them
         </div>
@@ -104,49 +104,15 @@
     </div>
     <div class="grid col-span-5 p-10 my-auto md:col-span-2">
       <div class="w-full p-10 bg-dark1 h-100 rounded-3xl">
-        <h1 class="text-xl font-bold leading-tight md:text-2xl">Join Us!</h1>
-        <div class="mt-6">
-          <div>
-            <label for="username" class="block text-gray-700">Username</label>
-            <input
-              bind:value="{username}"
-              type="text"
-              name=""
-              id="username"
-              placeholder="Enter Username"
-              class="w-full px-4 py-3 mt-2 rounded-lg bg-light1 focus:border-blue-500 focus:bg-white focus:outline-none text-dark1"
-              autocomplete
-              required
-            />
-          </div>
-
-          <div class="mt-4">
-            <label for="password" class="block text-gray-700">Password</label>
-            <input
-              bind:value="{password}"
-              type="password"
-              name=""
-              id="password"
-              placeholder="Enter Password"
-              class="w-full px-4 py-3 mt-2 rounded-lg bg-light1 focus:border-blue-500 focus:bg-white focus:outline-none text-dark1"
-              required
-            />
-          </div>
-
-          <button
-            on:click="{generalLogin}"
-            class="block w-full px-4 py-3 mt-6 font-semibold text-white transition duration-200 rounded-lg bg-color1 hover:bg-yellow hover:text-dark1"
-            >Log In</button
-          >
-        </div>
-
-        <hr class="w-full my-6 border-gray-300" />
+        <h1 class="text-xl font-bold leading-tight md:text-2xl font-montserrat">Join Us!</h1>
+      
 
         <button
           on:click="{handleGetGoogleAuthUrl}"
           type="button"
-          class="block w-full px-4 py-3 font-semibold text-gray-900 transition duration-200 bg-white rounded-lg bg-color1 hover:bg-yellow hover:text-dark1"
+          class="block w-full px-4 py-3 mt-6 mb-12 font-semibold text-gray-900 transition duration-200 bg-white border border-gray-400 hover:bg-black hover:text-white"
         >
+        
           <div class="flex items-center justify-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -171,12 +137,45 @@
           </div>
         </button>
 
-        <p class="mt-8">
+        <div class="mt-6">
+          <h3 class="mb-4 text-xl font-bold">For internal users</h3>
+          <div>
+            <!-- <label for="username" class="block text-gray-700">Username</label> -->
+            <input
+              bind:value="{username}"
+              type="text"
+              name=""
+              id="username"
+              placeholder="Username"
+              class="w-full px-4 py-3 mt-2 border-b bg-light1 focus:border-blue-500 focus:bg-white focus:outline-none"
+              autocomplete
+              required
+            />
+          </div>
+
+          <div class="mt-4">
+            <!-- <label for="password" class="block text-gray-700">Password</label> -->
+            <input
+              bind:value="{password}"
+              type="password"
+              name=""
+              id="password"
+              placeholder="Enter Password"
+              class="w-full px-4 py-3 mt-2 border-b bg-light1 focus:border-blue-500 focus:bg-white focus:outline-none"
+              required
+            />
+          </div>
+
+          <button
+            on:click="{generalLogin}"
+            class="block w-full px-4 py-3 mt-8 font-semibold text-gray-900 transition duration-200 bg-white border border-gray-400 hover:bg-black hover:text-white"
+            >Log In</button
+          >
+        </div>
+        <!-- <p class="mt-8">
           Need an account?
-          <!-- <a href="#" class="font-semibold text-blue-500 hover:text-blue-700"
-				>Create an account</a> -->
           Login with google 👆
-        </p>
+        </p> -->
       </div>
     </div>
   </div>

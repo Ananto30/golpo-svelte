@@ -7,11 +7,11 @@
   let alertTypes = [
     {
       name: "error",
-      bgColor: "bg-red",
+      textColor: "text-red-600",
     },
     {
       name: "info",
-      bgColor: "bg-color1",
+      textColor: "text-black",
     },
   ];
 
@@ -20,12 +20,12 @@
   $: if (message) {
     setTimeout(() => {
       message = "";
-    }, 5000);
+    }, 50000);
   }
 </script>
 
-<div in:fly="{{ y: -200, duration: 500 }}" class="fixed z-50 px-2 mx-auto top-10">
-  <div class="flex p-2 text-sm text-red-700 rounded-lg {alert.bgColor}" role="alert">
+<div in:fly="{{ x: 200, duration: 500 }}" class="fixed right-0 z-50 flex px-2 md:right-10 insert-x-0 top-20 md:top-10">
+  <div class="flex mx-auto p-2 text-sm {alert.textColor} border border-gray-400 bg-white" role="alert">
     <svg class="inline w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
       <path
         fill-rule="evenodd"
