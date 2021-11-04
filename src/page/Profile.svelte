@@ -172,7 +172,7 @@
 
     {#if selectedTab == "Posts"}
       {#if editable}
-        <div class="px-4 mt-8 md:px-0">
+        <div class="mt-8">
           <PostBox />
         </div>
       {/if}
