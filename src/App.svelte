@@ -15,6 +15,7 @@
   import Profile from "./page/Profile.svelte";
   import Post from "./page/Post.svelte";
   import Bookmarks from "./page/Bookmarks.svelte";
+  import Notification from "./page/Notification.svelte";
 
   import Alert from "./components/Alert.svelte";
 
@@ -30,6 +31,7 @@
     users: Users,
     profile: Profile,
     bookmarks: Bookmarks,
+    notification: Notification,
   };
 
   const slugPageMapping = {
