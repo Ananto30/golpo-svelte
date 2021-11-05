@@ -11,14 +11,24 @@ module.exports = {
   },
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      keyframes: {
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(-10deg)' },
+          '50%': { transform: 'rotate(10deg)' },
+        }
+      },
+      animation: {
+        wiggle: 'wiggle .5s ease-in-out infinite',
+      }
+    },
     // colors: {
     //   light1: "#dcddde",
     //   light3: "#40444b",
     //   dark1: "#36393f",
     //   dark2: "#292b2f",
     //   dark3 : "#202225",
-      
+
     //   yellow: "#e0cb44",
     //   "yellow-dark": "#C7B22B",
     //   color1: "#4459e0",
@@ -32,6 +42,7 @@ module.exports = {
   variants: {
     extend: {
       backgroundColor: ["active"],
+      animation: ['hover', 'focus'],
     },
   },
   plugins: [
