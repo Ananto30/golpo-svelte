@@ -1,6 +1,6 @@
 <style>
   .navshadow {
-    box-shadow: 0px 15px 10px -15px rgb(109, 107, 107);
+    box-shadow: 0 4px 3px -3px rgba(184, 184, 184, 0.644);
   }
 </style>
 
@@ -81,7 +81,8 @@
   const topTracker = () => {
     let element = document.getElementById("user-details");
     let atTop = element.getBoundingClientRect().top;
-    if (atTop == 0 || atTop == 40) {
+    console.log(atTop);
+    if (atTop == 0 || atTop == 32) {
       userDetailsOnTop = true;
     } else {
       userDetailsOnTop = false;
@@ -116,7 +117,7 @@
   <div class="col-span-12 md:col-span-8">
     <div
       id="user-details"
-      class="{userDetailsOnTop ? 'border-b border-gray-600' : ''} z-10 bg-white sticky top-8 md:top-0 pt-6 mt-14 md:mt-20"
+      class="{userDetailsOnTop ? 'navshadow' : ''} z-10 bg-white sticky top-8 md:top-0 pt-6 mt-14 md:mt-20"
     >
       <div class="w-full mx-auto">
         <div class="flex flex-row w-full px-4 md:px-16">
