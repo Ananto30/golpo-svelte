@@ -81,7 +81,6 @@
   const topTracker = () => {
     let element = document.getElementById("user-details");
     let atTop = element.getBoundingClientRect().top;
-    console.log(atTop);
     if (atTop == 0 || atTop == 32) {
       userDetailsOnTop = true;
     } else {

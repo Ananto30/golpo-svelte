@@ -11,11 +11,17 @@
 
   let allPosts = [];
   let selectedTag = "";
+  let sharedPost = null;
 
   const getPosts = async () => {
     const res = await client.Post.getAll();
     allPosts = res.data.posts.reverse();
   };
+
+  $: if (sharedPost) {
+    console.log("mama ami koi")
+    allPosts = [sharedPost, ...allPosts];
+  }
 
   onMount(async () => {
     $page = "home";
@@ -36,45 +42,23 @@
           </div>
         </div>
       </div>
-      <div class="w-full max-w-xl p-4 mx-auto">
-        <div class="flex space-x-4 animate-pulse">
-          <div class="w-12 h-12 bg-gray-300 rounded-full"></div>
-          <div class="flex-1 py-1 space-y-4">
-            <div class="w-3/4 h-4 bg-gray-300 "></div>
-            <div class="space-y-2">
-              <div class="h-4 bg-gray-300 "></div>
-              <div class="w-5/6 h-4 bg-gray-300 "></div>
+      {#each Array(5) as _}
+        <div class="w-full max-w-xl p-4 mx-auto">
+          <div class="flex space-x-4 animate-pulse">
+            <div class="w-12 h-12 bg-gray-300 rounded-full"></div>
+            <div class="flex-1 py-1 space-y-4">
+              <div class="w-3/4 h-4 bg-gray-300 "></div>
+              <div class="space-y-2">
+                <div class="h-4 bg-gray-300 "></div>
+                <div class="w-5/6 h-4 bg-gray-300 "></div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="w-full max-w-xl p-4 mx-auto">
-        <div class="flex space-x-4 animate-pulse">
-          <div class="w-12 h-12 bg-gray-300 rounded-full"></div>
-          <div class="flex-1 py-1 space-y-4">
-            <div class="w-3/4 h-4 bg-gray-300 "></div>
-            <div class="space-y-2">
-              <div class="h-4 bg-gray-300 "></div>
-              <div class="w-5/6 h-4 bg-gray-300 "></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="w-full max-w-xl p-4 mx-auto">
-        <div class="flex space-x-4 animate-pulse">
-          <div class="w-12 h-12 bg-gray-300 rounded-full"></div>
-          <div class="flex-1 py-1 space-y-4">
-            <div class="w-3/4 h-4 bg-gray-300 "></div>
-            <div class="space-y-2">
-              <div class="h-4 bg-gray-300 "></div>
-              <div class="w-5/6 h-4 bg-gray-300 "></div>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/each}
     {:else}
       <div class="min-w-full mt-16 md:mt-6">
-        <PostBox />
+        <PostBox bind:sharedPost />
       </div>
       <div class="grid mx-auto">
         <div class="mx-auto mt-4">

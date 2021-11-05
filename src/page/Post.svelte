@@ -9,6 +9,8 @@
   import Post from "../components/Post.svelte";
   import Footer from "../components/Footer.svelte";
 
+  import Svg from "../components/Svg.svelte";
+
   export let slug;
   let post;
   let postComment;
@@ -58,6 +60,12 @@
     }
   };
 
+  const deleteComment = async commentId => {
+    const res = await client.Post.deleteComment(post._id, commentId);
+    post.comments = res.data.post.comments.reverse();
+    post.commentCount--;
+  };
+
   onMount(async () => {
     getPost(slug);
   });
@@ -87,7 +95,7 @@
               </button>
             </div>
           </div>
-          {#each postComments as comment}
+          {#each post.comments as comment}
             <div in:fade class="py-2">
               <div class="flex w-full">
                 <div class="flex-none w-10 h-10 rounded-full">
@@ -97,8 +105,17 @@
                     src="{comment.authorImage || IMAGE_LARGE}"
                   />
                 </div>
-                <div class="flex flex-col mt-1 mb-2 ml-2">
-                  <div class="text-sm font-semibold text-gray-600">{comment.authorName || comment.author}</div>
+                <div class="flex flex-col w-full mt-1 mb-2 ml-2">
+                  <div class="inline-flex w-full">
+                    <div class="flex text-sm font-semibold text-gray-600">{comment.authorName || comment.author}</div>
+                    {#if comment.author == $loggedUsername}
+                      <div class="flex pl-2">
+                        <button title="delete" on:click="{() => deleteComment(comment._id)}">
+                          <Svg name="delete" height="16" width="16" />
+                        </button>
+                      </div>
+                    {/if}
+                  </div>
                   <div class="text-xs font-thin text-gray-500">{moment(comment.created_at).fromNow()}</div>
 
                   <div class="text-sm text-gray-600 break-all">

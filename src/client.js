@@ -64,6 +64,8 @@ const Post = {
 	deletePost: (postId) => api.post(`/post/${postId}/delete`, {}, getHeader()).catch(errorHandler),
 	getBookmarks: () => api.get("/post/bookmarks", getHeader()).catch(errorHandler),
 	bookmarkPost: (postId) => api.post(`/post/${postId}/bookmark`, {}, getHeader()).catch(errorHandler),
+	deleteComment: (postId, commentId) =>
+		api.post(`/post/${postId}/comment/${commentId}/delete`, {}, getHeader()).catch(errorHandler),
 };
 
 const Chat = {
@@ -96,8 +98,9 @@ const Activity = {
 };
 
 const Notification = {
-	getAll: () => api.get("/notification/" + get(loggedUsername), getHeader()).catch(errorHandler),
+	getAll: () => api.get("/notification", getHeader()).catch(errorHandler),
 	click: (id) => api.post(`/notification/${id}/clicked`, {}, getHeader()).catch(errorHandler),
+	hasUnclickedNotification: () => api.get("/notification/hasunclicked", getHeader()).catch(errorHandler),
 };
 
 export default {
