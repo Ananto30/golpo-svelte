@@ -24,15 +24,64 @@
 </script>
 
 <div in:fade class="grid grid-cols-12">
-  <div class="col-span-12 md:col-span-8">
-    <div class="min-w-full mt-16 md:mt-6">
-      <PostBox />
-    </div>
-    <div class="grid mx-auto">
-      <div class="mx-auto mt-4">
-        <Posts bind:allPosts bind:selectedTag />
+  <div class="col-span-12 md:col-span-8 ">
+    {#if allPosts.length == 0}
+      <div class="w-full max-w-xl p-4 mx-auto mt-16 md:mt-10">
+        <div class="flex space-x-4 animate-pulse">
+          <div class="flex-1 py-1 space-y-4">
+            <div class="space-y-6">
+              <div class="h-4 bg-gray-300 "></div>
+              <div class="w-5/6 h-4 bg-gray-300 "></div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+      <div class="w-full max-w-xl p-4 mx-auto">
+        <div class="flex space-x-4 animate-pulse">
+          <div class="w-12 h-12 bg-gray-300 rounded-full"></div>
+          <div class="flex-1 py-1 space-y-4">
+            <div class="w-3/4 h-4 bg-gray-300 "></div>
+            <div class="space-y-2">
+              <div class="h-4 bg-gray-300 "></div>
+              <div class="w-5/6 h-4 bg-gray-300 "></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="w-full max-w-xl p-4 mx-auto">
+        <div class="flex space-x-4 animate-pulse">
+          <div class="w-12 h-12 bg-gray-300 rounded-full"></div>
+          <div class="flex-1 py-1 space-y-4">
+            <div class="w-3/4 h-4 bg-gray-300 "></div>
+            <div class="space-y-2">
+              <div class="h-4 bg-gray-300 "></div>
+              <div class="w-5/6 h-4 bg-gray-300 "></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="w-full max-w-xl p-4 mx-auto">
+        <div class="flex space-x-4 animate-pulse">
+          <div class="w-12 h-12 bg-gray-300 rounded-full"></div>
+          <div class="flex-1 py-1 space-y-4">
+            <div class="w-3/4 h-4 bg-gray-300 "></div>
+            <div class="space-y-2">
+              <div class="h-4 bg-gray-300 "></div>
+              <div class="w-5/6 h-4 bg-gray-300 "></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {:else}
+      <div class="min-w-full mt-16 md:mt-6">
+        <PostBox />
+      </div>
+      <div class="grid mx-auto">
+        <div class="mx-auto mt-4">
+          <Posts bind:allPosts bind:selectedTag />
+        </div>
+      </div>
+    {/if}
   </div>
   <div class="col-span-4">
     <Tags bind:selectedTag />

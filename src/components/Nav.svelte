@@ -61,15 +61,15 @@
     <!-- mobile menu button -->
     <button on:click="{toggleSideBar}" class="p-4 focus:outline-none active:bg-gray-100">
       <div class="flex my-auto">
-      <span class="relative inline-block ">
-        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-        <span
-          class="absolute top-0 right-0 inline-block w-2 h-2 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full"
-        ></span>
-      </span>
-    </div>
+        <span class="relative inline-block ">
+          <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+          <span
+            class="absolute top-0 right-0 inline-block w-2 h-2 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full animate-pulse"
+          ></span>
+        </span>
+      </div>
     </button>
   </div>
 
@@ -93,7 +93,10 @@
             class="{$page == item.name.toLowerCase() ? 'font-bold text-yellow' : ''} {navButtonClass}"
             href="{item.href}"
           >
-            <Svg name="{item.icon}" height="24" width="24" />
+            <div class="{item.name == 'Notification' ? 'animate-wiggle' : ''}">
+              <Svg name="{item.icon}" height="24" width="24" />
+            </div>
+
             {item.name}
             {#if item.name == "Notification"}
               <span class="relative inline-block h-2">
@@ -128,3 +131,9 @@
     </div>
   </div>
 </div>
+
+<style>
+  .navshadow {
+    box-shadow: 0 4px 3px -3px rgba(184, 184, 184, 0.644);
+  }
+</style>
