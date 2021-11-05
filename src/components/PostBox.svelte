@@ -4,28 +4,30 @@
 
   import Multiselect from "./Multiselect.svelte";
 
+  export let sharedPost;
+
   let url = "";
   let selectedTags = [];
 
-  const sharePost = () => {
+  const sharePost = async () => {
     if (selectedTags.length === 0) {
       $error = "Atleast select one tag!";
-    } else if (url == "") {
+      return;
+    }
+    if (url == "") {
       $error = "You want to share something? Put the link/url in the box!";
-    } else {
-      client.Post.createPost(url, selectedTags)
-        .then(res => {
-          if (res.status === 200) {
-            url = "";
-            selectedTags = [];
-            $info = "Post shared!";
-          } else {
-            $error = "Sharing not successful";
-          }
-        })
-        .catch(err => {
-          $error = "Sharing not successful";
-        });
+      return;
+    }
+    try {
+      const res = await client.Post.createPost(url, selectedTags);
+      url = "";
+      selectedTags = [];
+      $info = "Post shared!";
+      sharedPost = res.data;
+      sharedPost.loveCount = 0;
+      sharedPost.commentCount = 0;
+    } catch (e) {
+      $error = "Sharing not successful";
     }
   };
 </script>
