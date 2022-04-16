@@ -1,30 +1,29 @@
 {
-  "name": "svelte-app",
-  "version": "1.0.0",
+  "name": "golpo13-backend",
+  "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -c -w",
-    "start": "sirv public --no-clear --host"
-  },
-  "devDependencies": {
-    "@rollup/plugin-commonjs": "^21.0.3",
-    "@rollup/plugin-node-resolve": "^13.1.3",
-    "postcss": "^8.4.12",
-    "postcss-load-config": "^3.1.4",
-    "rollup": "^2.70.1",
-    "rollup-plugin-css-only": "^3.1.0",
-    "rollup-plugin-livereload": "^2.0.5",
-    "rollup-plugin-svelte": "^7.1.0",
-    "rollup-plugin-terser": "^7.0.2",
-    "svelte": "^3.47.0",
-    "svelte-preprocess": "^4.10.5",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17"
+    "start": "node ./src/bin/www",
+    "heroku-postbuild": "cd client && npm install && npm run build",
+    "bootstrap": "node ./src/scripts/bootstrap.js"
   },
   "dependencies": {
-    "@tailwindcss/line-clamp": "^0.3.1",
-    "axios": "^0.26.1",
-    "moment": "^2.29.2",
-    "sirv-cli": "^2.0.2"
+    "cookie-parser": "~1.4.6",
+    "cors": "^2.8.5",
+    "debug": "~4.3.3",
+    "express": "~4.17.3",
+    "express-validator": "^6.14.0",
+    "googleapis": "^95.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "link-preview-js": "^2.1.13",
+    "mongoose": "^6.2.2",
+    "morgan": "~1.10.0",
+    "socket.io": "^4.4.1",
+    "vercel": "^24.1.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.17.3",
+    "@babel/preset-env": "^7.16.11",
+    "rimraf": "^3.0.2"
   }
 }
