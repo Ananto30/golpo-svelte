@@ -1,0 +1,83 @@
+@import url('https://fonts.cdnfonts.com/css/whitney-2');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200;0,300;0,400;1,200;1,300&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+html {
+    overflow-y: scroll;
+}
+
+* {
+    font-family: 'Karla', sans-serif;
+}
+
+.font-nunito {
+    font-family: 'Nunito', sans-serif;
+}
+
+.font-merriweather {
+    font-family: 'Merriweather', serif;
+}
+
+.font-merriweather-sans {
+    font-family: 'Merriweather Sans', sans-serif;
+}
+
+.font-pt-sans {
+    font-family: 'PT Sans', sans-serif;
+}
+
+.font-lato {
+    font-family: 'Lato', sans-serif;
+}
+
+.font-karla {
+    font-family: 'Karla', sans-serif;
+}
+
+.font-montserrat {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.font-whitney {
+    font-family: 'Whitney', sans-serif;
+}
+
+/* remove tap highlight color in mobile */
+
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/* Scroll bar beautify */
+
+/* width */
+
+::-webkit-scrollbar {
+    width: 4px;
+    height: 16px;
+}
+
+/* Track */
+
+::-webkit-scrollbar-track {
+    background: #fff;
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+    background: #202225;
+    border-radius: 100vh;
+    /* border: 3px solid #edf2f7; */
+}
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a0aec0;
+}
+

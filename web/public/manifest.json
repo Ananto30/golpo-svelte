@@ -1,0 +1,26 @@
+{
+    "name": "Golpo",
+    "short_name": "Golpo",
+    "icons": [
+        {
+            "src": "/images/charliebrown128.png",
+            "sizes": "128x128",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/charliebrown144.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/charliebrownmaskable.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ],
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#fff",
+    "theme_color": "#fff"
+}
