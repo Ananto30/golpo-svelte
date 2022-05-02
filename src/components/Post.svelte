@@ -55,15 +55,17 @@
             </div>
           </div>
         </div>
-        <div class="px-4 mb-2 text-lg font-bold leading-6 text-gray-800 line-clamp-2 font-montserrat">
-          {post.title}
-        </div>
-        <div class="px-4 mb-2 text-sm text-gray-700 break-all line-clamp-5 font-karla">
-          {post.description || ""}
-        </div>
-        <div class="px-4 my-4 text-sm font-medium text-gray-400">
-          <img class="" alt="{post.title}" src="{post.image}" />
-        </div>
+        <a title="{post.title}" href="{post.url}" target="_blank" class="hover:underline">
+          <div class="px-4 mb-2 text-lg font-bold leading-6 text-gray-800 line-clamp-2 font-montserrat">
+            {post.title}
+          </div>
+          <div class="px-4 mb-2 text-sm text-gray-700 break-all line-clamp-5 font-karla">
+            {post.description || ""}
+          </div>
+          <div class="px-4 my-4 text-sm font-medium text-gray-400">
+            <img class="" alt="{post.title}" src="{post.image}" />
+          </div>
+        </a>
 
         <div class="flex justify-start mt-4">
           <div class="flex gap-4 px-2">
@@ -87,9 +89,9 @@
             <button title="bookmark" on:click="{() => bookmarkPost(post._id)}" class="{mediaButtonClass}">
               <Svg name="bookmark" height="16" width="16" />
             </button>
-            <a title="visit link" href="{post.url}" target="_blank" class="{mediaButtonClass}">
+            <!-- <a title="visit link" href="{post.url}" target="_blank" class="{mediaButtonClass}">
               <Svg name="external" height="16" width="16" />
-            </a>
+            </a> -->
           </div>
         </div>
       </div>
