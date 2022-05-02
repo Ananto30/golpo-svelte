@@ -73,6 +73,7 @@
     <div class="grid col-span-5 p-6 my-auto md:col-span-3">
       <div class="mx-auto md:mx-0">
         <img alt="Charlie Brown with Snoopy" class="h-44" src="images/charliebrown.png" />
+        <p class="text-xs mx-2 mb-2 text-gray-400">*Image is property of peanuts[r]</p>
         <h2 class="text-6xl font-extrabold font-montserrat">Golpo</h2>
       </div>
       <p class="max-w-2xl mt-10 text-xl font-bold text-gray-800 font-montserrat">
