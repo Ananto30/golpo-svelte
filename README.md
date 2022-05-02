@@ -1,5 +1,6 @@
 # Golpo Svelte
 
+[![CodeQL](https://github.com/Ananto30/golpo-svelte/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/Ananto30/golpo-svelte/actions/workflows/codeql-analysis.yml)
 [![Depfu](https://badges.depfu.com/badges/1ec6ada5ad130ffb35b25c528a6eb5bd/count.svg)](https://depfu.com/github/Ananto30/golpo-svelte?project_id=32582)
 
 **Golpo is a link sharing platform without ads.**
