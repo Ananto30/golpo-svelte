@@ -65,7 +65,7 @@ const Post = {
 	getBookmarks: () => api.get("/post/bookmarks", getHeader()).catch(errorHandler),
 	bookmarkPost: (postId) => api.post(`/post/${postId}/bookmark`, {}, getHeader()).catch(errorHandler),
 	deleteComment: (postId, commentId) =>
-		api.delete(`/post/${postId}/comment/${commentId}/delete`, {}, getHeader()).catch(errorHandler),
+		api.post(`/post/${postId}/comment/${commentId}/delete`, {}, getHeader()).catch(errorHandler),
 };
 
 const Chat = {
