@@ -57,6 +57,7 @@
       post.comments = res.data.comments.reverse();
       post.commentCount++;
       postComment = "";
+      postComments = post.comments; // Update postComments to reflect the new comment
     }
   };
 
@@ -64,6 +65,7 @@
     const res = await client.Post.deleteComment(post._id, commentId);
     post.comments = res.data.post.comments.reverse();
     post.commentCount--;
+    postComments = post.comments; // Update postComments to reflect the deleted comment
   };
 
   onMount(async () => {
@@ -95,7 +97,7 @@
               </button>
             </div>
           </div>
-          {#each post.comments as comment}
+          {#each postComments as comment}
             <div in:fade class="py-2">
               <div class="flex w-full">
                 <div class="flex-none w-10 h-10 rounded-full">
