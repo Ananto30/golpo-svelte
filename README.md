@@ -7,7 +7,6 @@
 
 This is the **Svelte** build of the [golpo.vercel.app](https://golpo.vercel.app). It's a rebuild of the [old app](https://github.com/ananto30/golpo) built on React.
 
-
 We would like to have people's opinion on what Golpo can have in future. Please share your thoughts and feature request **[here](https://github.com/Ananto30/golpo-express/discussions/categories/request-feature).**
 
 ## Run the project
@@ -17,24 +16,6 @@ npm install
 npm run dev
 ```
 
-## Hacktoberfest!! 🎃
-
-Follow this login hack [here](https://github.com/Ananto30/golpo-svelte/blob/main/src/App.svelte#L79) for faster development.
-
-To get actual api response, you need to run the backend too. Check the backend [github.com/ananto30/golpo-express](https://github.com/Ananto30/golpo-express)
-
-### Svelte tasks
-
-Here are the tasks - [Hacktoberfest](https://github.com/Ananto30/golpo-svelte/issues?q=is%3Aissue+is%3Aopen+label%3AHacktoberfest)
-
-(Tasks are being added daily)
-
-#### Remaining tasks
-
-*   Send message to user button and modal.
-
-**Feel free to enhance code and beautify UI** 😃
-
-### Express tasks
+### Backend
 
 Visit the Express repo - [github.com/ananto30/golpo-express](https://github.com/Ananto30/golpo-express)

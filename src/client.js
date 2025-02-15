@@ -1,27 +1,27 @@
-import axios from "axios";
-import { get } from "svelte/store";
-import { jwt, loggedUsername } from "./store";
-import { BASE_URL } from "./defaults";
+import axios from 'axios';
+import { get } from 'svelte/store';
+import { jwt, loggedUsername } from './store';
+import { BASE_URL } from './defaults';
 
 const api = axios.create({
 	baseURL: BASE_URL,
 	headers: {
-		"Content-Type": "application/json",
-	},
+		'Content-Type': 'application/json'
+	}
 });
 
 const getHeader = () => {
 	return {
 		headers: {
-			Authorization: "Bearer " + get(jwt),
-		},
+			Authorization: 'Bearer ' + get(jwt)
+		}
 	};
 };
 
 const errorHandler = (err) => {
 	if (err.response && (err.response.status === 401 || err.response.status === 403)) {
-		jwt.set("");
-		loggedUsername.set("");
+		jwt.set('');
+		loggedUsername.set('');
 	}
 };
 
@@ -31,52 +31,59 @@ const errorHandler = (err) => {
 
 const Auth = {
 	login: (username, password) =>
-		api.post("/auth/login", {
+		api.post('/auth/login', {
 			username: username,
-			password: password,
+			password: password
 		}),
-	getGoogleAuthUrl: () => api.get("/auth/login/google/getAuthUrl"),
-	getTokenByGoogleCode: (code) => api.post("/auth/login/google/getToken", { code: code }),
+	getGoogleAuthUrl: () => api.get('/auth/login/google/getAuthUrl'),
+	getTokenByGoogleCode: (code) => api.post('/auth/login/google/getToken', { code: code })
 };
 
 const User = {
-	getMe: () => api.get("/user/me", getHeader()).catch(errorHandler),
-	getAllUsers: () => api.get("/user", getHeader()).catch(errorHandler),
+	getMe: () => api.get('/user/me', getHeader()).catch(errorHandler),
+	getAllUsers: () => api.get('/user', getHeader()).catch(errorHandler),
 	getByUsername: (username) => api.get(`/user/${username}`, getHeader()).catch(errorHandler),
-	updateMeta: (meta) => api.post("/user/me/update", meta, getHeader()).catch(errorHandler),
-	getUsersMeta: (usernames) => api.post("/user/get_users_meta", { usernames: usernames }, getHeader()).catch(errorHandler),
-	followUser: (username) => api.post(`/user/${username}/follow`, {}, getHeader()).catch(errorHandler),
-	unFollowUser: (username) => api.post(`/user/${username}/unfollow`, {}, getHeader()).catch(errorHandler),
-	getFollowers: (username) => api.get(`/user/${username}/followers`, getHeader()).catch(errorHandler),
-	getFollowing: (username) => api.get(`/user/${username}/following`, getHeader()).catch(errorHandler),
+	updateMeta: (meta) => api.post('/user/me/update', meta, getHeader()).catch(errorHandler),
+	getUsersMeta: (usernames) =>
+		api.post('/user/get_users_meta', { usernames: usernames }, getHeader()).catch(errorHandler),
+	followUser: (username) =>
+		api.post(`/user/${username}/follow`, {}, getHeader()).catch(errorHandler),
+	unFollowUser: (username) =>
+		api.post(`/user/${username}/unfollow`, {}, getHeader()).catch(errorHandler),
+	getFollowers: (username) =>
+		api.get(`/user/${username}/followers`, getHeader()).catch(errorHandler),
+	getFollowing: (username) =>
+		api.get(`/user/${username}/following`, getHeader()).catch(errorHandler)
 };
 
 const Post = {
-	getAll: () => api.get("/post", getHeader()).catch(errorHandler),
-	getFeed: () => api.get("/post/feed", getHeader()).catch(errorHandler),
+	getAll: () => api.get('/post', getHeader()).catch(errorHandler),
+	getFeed: () => api.get('/post/feed', getHeader()).catch(errorHandler),
 	getById: (id) => api.get(`/post/${id}`, getHeader()).catch(errorHandler),
 	getByUsername: (username) => api.get(`/post/user/${username}`, getHeader()).catch(errorHandler),
-	createPost: (url, tags) => api.post("/post", { url: url, tags: tags }, getHeader()).catch(errorHandler),
+	createPost: (url, tags) =>
+		api.post('/post', { url: url, tags: tags }, getHeader()).catch(errorHandler),
 	createComment: (postId, text) =>
 		api.post(`/post/${postId}/comment`, { text: text }, getHeader()).catch(errorHandler),
-	getAllTags: () => api.get("/post/tags", getHeader()).catch(errorHandler),
+	getAllTags: () => api.get('/post/tags', getHeader()).catch(errorHandler),
 	reactLove: (postId) => api.post(`/post/${postId}/love`, {}, getHeader()).catch(errorHandler),
 	deletePost: (postId) => api.post(`/post/${postId}/delete`, {}, getHeader()).catch(errorHandler),
-	getBookmarks: () => api.get("/post/bookmarks", getHeader()).catch(errorHandler),
-	bookmarkPost: (postId) => api.post(`/post/${postId}/bookmark`, {}, getHeader()).catch(errorHandler),
+	getBookmarks: () => api.get('/post/bookmarks', getHeader()).catch(errorHandler),
+	bookmarkPost: (postId) =>
+		api.post(`/post/${postId}/bookmark`, {}, getHeader()).catch(errorHandler),
 	deleteComment: (postId, commentId) =>
-		api.post(`/post/${postId}/comment/${commentId}/delete`, {}, getHeader()).catch(errorHandler),
+		api.post(`/post/${postId}/comment/${commentId}/delete`, {}, getHeader()).catch(errorHandler)
 };
 
 const Chat = {
-	getChats: () => api.get("/chat", getHeader()).catch(errorHandler),
+	getChats: () => api.get('/chat', getHeader()).catch(errorHandler),
 	getChatsByReceiver: (receiver) => api.get(`/chat/${receiver}`, getHeader()).catch(errorHandler),
 	sendChat: (receiver, text) =>
 		api
 			.post(
 				`/chat/${receiver}`,
 				{
-					text: text,
+					text: text
 				},
 				getHeader()
 			)
@@ -86,21 +93,22 @@ const Chat = {
 			.post(
 				`/chat/${receiver}/message`,
 				{
-					text: text,
+					text: text
 				},
 				getHeader()
 			)
-			.catch(errorHandler),
+			.catch(errorHandler)
 };
 
 const Activity = {
-	getAll: () => api.get("/activity", getHeader()).catch(errorHandler),
+	getAll: () => api.get('/activity', getHeader()).catch(errorHandler)
 };
 
 const Notification = {
-	getAll: () => api.get("/notification", getHeader()).catch(errorHandler),
+	getAll: () => api.get('/notification', getHeader()).catch(errorHandler),
 	click: (id) => api.post(`/notification/${id}/clicked`, {}, getHeader()).catch(errorHandler),
-	hasUnclickedNotification: () => api.get("/notification/hasunclicked", getHeader()).catch(errorHandler),
+	hasUnclickedNotification: () =>
+		api.get('/notification/hasunclicked', getHeader()).catch(errorHandler)
 };
 
 export default {
@@ -109,5 +117,5 @@ export default {
 	Post,
 	Chat,
 	Activity,
-	Notification,
+	Notification
 };

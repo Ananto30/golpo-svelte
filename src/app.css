@@ -1,0 +1,71 @@
+@import 'tailwindcss';
+
+html {
+	overflow-y: scroll;
+}
+
+body {
+	/* font-family: 'Rubik', sans-serif; */
+	font-family: 'Karla', sans-serif;
+	/* font-family: 'Lato', sans-serif; */
+	/* font-family: 'Reddit Sans', serif; */
+}
+
+.font-merriweather {
+	font-family: 'Merriweather', serif;
+}
+
+.font-lato {
+	font-family: 'Lato', sans-serif;
+}
+
+.font-karla {
+	font-family: 'Karla', sans-serif;
+}
+
+.font-montserrat {
+	font-family: 'Montserrat', sans-serif;
+}
+
+.font-popins {
+	font-family: 'Poppins', sans-serif;
+}
+
+.font-rubik {
+	font-family: 'Rubik', sans-serif;
+}
+
+/* remove tap highlight color in mobile */
+
+* {
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/* Scroll bar beautify */
+
+/* width */
+
+::-webkit-scrollbar {
+	width: 4px;
+	height: 16px;
+}
+
+/* Track */
+
+::-webkit-scrollbar-track {
+	background: #fff;
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+	background: #202225;
+	border-radius: 100vh;
+	/* border: 3px solid #edf2f7; */
+}
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+	background: #a0aec0;
+}

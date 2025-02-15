@@ -1,12 +1,12 @@
 <script>
-  import moment from "moment";
+	import moment from 'moment';
 
-  export let chats;
-  export let chatNow;
+	export let chats;
+	export let chatNow;
 </script>
 
 <div class="">
-  <!-- <div class="mx-3 my-3 ">
+	<!-- <div class="mx-3 my-3 ">
       <div class="relative text-gray-600 focus-within:text-gray-400">
         <span class="absolute inset-y-0 left-0 flex items-center pl-2">
           <svg
@@ -31,31 +31,35 @@
       </div>
     </div> -->
 
-  <ul class="overflow-auto" style="height: 90vh;">
-    <!-- <h2 class="my-2 mb-2 ml-2 text-lg">Chats</h2> -->
-    <li>
-      {#each chats as chat}
-        <!-- svelte-ignore a11y-missing-attribute -->
-        <a
-          on:click="{() => (chatNow = chat.participants[1])}"
-          class="{chatNow == chat.participants[1]
-            ? 'bg-dark1'
-            : 'hover:bg-dark1'} rounded-xl px-3 py-2 cursor-pointer flex items-center text-sm focus:outline-none focus-visible:ring transition duration-200 ease-in-out"
-        >
-          <img
-            class="object-cover w-10 h-10 rounded-full"
-            src="https://images.pexels.com/photos/837358/pexels-photo-837358.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
-            alt="username"
-          />
-          <div class="w-full pb-2">
-            <div class="flex justify-between">
-              <span class="block ml-2 text-base font-semibold text-gray-600 ">{chat.participants[1]}</span>
-              <span class="block ml-2 text-sm text-gray-600">{moment(chat.chats[0].date).fromNow()}</span>
-            </div>
-            <span class="block ml-2 text-sm text-gray-600 line-clamp-1">{chat.chats[0].text}</span>
-          </div>
-        </a>
-      {/each}
-    </li>
-  </ul>
+	<ul class="overflow-auto" style="height: 90vh;">
+		<!-- <h2 class="my-2 mb-2 ml-2 text-lg">Chats</h2> -->
+		<li>
+			{#each chats as chat}
+				<!-- svelte-ignore a11y-missing-attribute -->
+				<a
+					on:click={() => (chatNow = chat.participants[1])}
+					class="{chatNow == chat.participants[1]
+						? 'bg-dark1'
+						: 'hover:bg-dark1'} flex cursor-pointer items-center rounded-xl px-3 py-2 text-sm transition duration-200 ease-in-out focus:outline-none focus-visible:ring"
+				>
+					<img
+						class="h-10 w-10 rounded-full object-cover"
+						src="https://images.pexels.com/photos/837358/pexels-photo-837358.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
+						alt="username"
+					/>
+					<div class="w-full pb-2">
+						<div class="flex justify-between">
+							<span class="ml-2 block text-base font-semibold text-gray-600"
+								>{chat.participants[1]}</span
+							>
+							<span class="ml-2 block text-sm text-gray-600"
+								>{moment(chat.chats[0].date).fromNow()}</span
+							>
+						</div>
+						<span class="ml-2 line-clamp-1 block text-sm text-gray-600">{chat.chats[0].text}</span>
+					</div>
+				</a>
+			{/each}
+		</li>
+	</ul>
 </div>
