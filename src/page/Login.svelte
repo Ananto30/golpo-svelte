@@ -85,8 +85,8 @@
 				<h2 class="font-montserrat text-6xl font-extrabold">Golpo</h2>
 			</div>
 			<p class="font-montserrat mt-10 max-w-2xl text-xl font-bold text-gray-800">
-				Golpo is a clutter free platform for sharing links. We support people and content makers to
-				share their work and nothing more. Stay simple!
+				Golpo is a clutter free platform for sharing links. We support people and content makers to share their work and
+				nothing more. Stay simple!
 			</p>
 			<div class="bg-dark1 mt-10 max-w-md rounded-2xl">
 				<div class="font-montserrat text-xl leading-tight font-bold md:text-2xl">Why Golpo?</div>
@@ -130,14 +130,7 @@
 					<div class="flex items-center justify-center">
 						{#if googleLoading}
 							<svg class="mr-3 h-5 w-5 animate-spin" viewBox="0 0 24 24">
-								<circle
-									class="opacity-25"
-									cx="12"
-									cy="12"
-									r="10"
-									stroke="currentColor"
-									stroke-width="4"
-								></circle>
+								<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
 								<path
 									class="opacity-75"
 									fill="currentColor"
@@ -159,10 +152,11 @@
 									clip-path="url(#b)"
 									fill="#FBBC05"
 									d="M0 37V11l17 13z"
-								></path><path clip-path="url(#b)" fill="#EA4335" d="M0 11l17 13 7-6.1L48 14V0H0z"
-								></path><path clip-path="url(#b)" fill="#34A853" d="M0 37l30-23 7.9 1L48 0v48H0z"
-								></path><path clip-path="url(#b)" fill="#4285F4" d="M48 48L17 24l-4-3 35-10z"
-								></path></svg
+								></path><path clip-path="url(#b)" fill="#EA4335" d="M0 11l17 13 7-6.1L48 14V0H0z"></path><path
+									clip-path="url(#b)"
+									fill="#34A853"
+									d="M0 37l30-23 7.9 1L48 0v48H0z"
+								></path><path clip-path="url(#b)" fill="#4285F4" d="M48 48L17 24l-4-3 35-10z"></path></svg
 							>
 							<span class="ml-4"> Log in with Google</span>
 						{/if}
@@ -180,7 +174,6 @@
 							id="username"
 							placeholder="Username"
 							class="bg-light1 mt-2 w-full border-b px-4 py-3 focus:border-blue-500 focus:bg-white focus:outline-none"
-							autocomplete
 							required
 						/>
 					</div>

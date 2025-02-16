@@ -32,8 +32,8 @@
 	});
 </script>
 
-<div in:fade class="sticky top-0 hidden w-full px-2 py-8 pl-10 md:block">
-	<div class="rounded-2xl bg-white">
+<div class="sticky top-0 hidden w-full px-2 py-8 pl-10 md:block">
+	<div in:fade class="rounded-2xl bg-white">
 		<h2 class="text-yellow px-2 text-2xl font-extrabold">Tags</h2>
 		<div class="flex flex-wrap pt-4">
 			{#if $tags.length == 0}
@@ -44,13 +44,12 @@
 
 			{#each $tags as tag}
 				<button
+					in:fade
 					on:click={() => selectTag(tag)}
 					class="items-center rounded-md border-b border-transparent p-2 text-sm transition duration-200 hover:cursor-pointer hover:bg-gray-200
-					{selectedTag == tag ? 'font-bold' : 'bg-dark1'} "
+					{selectedTag == tag ? 'bg-gray-200 font-bold' : ''} "
 				>
-					<span class="flex items-center gap-1">
-						<Svg name={getTagSvgName(tag)} height="16" width="16" />{tag}</span
-					>
+					<span class="flex items-center gap-1"> <Svg name={getTagSvgName(tag)} height="16" width="16" />{tag}</span>
 				</button>
 			{/each}
 		</div>

@@ -29,13 +29,8 @@
 
 {#if $visible}
 	<div class="fixed inset-0 z-50 overflow-y-auto">
-		<div
-			class="flex min-h-screen items-end justify-center px-4 pt-4 pb-20 text-center sm:block sm:p-0"
-		>
-			<div
-				class="bg-opacity-75 absolute inset-0 bg-white transition-opacity"
-				on:click={modal.close}
-			></div>
+		<div class="flex min-h-screen items-end justify-center px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+			<div class="bg-opacity-75 absolute inset-0 bg-white transition-opacity" on:click={modal.close}></div>
 			<span class="hidden sm:inline-block sm:h-screen sm:align-middle"></span>​
 			<div
 				class="relative inline-block w-full overflow-hidden border border-gray-400 bg-white text-left align-bottom sm:my-8 sm:w-full sm:max-w-lg sm:align-middle"

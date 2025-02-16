@@ -32,9 +32,7 @@
 	});
 
 	$: if (selected) value = Object.values(selected).map((o) => o.value);
-	$: filtered = options.filter((o) =>
-		inputValue ? o.name.toLowerCase().includes(inputValue.toLowerCase()) : o
-	);
+	$: filtered = options.filter((o) => (inputValue ? o.name.toLowerCase().includes(inputValue.toLowerCase()) : o));
 	$: if ((activeOption && !filtered.includes(activeOption)) || (!activeOption && inputValue))
 		activeOption = filtered[0];
 
@@ -68,9 +66,7 @@
 
 	function handleKeyup(e) {
 		if (e.keyCode === 13) {
-			Object.keys(selected).includes(activeOption.value)
-				? remove(activeOption.value)
-				: add(activeOption);
+			Object.keys(selected).includes(activeOption.value) ? remove(activeOption.value) : add(activeOption);
 			inputValue = '';
 		}
 		if ([38, 40].includes(e.keyCode)) {
@@ -114,11 +110,7 @@
 </script>
 
 <div class="multiselect relative z-0 w-full px-4" class:readonly>
-	<div
-		class="tokens flex cursor-pointer flex-wrap items-center"
-		class:showOptions
-		on:click={handleTokenClick}
-	>
+	<div class="tokens flex cursor-pointer flex-wrap items-center" class:showOptions on:click={handleTokenClick}>
 		{#each Object.values(selected) as s}
 			<div class="token m-1 flex items-center rounded-full px-1 py-1 text-sm" data-id={s.value}>
 				<span
@@ -181,17 +173,9 @@
 	<select bind:this={slot} type="multiple" class="bg-dark1 hidden"><slot /></select>
 
 	{#if showOptions}
-		<ul
-			class="options"
-			transition:fly={{ duration: 200, y: 5 }}
-			on:mousedown|preventDefault={handleOptionMousedown}
-		>
+		<ul class="options" transition:fly={{ duration: 200, y: 5 }} on:mousedown|preventDefault={handleOptionMousedown}>
 			{#each filtered as option}
-				<li
-					class:selected={selected[option.value]}
-					class:active={activeOption === option}
-					data-value={option.value}
-				>
+				<li class:selected={selected[option.value]} class:active={activeOption === option} data-value={option.value}>
 					<span class="flex items-center gap-1" data-value={option.value}>
 						<Svg name={getTagSvgName(option.name)} height="16" width="16" />{option.name}</span
 					>

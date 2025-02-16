@@ -49,12 +49,8 @@
 					/>
 					<div class="w-full pb-2">
 						<div class="flex justify-between">
-							<span class="ml-2 block text-base font-semibold text-gray-600"
-								>{chat.participants[1]}</span
-							>
-							<span class="ml-2 block text-sm text-gray-600"
-								>{moment(chat.chats[0].date).fromNow()}</span
-							>
+							<span class="ml-2 block text-base font-semibold text-gray-600">{chat.participants[1]}</span>
+							<span class="ml-2 block text-sm text-gray-600">{moment(chat.chats[0].date).fromNow()}</span>
 						</div>
 						<span class="ml-2 line-clamp-1 block text-sm text-gray-600">{chat.chats[0].text}</span>
 					</div>

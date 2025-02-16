@@ -22,7 +22,6 @@
 	let tagline;
 	let image;
 	let followed = false;
-	let userDetailsOnTop = false;
 	let selectedTag = '';
 	let displayName = '';
 	let users = [];
@@ -74,16 +73,6 @@
 		users = res.data.users;
 	};
 
-	const topTracker = () => {
-		let element = document.getElementById('user-details');
-		let atTop = element.getBoundingClientRect().top;
-		if (atTop == 0 || atTop == 32) {
-			userDetailsOnTop = true;
-		} else {
-			userDetailsOnTop = false;
-		}
-	};
-
 	$: if (slug) {
 		$page = 'profile';
 		getProfileInfo();
@@ -99,92 +88,83 @@
 		users = [];
 		getFollowing();
 	}
-
-	onMount(async () => {
-		window.addEventListener('scroll', topTracker);
-	});
-
-	onDestroy(() => {
-		window.removeEventListener('scroll', topTracker);
-	});
 </script>
 
-<div in:fade class="grid min-h-screen grid-cols-12">
-	<ProfileEditModal bind:hide={editModalHide} bind:work bind:tagline />
-	<div class="col-span-12 md:col-span-8">
-		<div
-			id="user-details"
-			class="sticky top-8 z-10 mt-14 bg-white pt-6 md:top-0 md:mt-20
-			{userDetailsOnTop ? 'navshadow' : ''}"
-		>
-			<div class="mx-auto w-full">
-				<div class="flex w-full flex-row px-4 md:px-16">
-					<Avatar src={image} alt={displayName || slug} size="l" />
-					<div class="mb-2 ml-4 flex flex-col md:mt-2 md:ml-6">
-						<div class="font-montserrat font-bold md:text-2xl">{displayName || slug}</div>
-						<div class="font-base">{work ? work : WORK}</div>
-						<div class="text-sm text-gray-500">
-							{tagline ? tagline : TAGLINE}
-						</div>
+<div class="grid min-h-screen grid-cols-12">
+	{#if image}
+		<ProfileEditModal bind:hide={editModalHide} {work} {tagline} />
+		<div in:fade class="col-span-12 md:col-span-8">
+			<div id="user-details" class="navshadow sticky top-8 z-10 bg-white pt-8 md:top-0">
+				<div class="mx-auto w-full">
+					<div class="flex w-full flex-row px-4 md:px-16">
+						<Avatar src={image} alt={displayName || slug} size="l" />
+						<div class="mb-2 ml-4 flex flex-col md:mt-2 md:ml-6">
+							<div class="font-montserrat font-bold md:text-2xl">{displayName || slug}</div>
+							<div class="font-base">{work ? work : WORK}</div>
+							<div class="text-sm text-gray-500">
+								{tagline ? tagline : TAGLINE}
+							</div>
 
-						<div class="mt-2 md:mt-4">
-							{#if !editable}
-								{#if followed}
-									<button
-										in:fade
-										on:click={followButtonHandler}
-										class="bg-color1 {profileButtonClass} follow-button"
-									>
-										<span></span>
+							<div class="mt-2 md:mt-4">
+								{#if !editable}
+									{#if followed}
+										<button
+											in:fade
+											on:click={followButtonHandler}
+											class="bg-color1 {profileButtonClass} follow-button"
+											aria-label="Unfollow"
+										>
+											<span>Unfollow</span>
+										</button>
+									{:else}
+										<button in:fade on:click={followButtonHandler} class={profileButtonClass}>
+											<span>Follow</span>
+										</button>
+									{/if}
+									<button class={profileButtonClass}>
+										<span>Send Message</span>
 									</button>
 								{:else}
-									<button in:fade on:click={followButtonHandler} class={profileButtonClass}>
-										<span>Follow</span>
+									<button in:fade on:click={() => (editModalHide = !editModalHide)} class={profileButtonClass}>
+										<span>Edit profile</span>
 									</button>
 								{/if}
-								<button class={profileButtonClass}>
-									<span>Send Message</span>
-								</button>
-							{:else}
-								<button
-									in:fade
-									on:click={() => (editModalHide = !editModalHide)}
-									class={profileButtonClass}
-								>
-									<span>Edit profile</span>
-								</button>
-							{/if}
+							</div>
 						</div>
 					</div>
 				</div>
+				<div class="mt-2 bg-white px-4 text-sm md:px-16">
+					<Tab items={tabs} bind:selectedItem={selectedTab} />
+				</div>
 			</div>
-			<div class="mt-2 bg-white px-4 text-sm md:px-16">
-				<Tab items={tabs} bind:selectedItem={selectedTab} />
-			</div>
-		</div>
 
-		{#if selectedTab == 'Followers' || selectedTab == 'Following'}
-			<div in:fade class="grid grid-cols-2 px-4 pt-6 lg:grid-cols-3">
-				{#each users as user}
-					<UserCard bind:user />
-				{/each}
-			</div>
-		{/if}
-
-		{#if selectedTab == 'Posts'}
-			{#if editable}
-				<div class="mt-8">
-					<PostBox />
+			{#if selectedTab == 'Followers' || selectedTab == 'Following'}
+				<div in:fade class="grid grid-cols-2 px-4 pt-6 lg:grid-cols-3">
+					{#each users as user}
+						<UserCard bind:user />
+					{/each}
 				</div>
 			{/if}
 
-			<div class="mx-auto mt-4 grid">
-				<div class="mx-auto">
-					<Posts bind:allPosts bind:selectedTag />
+			{#if selectedTab == 'Posts'}
+				{#if editable}
+					<div class="mt-8">
+						<PostBox />
+					</div>
+				{/if}
+
+				<div in:fade class="mx-auto mt-4 grid">
+					<div class="mx-auto">
+						<Posts bind:allPosts bind:selectedTag />
+					</div>
 				</div>
-			</div>
-		{/if}
-	</div>
+			{/if}
+		</div>
+	{:else}
+		<div in:fade class="col-span-12 flex h-screen items-center justify-center md:col-span-8">
+			<h3 class="text-md text-center">Loading...</h3>
+		</div>
+	{/if}
 	<div class="col-span-4">
 		<Tags bind:selectedTag />
 	</div>
@@ -197,12 +177,5 @@
 <style>
 	.navshadow {
 		box-shadow: 0 4px 3px -3px rgba(184, 184, 184, 0.644);
-	}
-
-	.follow-button:hover span::after {
-		content: 'Unfollow';
-	}
-	.follow-button span::after {
-		content: 'Following';
 	}
 </style>

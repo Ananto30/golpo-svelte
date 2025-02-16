@@ -130,12 +130,7 @@
 											{#if comment.author == $loggedUsername}
 												<div class="flex pl-2">
 													<button title="delete" on:click={() => deleteComment(comment._id)}>
-														<Svg
-															class="hover:cursor-pointer hover:border"
-															name="delete"
-															height="16"
-															width="16"
-														/>
+														<Svg class="hover:cursor-pointer hover:border" name="delete" height="16" width="16" />
 													</button>
 												</div>
 											{/if}

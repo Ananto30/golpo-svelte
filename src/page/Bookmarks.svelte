@@ -23,12 +23,14 @@
 	});
 </script>
 
-<div in:fade class="grid grid-cols-12">
+<div class="grid grid-cols-12">
 	<div class="col-span-12 md:col-span-8">
 		<div class="mx-auto grid">
-			<div class="mx-auto mt-12 md:mt-6">
-				<Posts bind:allPosts bind:selectedTag />
-			</div>
+			{#if allPosts.length > 0}
+				<div in:fade class="mx-auto mt-12 md:mt-6">
+					<Posts bind:allPosts bind:selectedTag />
+				</div>
+			{/if}
 		</div>
 	</div>
 	<div class="col-span-4">

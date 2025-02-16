@@ -46,14 +46,10 @@ const User = {
 	updateMeta: (meta) => api.post('/user/me/update', meta, getHeader()).catch(errorHandler),
 	getUsersMeta: (usernames) =>
 		api.post('/user/get_users_meta', { usernames: usernames }, getHeader()).catch(errorHandler),
-	followUser: (username) =>
-		api.post(`/user/${username}/follow`, {}, getHeader()).catch(errorHandler),
-	unFollowUser: (username) =>
-		api.post(`/user/${username}/unfollow`, {}, getHeader()).catch(errorHandler),
-	getFollowers: (username) =>
-		api.get(`/user/${username}/followers`, getHeader()).catch(errorHandler),
-	getFollowing: (username) =>
-		api.get(`/user/${username}/following`, getHeader()).catch(errorHandler)
+	followUser: (username) => api.post(`/user/${username}/follow`, {}, getHeader()).catch(errorHandler),
+	unFollowUser: (username) => api.post(`/user/${username}/unfollow`, {}, getHeader()).catch(errorHandler),
+	getFollowers: (username) => api.get(`/user/${username}/followers`, getHeader()).catch(errorHandler),
+	getFollowing: (username) => api.get(`/user/${username}/following`, getHeader()).catch(errorHandler)
 };
 
 const Post = {
@@ -61,16 +57,13 @@ const Post = {
 	getFeed: () => api.get('/post/feed', getHeader()).catch(errorHandler),
 	getById: (id) => api.get(`/post/${id}`, getHeader()).catch(errorHandler),
 	getByUsername: (username) => api.get(`/post/user/${username}`, getHeader()).catch(errorHandler),
-	createPost: (url, tags) =>
-		api.post('/post', { url: url, tags: tags }, getHeader()).catch(errorHandler),
-	createComment: (postId, text) =>
-		api.post(`/post/${postId}/comment`, { text: text }, getHeader()).catch(errorHandler),
+	createPost: (url, tags) => api.post('/post', { url: url, tags: tags }, getHeader()).catch(errorHandler),
+	createComment: (postId, text) => api.post(`/post/${postId}/comment`, { text: text }, getHeader()).catch(errorHandler),
 	getAllTags: () => api.get('/post/tags', getHeader()).catch(errorHandler),
 	reactLove: (postId) => api.post(`/post/${postId}/love`, {}, getHeader()).catch(errorHandler),
 	deletePost: (postId) => api.post(`/post/${postId}/delete`, {}, getHeader()).catch(errorHandler),
 	getBookmarks: () => api.get('/post/bookmarks', getHeader()).catch(errorHandler),
-	bookmarkPost: (postId) =>
-		api.post(`/post/${postId}/bookmark`, {}, getHeader()).catch(errorHandler),
+	bookmarkPost: (postId) => api.post(`/post/${postId}/bookmark`, {}, getHeader()).catch(errorHandler),
 	deleteComment: (postId, commentId) =>
 		api.post(`/post/${postId}/comment/${commentId}/delete`, {}, getHeader()).catch(errorHandler)
 };
@@ -105,10 +98,9 @@ const Activity = {
 };
 
 const Notification = {
-	getAll: () => api.get('/notification', getHeader()).catch(errorHandler),
+	getAll: (username) => api.get(`/notification/${username}`, getHeader()).catch(errorHandler),
 	click: (id) => api.post(`/notification/${id}/clicked`, {}, getHeader()).catch(errorHandler),
-	hasUnclickedNotification: () =>
-		api.get('/notification/hasunclicked', getHeader()).catch(errorHandler)
+	hasUnclickedNotification: () => api.get('/notification/hasunclicked', getHeader()).catch(errorHandler)
 };
 
 export default {

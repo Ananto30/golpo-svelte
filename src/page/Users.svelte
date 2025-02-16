@@ -44,12 +44,14 @@
 
 <div in:fade class="min-h-screen">
 	<div class="sticky top-0 z-10 mb-3 bg-white pt-16 md:pt-8">
-		<!-- <div class="justify-center">
-      <Tab items="{tabs}" bind:selectedItem="{selectedTab}" />
-    </div> -->
+		<div class="justify-center">
+			<Tab items={tabs} bind:selectedItem={selectedTab} />
+		</div>
 		<div class="grid grid-cols-2 lg:grid-cols-4">
 			{#each users as user}
-				<UserCard bind:user />
+				<div in:fade>
+					<UserCard bind:user />
+				</div>
 			{/each}
 		</div>
 	</div>

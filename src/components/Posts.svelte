@@ -56,9 +56,9 @@
 	}
 </script>
 
-<div in:fade>
+<div>
 	{#each filteredPosts as post}
-		<div>
+		<div in:fade>
 			<Post
 				{post}
 				onDelete={() => {

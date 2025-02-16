@@ -90,11 +90,7 @@
 								<Svg name="delete" height="16" width="16" />
 							</button>
 						{/if}
-						<button
-							title="bookmark"
-							on:click={() => bookmarkPost(post._id)}
-							class={mediaButtonClass}
-						>
+						<button title="bookmark" on:click={() => bookmarkPost(post._id)} class={mediaButtonClass}>
 							<Svg name="bookmark" height="16" width="16" />
 						</button>
 						<!-- <a title="visit link" href="{post.url}" target="_blank" class="{mediaButtonClass}">

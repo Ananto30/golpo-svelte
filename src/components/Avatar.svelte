@@ -13,9 +13,5 @@
 </script>
 
 <div class="{sizes[size]} flex-none rounded-full bg-gray-200">
-	<img
-		class="{sizes[size]} cursor-pointer rounded-full object-cover"
-		{alt}
-		src={src || fallbackSrc}
-	/>
+	<img class="{sizes[size]} cursor-pointer rounded-full object-cover" {alt} src={src || fallbackSrc} />
 </div>

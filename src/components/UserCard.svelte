@@ -12,7 +12,7 @@
 		>
 			<div class="flex flex-col justify-center gap-4">
 				<div class="flex justify-center">
-					<Avatar src={user.image || IMAGE_LARGE} alt={user.username} size="l" />
+					<Avatar src={user.image} alt={user.username} size="l" />
 				</div>
 				<div class="flex flex-col gap-1">
 					<h2 class="cursor-pointer font-bold">{user.display_name || user.username}</h2>

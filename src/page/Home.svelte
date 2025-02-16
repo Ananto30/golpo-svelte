@@ -29,16 +29,20 @@
 	});
 </script>
 
-<div in:fade class="grid grid-cols-12">
-	<div class="col-span-12 md:col-span-8">
+<div class="grid grid-cols-12">
+	<div in:fade class="col-span-12 md:col-span-8">
+		<div class="mt-16 min-w-full md:mt-6">
+			<PostBox bind:sharedPost />
+		</div>
 		{#if allPosts.length > 0}
-			<div class="mt-16 min-w-full md:mt-6">
-				<PostBox bind:sharedPost />
-			</div>
 			<div class="mx-auto grid">
 				<div class="mx-auto mt-4">
 					<Posts bind:allPosts bind:selectedTag />
 				</div>
+			</div>
+		{:else}
+			<div class="mx-auto mt-4">
+				<p class="text-center text-gray-600">No posts yet...</p>
 			</div>
 		{/if}
 	</div>

@@ -59,9 +59,7 @@
 			</svg>
 		</span>
 
-		<button class="flex w-full justify-end p-2 px-6 md:hidden" on:click={() => (chatNow = null)}>
-			back
-		</button>
+		<button class="flex w-full justify-end p-2 px-6 md:hidden" on:click={() => (chatNow = null)}> back </button>
 	</div>
 	<div
 		id="chat"
@@ -73,10 +71,7 @@
 			<li class="clearfix2">
 				{#each chats as chat}
 					<div in:fade class="flex w-full {chat.from == chatNow ? 'justify-start' : 'justify-end'}">
-						<div
-							class="bg-light3 relative my-2 rounded-xl px-5 py-2 text-gray-700"
-							style="max-width: 300px;"
-						>
+						<div class="bg-light3 relative my-2 rounded-xl px-5 py-2 text-gray-700" style="max-width: 300px;">
 							<span class="block text-sm md:text-base">{chat.text}</span>
 							<span class="block text-right text-xs">{moment(chat.date).fromNow()}</span>
 						</div>
@@ -100,7 +95,8 @@
 					stroke-linejoin="round"
 					stroke-width="2"
 					d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-				></path>
+				>
+				</path>
 			</svg>
 		</button>
 		<button class="ml-1 outline-none focus:outline-none">
