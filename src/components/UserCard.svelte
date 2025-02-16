@@ -15,9 +15,15 @@
 					<Avatar src={user.image} alt={user.username} size="l" />
 				</div>
 				<div class="flex flex-col gap-1">
-					<h2 class="cursor-pointer text-sm font-bold md:text-base">{user.display_name || user.username}</h2>
-					<span class="line-clamp-2 block text-xs text-gray-500 md:text-sm">{user.work || WORK}</span>
-					<span class="line-clamp-2 block text-xs text-gray-500 md:text-sm">{user.tagline || TAGLINE}</span>
+					<h2 class="cursor-pointer text-sm font-bold md:text-base">
+						{user.display_name || user.username}
+					</h2>
+					<span class="line-clamp-2 block text-xs text-gray-500 md:text-sm"
+						>{user.work || WORK}</span
+					>
+					<span class="line-clamp-2 block text-xs text-gray-500 md:text-sm"
+						>{user.tagline || TAGLINE}</span
+					>
 				</div>
 			</div>
 		</div>

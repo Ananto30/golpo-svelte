@@ -1,11 +1,23 @@
-<script>
+<script lang="ts">
 	import moment from 'moment';
+	import { loggedUsername } from '../store';
+	import type { ChatGroup } from '../types';
 
-	export let chats;
-	export let chatNow;
+	import Avatar from './Avatar.svelte';
+
+	export let chats: ChatGroup[] = [];
+	export let chatNowUsername: string = '';
+
+	const getChatNowUsername = (chat: ChatGroup) => {
+		if (chat.participants[0] == $loggedUsername) {
+			return chat.participants[1];
+		} else {
+			return chat.participants[0];
+		}
+	};
 </script>
 
-<div class="">
+<div class="p-2 pt-8 md:pt-2">
 	<!-- <div class="mx-3 my-3 ">
       <div class="relative text-gray-600 focus-within:text-gray-400">
         <span class="absolute inset-y-0 left-0 flex items-center pl-2">
@@ -31,30 +43,35 @@
       </div>
     </div> -->
 
-	<ul class="overflow-auto" style="height: 90vh;">
-		<!-- <h2 class="my-2 mb-2 ml-2 text-lg">Chats</h2> -->
-		<li>
+	<ul class="overflow-auto">
+		<h2 class="font-rubik mb-4 text-lg font-semibold">Chats</h2>
+		<li class="flex flex-col gap-2">
 			{#each chats as chat}
-				<!-- svelte-ignore a11y-missing-attribute -->
-				<a
-					on:click={() => (chatNow = chat.participants[1])}
-					class="{chatNow == chat.participants[1]
-						? 'bg-dark1'
-						: 'hover:bg-dark1'} flex cursor-pointer items-center rounded-xl px-3 py-2 text-sm transition duration-200 ease-in-out focus:outline-none focus-visible:ring"
-				>
-					<img
-						class="h-10 w-10 rounded-full object-cover"
-						src="https://images.pexels.com/photos/837358/pexels-photo-837358.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
-						alt="username"
-					/>
-					<div class="w-full pb-2">
-						<div class="flex justify-between">
-							<span class="ml-2 block text-base font-semibold text-gray-600">{chat.participants[1]}</span>
-							<span class="ml-2 block text-sm text-gray-600">{moment(chat.chats[0].date).fromNow()}</span>
+				{#if chat.chats.length > 0}
+					<button
+						on:click={() => (chatNowUsername = getChatNowUsername(chat))}
+						on:keydown={(e) => e.key === 'Enter' && (chatNowUsername = getChatNowUsername(chat))}
+						tabindex="0"
+						class="w-full cursor-pointer rounded-md bg-gray-100 px-3 py-2 text-sm transition ease-in-out hover:bg-gray-200 focus:outline-none focus-visible:ring
+					{chatNowUsername == getChatNowUsername(chat) ? 'bg-dark1' : 'hover:bg-dark1'}"
+						aria-label="chat"
+					>
+						<div class="flex w-full items-start justify-between">
+							<div class="flex justify-center gap-4 text-left">
+								<Avatar src={undefined} alt={getChatNowUsername(chat)} />
+								<div>
+									<p class="font-semibold text-gray-800">{getChatNowUsername(chat)}</p>
+									<p class="line-clamp-1 text-gray-600">
+										{chat.chats[0].from}: {chat.chats[0].text}
+									</p>
+								</div>
+							</div>
+							<p class="text-xs text-gray-600">
+								{moment(chat.chats[0].date).fromNow()}
+							</p>
 						</div>
-						<span class="ml-2 line-clamp-1 block text-sm text-gray-600">{chat.chats[0].text}</span>
-					</div>
-				</a>
+					</button>
+				{/if}
 			{/each}
 		</li>
 	</ul>

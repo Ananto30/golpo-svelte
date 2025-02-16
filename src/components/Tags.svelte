@@ -49,7 +49,9 @@
 					class="items-center rounded-md border-b border-transparent p-2 text-sm transition duration-200 hover:cursor-pointer hover:bg-gray-200
 					{selectedTag == tag ? 'bg-gray-200 font-bold' : ''} "
 				>
-					<span class="flex items-center gap-1"> <Svg name={getTagSvgName(tag)} height="16" width="16" />{tag}</span>
+					<span class="flex items-center gap-1">
+						<Svg name={getTagSvgName(tag)} height="16" width="16" />{tag}</span
+					>
 				</button>
 			{/each}
 		</div>

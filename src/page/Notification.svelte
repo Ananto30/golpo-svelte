@@ -61,8 +61,6 @@
 	onMount(async () => {
 		$page = 'notification';
 		getNotifications();
-		console.log(notifications);
-		console.log(Object.entries(notifications).map(([category, notis]) => [category, notis.length]));
 	});
 </script>
 

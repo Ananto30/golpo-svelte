@@ -1,21 +1,16 @@
-<script>
+<script lang="ts">
 	import client from '../client';
 
-	export let hide;
-	export let work;
-	export let tagline;
+	export let hide: boolean;
+	export let recipient;
 
-	let updatedWork = work;
-	let updatedTagline = tagline;
+	let message = '';
 
-	const updateProfile = async () => {
-		await client.User.updateMeta({
-			work: updatedWork,
-			tagline: updatedTagline
-		});
+	const sendMessage = async () => {
+		if (message.trim() === '') return;
+		await client.Chat.sendMessage(recipient, message);
 		hide = true;
-		work = updatedWork;
-		tagline = updatedTagline;
+		message = '';
 	};
 </script>
 
@@ -35,33 +30,22 @@
 			class="inline-block w-full transform overflow-hidden border border-gray-400 bg-white text-left align-bottom transition-all sm:my-8 sm:w-full sm:max-w-lg sm:align-middle"
 		>
 			<div class="bg-dark2 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-				<h3 class="text-lg font-semibold text-gray-900" id="modal-title">
-					Update profile information
-				</h3>
+				<h3 class="text-lg font-semibold text-gray-900" id="modal-title">Send Message</h3>
 				<div class="mt-4 text-sm">
-					<input
-						bind:value={updatedWork}
-						type="text"
-						id="work"
-						placeholder="Work/Education"
+					<textarea
+						bind:value={message}
+						placeholder="Type your message here..."
 						class="mt-2 w-full border-b py-3 focus:border-black focus:outline-none"
-					/>
-					<input
-						bind:value={updatedTagline}
-						type="text"
-						id="tagline"
-						placeholder="About/Tagline"
-						class="mt-2 w-full border-b py-3 focus:border-black focus:outline-none"
-					/>
+					></textarea>
 				</div>
 			</div>
 			<div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
 				<button
-					on:click={updateProfile}
+					on:click={sendMessage}
 					type="button"
 					class="inline-flex w-full justify-center border border-transparent bg-black px-4 py-2 text-base font-medium text-white transition duration-200 hover:cursor-pointer hover:border-current hover:bg-white hover:text-black focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
 				>
-					Save
+					Send
 				</button>
 				<button
 					on:click={() => (hide = true)}

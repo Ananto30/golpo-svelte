@@ -100,11 +100,19 @@
 
 						<!-- bookmark -->
 						{#if isBookmarked(post)}
-							<button title="unbookmark" on:click={() => unbokmarkPost(post._id)} class={mediaButtonClass}>
+							<button
+								title="unbookmark"
+								on:click={() => unbokmarkPost(post._id)}
+								class={mediaButtonClass}
+							>
 								<Svg name="bookmarked" height="16" width="16" />
 							</button>
 						{:else}
-							<button title="bookmark" on:click={() => bookmarkPost(post._id)} class={mediaButtonClass}>
+							<button
+								title="bookmark"
+								on:click={() => bookmarkPost(post._id)}
+								class={mediaButtonClass}
+							>
 								<Svg name="bookmark" height="16" width="16" />
 							</button>
 						{/if}

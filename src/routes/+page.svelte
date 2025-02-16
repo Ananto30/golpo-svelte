@@ -61,7 +61,6 @@
 		if ($myBookmarkIds.length === 0) {
 			const res = await client.Post.getBookmarks();
 			$myBookmarkIds = res.data.bookmarks.map((i) => i._id);
-			console.log($myBookmarkIds);
 		}
 	});
 </script>

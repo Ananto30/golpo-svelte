@@ -48,7 +48,7 @@
 
 	const logout = () => {
 		$loggedUsername = '';
-		$jwt = null;
+		$jwt = '';
 	};
 
 	const toggleSideBar = () => {
@@ -78,20 +78,37 @@
 
 <div in:fade class="sticky top-0 z-20 w-full md:min-h-screen md:w-auto">
 	<!-- mobile menu bar -->
-	<div class="{shouldBorder ? 'border-b-2' : ''} fixed z-50 flex w-full justify-between bg-white md:hidden md:w-auto">
+	<div
+		class="{shouldBorder
+			? 'border-b-2'
+			: ''} fixed z-50 flex w-full justify-between bg-white md:hidden md:w-auto"
+	>
 		<!-- logo -->
 		<a href="#/home" class="font-rubik my-auto block px-4 py-2 text-2xl font-bold">Golpo</a>
 
 		<!-- mobile menu button -->
 		<button on:click={toggleSideBar} class="p-4 focus:outline-none active:bg-gray-100">
 			<div class="my-auto flex">
-				<svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+				<svg
+					class="h-5 w-5"
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M4 6h16M4 12h16M4 18h16"
+					></path>
 				</svg>
 				{#if hasNotification}
 					<span class="relative inline-block h-2">
 						<span class="flex h-2 w-2">
-							<span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-black opacity-75"></span>
+							<span
+								class="absolute inline-flex h-full w-full animate-ping rounded-full bg-black opacity-75"
+							></span>
 							<span class="relative inline-flex h-2 w-2 rounded-full bg-black"></span>
 						</span>
 					</span>
@@ -127,7 +144,9 @@
 						{#if item.name == 'Notification' && hasNotification}
 							<span class="relative -mt-4 -ml-2 inline-block">
 								<span class="flex h-2 w-2">
-									<span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-black opacity-75"></span>
+									<span
+										class="absolute inline-flex h-full w-full animate-ping rounded-full bg-black opacity-75"
+									></span>
 									<span class="relative inline-flex h-2 w-2 rounded-full bg-black"></span>
 								</span>
 							</span>
@@ -144,9 +163,14 @@
 		</nav>
 
 		<div class="text-xs lg:w-40">
-			<a class="cursor-pointer hover:underline" href="https://github.com/Ananto30/golpo-svelte"> GitHub </a>
+			<a class="cursor-pointer hover:underline" href="https://github.com/Ananto30/golpo-svelte">
+				GitHub
+			</a>
 			•
-			<a class="cursor-pointer hover:underline" href="https://github.com/Ananto30/golpo-svelte/labels/bug">
+			<a
+				class="cursor-pointer hover:underline"
+				href="https://github.com/Ananto30/golpo-svelte/labels/bug"
+			>
 				Report Bug
 			</a>
 			•
@@ -157,7 +181,9 @@
 				Request Feature
 			</a>
 			•
-			<a class="cursor-pointer hover:underline" href="https://github.com/Ananto30/golpo-svelte"> Policy </a>
+			<a class="cursor-pointer hover:underline" href="https://github.com/Ananto30/golpo-svelte">
+				Policy
+			</a>
 		</div>
 	</div>
 </div>

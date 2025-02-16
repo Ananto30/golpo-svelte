@@ -1,42 +1,39 @@
-<!-- copied from https://svelte.dev/repl/c7094fb1004b440482d2a88f4d1d7ef5?version=3.14.0 -->
-<script>
+<script lang="ts">
 	import { onMount } from 'svelte';
 	import { fly } from 'svelte/transition';
-	export let id = '';
-	export let value = [];
-	export let readonly = false;
-	export let placeholder = '';
-	export let limit = 3;
 	import { error } from '../store';
-
 	import Svg from '../components/Svg.svelte';
 	import { getTagSvgName } from '../helpers';
 
-	let input,
-		inputValue,
-		options = [],
-		activeOption,
-		showOptions = false,
-		selected = {},
-		first = true,
-		slot;
+	export let id: string = '';
+	export let value: string[] = [];
+	export let readonly: boolean = false;
+	export let placeholder: string = '';
+	export let limit: number = 3;
+
+	let input: HTMLInputElement;
+	let inputValue: string = '';
+	let options: { value: string; name: string }[] = [];
+	let activeOption: { value: string; name: string } | undefined;
+	let showOptions: boolean = false;
+	let selected: { [key: string]: { value: string; name: string } } = {};
+	let first: boolean = true;
+	let slot: HTMLSelectElement;
 
 	onMount(() => {
-		slot.querySelectorAll('option').forEach((o) => {
-			// o.selected && !value.includes(o.value) && (value = [...value, o.value]);
-			options = [...options, { value: o.value, name: o.textContent }];
+		slot.querySelectorAll('option').forEach((o: HTMLOptionElement) => {
+			options = [...options, { value: o.value, name: o.textContent || '' }];
 		});
-		// value &&
-		//   (selected = options.reduce((obj, op) => (value.includes(op.value) ? { ...obj, [op.value]: op } : obj), {}));
-		// first = false;
 	});
 
 	$: if (selected) value = Object.values(selected).map((o) => o.value);
-	$: filtered = options.filter((o) => (inputValue ? o.name.toLowerCase().includes(inputValue.toLowerCase()) : o));
+	$: filtered = options.filter((o) =>
+		inputValue ? o.name.toLowerCase().includes(inputValue.toLowerCase()) : o
+	);
 	$: if ((activeOption && !filtered.includes(activeOption)) || (!activeOption && inputValue))
 		activeOption = filtered[0];
 
-	function add(token) {
+	function add(token: { value: string; name: string }) {
 		if (Object.values(selected).length < limit) {
 			if (!readonly) selected[token.value] = token;
 		} else {
@@ -44,14 +41,14 @@
 		}
 	}
 
-	function remove(value) {
+	function remove(value: string) {
 		if (!readonly) {
 			const { [value]: val, ...rest } = selected;
 			selected = rest;
 		}
 	}
 
-	function optionsVisibility(show) {
+	function optionsVisibility(show: boolean | undefined) {
 		if (readonly) return;
 		if (typeof show === 'boolean') {
 			showOptions = show;
@@ -64,15 +61,16 @@
 		}
 	}
 
-	function handleKeyup(e) {
-		if (e.keyCode === 13) {
-			Object.keys(selected).includes(activeOption.value) ? remove(activeOption.value) : add(activeOption);
+	function handleKeyup(e: KeyboardEvent) {
+		if (e.key === 'Enter') {
+			Object.keys(selected).includes(activeOption?.value || '')
+				? remove(activeOption?.value || '')
+				: add(activeOption!);
 			inputValue = '';
 		}
-		if ([38, 40].includes(e.keyCode)) {
-			// up and down arrows
-			const increment = e.keyCode === 38 ? -1 : 1;
-			const calcIndex = filtered.indexOf(activeOption) + increment;
+		if (['ArrowUp', 'ArrowDown'].includes(e.key)) {
+			const increment = e.key === 'ArrowUp' ? -1 : 1;
+			const calcIndex = filtered.indexOf(activeOption!) + increment;
 			activeOption =
 				calcIndex < 0
 					? filtered[filtered.length - 1]
@@ -82,24 +80,26 @@
 		}
 	}
 
-	function handleBlur(e) {
+	function handleBlur(e: FocusEvent) {
 		optionsVisibility(false);
 	}
 
-	function handleTokenClick(e) {
-		if (e.target.closest('.token-remove')) {
+	function handleTokenClick(e: MouseEvent) {
+		const target = e.target as HTMLElement;
+		if (target.closest('.token-remove')) {
 			e.stopPropagation();
-			remove(e.target.closest('.token').dataset.id);
-		} else if (e.target.closest('.remove-all')) {
-			selected = [];
+			remove((target.closest('.token') as HTMLElement)!.dataset.id!);
+		} else if (target.closest('.remove-all')) {
+			selected = {};
 			inputValue = '';
 		} else {
 			optionsVisibility(true);
 		}
 	}
 
-	function handleOptionMousedown(e) {
-		const value = e.target.dataset.value;
+	function handleOptionMousedown(e: MouseEvent) {
+		const target = e.target as HTMLElement;
+		const value = target.dataset.value!;
 		if (selected[value]) {
 			remove(value);
 		} else {
@@ -110,7 +110,11 @@
 </script>
 
 <div class="multiselect relative z-0 w-full px-4" class:readonly>
-	<div class="tokens flex cursor-pointer flex-wrap items-center" class:showOptions on:click={handleTokenClick}>
+	<button
+		class="tokens flex cursor-pointer flex-wrap items-center"
+		class:showOptions
+		on:click={handleTokenClick}
+	>
 		{#each Object.values(selected) as s}
 			<div class="token m-1 flex items-center rounded-full px-1 py-1 text-sm" data-id={s.value}>
 				<span
@@ -168,30 +172,34 @@
 				</div>
 			{/if}
 		</div>
-	</div>
+	</button>
 
-	<select bind:this={slot} type="multiple" class="bg-dark1 hidden"><slot /></select>
+	<select bind:this={slot} class="bg-dark1 hidden"><slot /></select>
 
 	{#if showOptions}
-		<ul class="options" transition:fly={{ duration: 200, y: 5 }} on:mousedown|preventDefault={handleOptionMousedown}>
+		<button
+			class="options"
+			transition:fly={{ duration: 200, y: 5 }}
+			on:mousedown|preventDefault={handleOptionMousedown}
+		>
 			{#each filtered as option}
-				<li class:selected={selected[option.value]} class:active={activeOption === option} data-value={option.value}>
+				<li
+					class:selected={selected[option.value]}
+					class:active={activeOption === option}
+					data-value={option.value}
+				>
 					<span class="flex items-center gap-1" data-value={option.value}>
 						<Svg name={getTagSvgName(option.name)} height="16" width="16" />{option.name}</span
 					>
 				</li>
 			{/each}
-		</ul>
+		</button>
 	{/if}
 </div>
 
 <style>
 	.readonly .token {
 		color: hsl(0, 0%, 40%);
-	}
-
-	.multiselect:hover .dropdown-arrow path {
-		fill: hsl(0, 0%, 50%);
 	}
 
 	.options {

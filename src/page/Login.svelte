@@ -86,8 +86,8 @@
 				<h2 class="font-rubik text-6xl font-bold">Golpo</h2>
 			</div>
 			<p class="mt-10 max-w-2xl text-xl font-semibold text-gray-800">
-				Golpo is a clutter free platform for sharing links. We support people and content makers to share their work and
-				nothing more. Stay simple!
+				Golpo is a clutter free platform for sharing links. We support people and content makers to
+				share their work and nothing more. Stay simple!
 			</p>
 			<div class="bg-dark1 mt-10 max-w-md rounded-2xl">
 				<div class="font-rubik text-xl leading-tight font-bold md:text-2xl">Why Golpo?</div>
@@ -131,7 +131,14 @@
 					<div class="flex items-center justify-center">
 						{#if googleLoading}
 							<svg class="mr-3 h-5 w-5 animate-spin" viewBox="0 0 24 24">
-								<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+								<circle
+									class="opacity-25"
+									cx="12"
+									cy="12"
+									r="10"
+									stroke="currentColor"
+									stroke-width="4"
+								></circle>
 								<path
 									class="opacity-75"
 									fill="currentColor"

@@ -12,6 +12,7 @@
 	import Tab from '../components/Tab.svelte';
 	import ProfileEditModal from '../components/ProfileEditModal.svelte';
 	import Avatar from '../components/Avatar.svelte';
+	import SendMessageModal from '../components/SendMessageModal.svelte';
 
 	export let slug;
 
@@ -26,6 +27,7 @@
 	let users = [];
 	let editModalHide = true;
 	let user;
+	let hideSendMessage = true;
 
 	const profileButtonClass =
 		'flex-none px-3 py-1 text-sm transition ease-in-out text-white bg-black border border-transparent hover:bg-white hover:text-black hover:border-current focus-visible:ring cursor-pointer';
@@ -124,11 +126,16 @@
 											<span>Follow</span>
 										</button>
 									{/if}
-									<button class={profileButtonClass}>
+									<button class={profileButtonClass} on:click={() => (hideSendMessage = false)}>
+										<SendMessageModal bind:recipient={slug} bind:hide={hideSendMessage} />
 										<span>Send Message</span>
 									</button>
 								{:else}
-									<button in:fade on:click={() => (editModalHide = !editModalHide)} class={profileButtonClass}>
+									<button
+										in:fade
+										on:click={() => (editModalHide = !editModalHide)}
+										class={profileButtonClass}
+									>
 										<span>Edit profile</span>
 									</button>
 								{/if}
