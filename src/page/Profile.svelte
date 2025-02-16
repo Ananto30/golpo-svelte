@@ -1,9 +1,8 @@
 <script>
 	import { fade } from 'svelte/transition';
-	import { onMount, onDestroy } from 'svelte';
 	import { loggedUsername, page, isLoading } from '../store';
 	import client from '../client';
-	import { TAGLINE, WORK, IMAGE_LARGE } from '../defaults';
+	import { TAGLINE, WORK } from '../defaults';
 
 	import PostBox from '../components/PostBox.svelte';
 	import Footer from '../components/Footer.svelte';
@@ -26,9 +25,10 @@
 	let displayName = '';
 	let users = [];
 	let editModalHide = true;
+	let user;
 
 	const profileButtonClass =
-		'flex-none px-3 py-1 text-sm transition duration-200 text-white bg-black border border-transparent hover:bg-white hover:text-black hover:border-current focus-visible:ring hover:cursor-pointer';
+		'flex-none px-3 py-1 text-sm transition ease-in-out text-white bg-black border border-transparent hover:bg-white hover:text-black hover:border-current focus-visible:ring cursor-pointer';
 
 	let tabs = ['Posts', 'Followers', 'Following'];
 	let selectedTab = 'Posts';
@@ -40,6 +40,7 @@
 
 	const getProfileInfo = async () => {
 		const res = await client.User.getByUsername(slug);
+		user = res.data;
 		work = res.data.work;
 		tagline = res.data.tagline;
 		image = res.data.image;
@@ -91,18 +92,20 @@
 </script>
 
 <div class="grid min-h-screen grid-cols-12">
-	{#if image}
+	{#if user}
 		<ProfileEditModal bind:hide={editModalHide} {work} {tagline} />
 		<div in:fade class="col-span-12 md:col-span-8">
-			<div id="user-details" class="navshadow sticky top-8 z-10 bg-white pt-8 md:top-0">
+			<div id="user-details" class="navshadow z-10 bg-white pt-14 md:sticky md:top-0 md:pt-8">
 				<div class="mx-auto w-full">
-					<div class="flex w-full flex-row px-4 md:px-16">
-						<Avatar src={image} alt={displayName || slug} size="l" />
+					<div class="flex w-full flex-col gap-4 md:flex-row md:px-14">
+						<div class="flex justify-center md:block">
+							<Avatar src={image} alt={displayName || slug} size="l" />
+						</div>
 						<div class="mb-2 ml-4 flex flex-col md:mt-2 md:ml-6">
-							<div class="font-montserrat font-bold md:text-2xl">{displayName || slug}</div>
-							<div class="font-base">{work ? work : WORK}</div>
-							<div class="text-sm text-gray-500">
-								{tagline ? tagline : TAGLINE}
+							<div class="font-rubik font-semibold md:text-xl">{displayName || slug}</div>
+							<div class="mt-1 text-sm">{work || WORK}</div>
+							<div class="mt-1 text-sm text-gray-500">
+								{tagline || TAGLINE}
 							</div>
 
 							<div class="mt-2 md:mt-4">

@@ -4,7 +4,6 @@
 	import { loggedUsername, isLoading, error } from '../store';
 	import client from '../client';
 	import moment from 'moment';
-	import { IMAGE_LARGE } from '../defaults';
 
 	import Post from '../components/Post.svelte';
 	import Footer from '../components/Footer.svelte';
@@ -13,6 +12,7 @@
 	import Avatar from '../components/Avatar.svelte';
 
 	export let slug;
+
 	let post;
 	let postComment = '';
 	let postComments;
@@ -32,7 +32,8 @@
 
 	const addAuthorImageToComments = async () => {
 		const usernames = [...new Set(post.comments.map((i) => i.author))];
-		usernames.push(post.author);
+		usernames.push(post.author); // Add the post author to the list
+
 		const res = await client.User.getUsersMeta(usernames);
 
 		const users = res.data.users.reduce((acc, user) => {

@@ -1,9 +1,7 @@
 <script>
-	import { fade } from 'svelte/transition';
-	import { info, loggedUsername } from '../store';
+	import { info, loggedUsername, myBookmarkIds } from '../store';
 	import moment from 'moment';
 	import client from '../client';
-	import { IMAGE_LARGE } from '../defaults';
 
 	import Svg from '../components/Svg.svelte';
 	import Avatar from './Avatar.svelte';
@@ -26,7 +24,18 @@
 
 	const bookmarkPost = async (postId) => {
 		await client.Post.bookmarkPost(postId);
+		$myBookmarkIds = [...$myBookmarkIds, postId];
 		$info = 'Post bookmarked!';
+	};
+
+	const unbokmarkPost = async (postId) => {
+		await client.Post.unbookmarkPost(postId);
+		$myBookmarkIds = $myBookmarkIds.filter((id) => id !== postId);
+		$info = 'Post unbookmarked!';
+	};
+
+	const isBookmarked = (post) => {
+		return $myBookmarkIds.includes(post._id);
 	};
 </script>
 
@@ -45,7 +54,7 @@
 								{post.authorName || post.author}
 							</div>
 						</a>
-						<div class="flex w-full">
+						<div class="flex w-full flex-wrap">
 							<div class="cursor-pointer text-xs font-medium text-gray-600">
 								{post.tags.join(', ')}
 								•&nbsp;
@@ -62,7 +71,7 @@
 					<div class="font-rubik mb-2 line-clamp-2 px-4 text-lg leading-6 font-bold text-gray-800">
 						{post.title}
 					</div>
-					<div class="font-karla mb-2 line-clamp-5 px-4 text-sm break-all text-gray-700">
+					<div class="mb-2 line-clamp-5 px-4 text-sm break-all text-gray-700">
 						{post.description || ''}
 					</div>
 					<div class="my-4 px-4 text-sm font-medium text-gray-400">
@@ -73,6 +82,7 @@
 				<!-- actions -->
 				<div class="mt-4 flex justify-start">
 					<div class="flex gap-4 px-2">
+						<!-- love -->
 						<button title="loves" on:click={() => lovePost(post._id)} class={mediaButtonClass}>
 							{#if post.isLovedByMe}
 								<Svg name="red-love" height="16" width="16" />
@@ -81,21 +91,35 @@
 							{/if}
 							<span>{post.loveCount}</span>
 						</button>
+
+						<!-- comment -->
 						<a href="#/post/{post._id}" title="comments" class={mediaButtonClass}>
 							<Svg name="comment" height="16" width="16" />
 							<span>{post.commentCount}</span>
 						</a>
+
+						<!-- bookmark -->
+						{#if isBookmarked(post)}
+							<button title="unbookmark" on:click={() => unbokmarkPost(post._id)} class={mediaButtonClass}>
+								<Svg name="bookmarked" height="16" width="16" />
+							</button>
+						{:else}
+							<button title="bookmark" on:click={() => bookmarkPost(post._id)} class={mediaButtonClass}>
+								<Svg name="bookmark" height="16" width="16" />
+							</button>
+						{/if}
+
+						<!-- delete -->
 						{#if post.author == $loggedUsername}
 							<button title="delete" on:click={onDelete} class={mediaButtonClass}>
 								<Svg name="delete" height="16" width="16" />
 							</button>
 						{/if}
-						<button title="bookmark" on:click={() => bookmarkPost(post._id)} class={mediaButtonClass}>
-							<Svg name="bookmark" height="16" width="16" />
-						</button>
+
+						<!-- open -->
 						<!-- <a title="visit link" href="{post.url}" target="_blank" class="{mediaButtonClass}">
-              <Svg name="external" height="16" width="16" />
-            </a> -->
+							<Svg name="external" height="16" width="16" />
+						</a> -->
 					</div>
 				</div>
 			</div>

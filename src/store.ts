@@ -11,6 +11,8 @@ export const page = writable<string>('');
 
 export const isLoading = writable<boolean>(true);
 
+export const myBookmarkIds = writable<string[]>([]);
+
 jwt.subscribe((jwt: string) => localStorage.setItem('jwt', jwt));
 loggedUsername.subscribe((username: string) => localStorage.setItem('loggedUsername', username));
 // loggedUserImage.subscribe((image: string) => localStorage.setItem("loggedUserImage", image));

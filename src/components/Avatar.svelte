@@ -1,9 +1,9 @@
-<script>
-	export let src;
-	export let alt = 'User avatar';
-	export let size = 's';
+<script lang="ts">
+	export let src: string | undefined;
+	export let alt: string = 'User avatar';
+	export let size: 's' | 'm' | 'l' = 's';
 
-	let sizes = {
+	let sizes: { [key: string]: string } = {
 		s: 'h-10 w-10',
 		m: 'h-12 w-12',
 		l: 'h-28 w-28'

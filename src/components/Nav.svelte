@@ -44,7 +44,7 @@
 	];
 
 	const navButtonClass =
-		'flex items-center gap-2 -ml-4 mr-4 transition ease-in-out cursor-pointer rounded-lg p-4 hover:bg-gray-200 w-full font-medium font-montserrat';
+		'flex items-center gap-2 -ml-4 mr-4 transition ease-in-out cursor-pointer rounded-lg p-4 hover:bg-gray-200 w-full font-medium font-poppins';
 
 	const logout = () => {
 		$loggedUsername = '';
@@ -80,7 +80,7 @@
 	<!-- mobile menu bar -->
 	<div class="{shouldBorder ? 'border-b-2' : ''} fixed z-50 flex w-full justify-between bg-white md:hidden md:w-auto">
 		<!-- logo -->
-		<a href="#/home" class="font-montserrat my-auto block px-4 py-2 text-2xl font-bold">Golpo</a>
+		<a href="#/home" class="font-rubik my-auto block px-4 py-2 text-2xl font-bold">Golpo</a>
 
 		<!-- mobile menu button -->
 		<button on:click={toggleSideBar} class="p-4 focus:outline-none active:bg-gray-100">
@@ -107,11 +107,11 @@
 	>
 		<!-- logo -->
 		<a href="#/home" class="flex items-center space-x-2">
-			<span class="font-montserrat text-3xl font-extrabold">Golpo</span>
+			<span class="font-rubik text-3xl font-bold">Golpo</span>
 		</a>
 
 		<!-- nav -->
-		<nav class="grid w-full gap-2 sm:text-xl md:text-base lg:text-lg">
+		<nav class="text-md grid w-full gap-2">
 			{#each navItems as item}
 				<div class="flex w-full">
 					<a
@@ -144,17 +144,20 @@
 		</nav>
 
 		<div class="text-xs lg:w-40">
-			<a class="cursor-pointer hover:underline" href="https://github.com/Ananto30/golpo-svelte">GitHub</a>
+			<a class="cursor-pointer hover:underline" href="https://github.com/Ananto30/golpo-svelte"> GitHub </a>
 			•
-			<a class="cursor-pointer hover:underline" href="https://github.com/Ananto30/golpo-svelte/labels/bug">Report Bug</a
-			>
+			<a class="cursor-pointer hover:underline" href="https://github.com/Ananto30/golpo-svelte/labels/bug">
+				Report Bug
+			</a>
 			•
 			<a
 				class="cursor-pointer hover:underline"
-				href="https://github.com/Ananto30/golpo-express/discussions/categories/request-feature">Request Feature</a
+				href="https://github.com/Ananto30/golpo-express/discussions/categories/request-feature"
 			>
+				Request Feature
+			</a>
 			•
-			<a class="cursor-pointer hover:underline" href="https://github.com/Ananto30/golpo-svelte">Policy</a>
+			<a class="cursor-pointer hover:underline" href="https://github.com/Ananto30/golpo-svelte"> Policy </a>
 		</div>
 	</div>
 </div>

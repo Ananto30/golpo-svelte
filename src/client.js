@@ -64,6 +64,7 @@ const Post = {
 	deletePost: (postId) => api.post(`/post/${postId}/delete`, {}, getHeader()).catch(errorHandler),
 	getBookmarks: () => api.get('/post/bookmarks', getHeader()).catch(errorHandler),
 	bookmarkPost: (postId) => api.post(`/post/${postId}/bookmark`, {}, getHeader()).catch(errorHandler),
+	unbookmarkPost: (postId) => api.post(`/post/${postId}/unbookmark`, {}, getHeader()).catch(errorHandler),
 	deleteComment: (postId, commentId) =>
 		api.post(`/post/${postId}/comment/${commentId}/delete`, {}, getHeader()).catch(errorHandler)
 };

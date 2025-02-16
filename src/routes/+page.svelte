@@ -13,7 +13,8 @@
 
 	import Alert from '../components/Alert.svelte';
 
-	import { loggedUsername, error, info, isLoading } from '../store';
+	import { loggedUsername, error, info, isLoading, myBookmarkIds } from '../store';
+	import client from '../client';
 
 	let currentPage;
 	let props;
@@ -55,7 +56,14 @@
 		}
 	}
 
-	onMount(hashchange);
+	onMount(async () => {
+		hashchange();
+		if ($myBookmarkIds.length === 0) {
+			const res = await client.Post.getBookmarks();
+			$myBookmarkIds = res.data.bookmarks.map((i) => i._id);
+			console.log($myBookmarkIds);
+		}
+	});
 </script>
 
 <svelte:window on:hashchange={hashchange} />

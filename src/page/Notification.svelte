@@ -67,31 +67,27 @@
 </script>
 
 <div class="grid grid-cols-12">
-	<div class="col-span-12 md:col-span-8">
-		<div class="mx-auto grid">
-			<div class="md:ml-10">
-				{#each Object.entries(notifications) as [category, notis]}
-					{#if notis.length > 0}
-						<div in:fade>
-							<h4 class="font-montserrat mt-8 mb-2 text-right text-lg font-medium">
-								{categoryNameMap[category]}
-							</h4>
-							{#each notis as noti}
-								<a href="#/post/{noti.post_id}" on:click={() => clickedNotification(noti._id)}>
-									<div
-										class="flex items-center justify-between gap-4 border-b border-gray-300 p-4 hover:bg-gray-100
-                                    {noti.clicked ? '' : 'bg-blue-50'}"
-									>
-										<p><b>{noti.comment_author}</b> commented on your post</p>
-										<span class="text-sm font-thin">{moment(noti.created_at).fromNow()}</span>
-									</div>
-								</a>
-							{/each}
-						</div>
-					{/if}
-				{/each}
-			</div>
-		</div>
+	<div class="col-span-12 md:col-span-8 md:ml-10">
+		{#each Object.entries(notifications) as [category, notis]}
+			{#if notis.length > 0}
+				<div in:fade>
+					<h4 class="font-rubik mt-8 mb-2 text-right text-lg font-medium">
+						{categoryNameMap[category]}
+					</h4>
+					{#each notis as noti}
+						<a href="#/post/{noti.post_id}" on:click={() => clickedNotification(noti._id)}>
+							<div
+								class="flex items-center justify-between gap-4 border-b border-gray-300 p-4 text-sm hover:bg-gray-100
+                                {noti.clicked ? '' : 'bg-blue-50'}"
+							>
+								<p><b>{noti.comment_author}</b> commented on your post</p>
+								<span class="text-xs text-gray-500">{moment(noti.created_at).fromNow()}</span>
+							</div>
+						</a>
+					{/each}
+				</div>
+			{/if}
+		{/each}
 	</div>
 </div>
 

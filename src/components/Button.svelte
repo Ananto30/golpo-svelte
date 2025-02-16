@@ -1,12 +1,13 @@
-<script>
-	var root = document.documentElement;
-	document.addEventListener('mousedown', (ev) => {
-		var el = ev.target;
-		var x = (ev.clientX - el.offsetLeft) / el.offsetWidth;
-		var y = (ev.clientY - el.offsetTop) / el.offsetHeight;
+<script lang="ts">
+	const root: HTMLElement = document.documentElement;
 
-		root.style.setProperty('--ripple-x', x);
-		root.style.setProperty('--ripple-y', y);
+	document.addEventListener('mousedown', (ev: MouseEvent) => {
+		const el = ev.target as HTMLElement;
+		const x = (ev.clientX - el.offsetLeft) / el.offsetWidth;
+		const y = (ev.clientY - el.offsetTop) / el.offsetHeight;
+
+		root.style.setProperty('--ripple-x', x.toString());
+		root.style.setProperty('--ripple-y', y.toString());
 	});
 </script>
 

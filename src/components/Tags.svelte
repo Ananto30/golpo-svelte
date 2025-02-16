@@ -34,7 +34,7 @@
 
 <div class="sticky top-0 hidden w-full px-2 py-8 pl-10 md:block">
 	<div in:fade class="rounded-2xl bg-white">
-		<h2 class="text-yellow px-2 text-2xl font-extrabold">Tags</h2>
+		<h2 class="font-rubik text-yellow px-2 text-2xl font-bold">Tags</h2>
 		<div class="flex flex-wrap pt-4">
 			{#if $tags.length == 0}
 				{#each Array(10) as _}
