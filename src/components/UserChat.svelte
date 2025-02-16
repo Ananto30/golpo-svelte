@@ -1,38 +1,45 @@
 <script lang="ts">
+	import moment from 'moment';
 	import { fade } from 'svelte/transition';
 	import client from '../client';
-	import moment from 'moment';
-	import Avatar from './Avatar.svelte';
 	import { loggedUsername } from '../store';
 	import type { Chat } from '../types';
+	import Avatar from './Avatar.svelte';
 
-	export let chatNow: string | null;
+	export let activeChatUsername: string;
 
-	let chats: Array<Chat> = [];
+	let chats: Chat[] = [];
 	let innerHeight: number;
 
 	let message: string = '';
 
 	const getUserChats = async (): Promise<void> => {
-		const res = await client.Chat.getChatsByReceiver(chatNow);
+		const res = await client.Chat.getChatsByReceiver(activeChatUsername);
+		console.log(res);
 		chats = res.data.chats;
 	};
 
-	$: if (chatNow) {
+	$: if (activeChatUsername) {
 		getUserChats();
 	}
+
+	const randomId = (): string => {
+		return Math.random().toString(36).substr(2, 9);
+	};
 
 	const sendChat = async (e: Event): Promise<void> => {
 		e.preventDefault();
 		if (message.trim() === '') return;
 
-		const res = await client.Chat.sendChat(chatNow, message);
+		const res = await client.Chat.sendChat(activeChatUsername, message);
 		chats = [
 			...chats,
 			{
 				from: $loggedUsername,
 				text: message,
-				date: new Date()
+				date: new Date(),
+				seen: false,
+				_id: randomId()
 			}
 		];
 		message = '';
@@ -45,35 +52,14 @@
 	};
 </script>
 
-<!-- 
-<div class="flex flex-col h-screen">
-  <div class="">
-    <div class="flex items-center pl-3 md:py-3 bg-dark3 md:rounded-t-xl">
-      <img
-        class="object-cover w-6 h-6 rounded-full md:h-10 md:w-10"
-        src="https://images.pexels.com/photos/3777931/pexels-photo-3777931.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
-        alt="username"
-      />
-      <span class="block ml-2 text-base font-bold text-gray-600">{chatNow}</span>
-      <span class="ml-2 text-green-500 connected">
-        <svg width="6" height="6">
-          <circle cx="3" cy="3" r="3" fill="currentColor"></circle>
-        </svg>
-      </span>
-      <button class="flex justify-end w-full p-2 px-6 md:hidden" on:click="{() => (chatNow = null)}"> back </button>
-    </div>
-  </div>
-  <div class="flex items-center justify-center flex-grow bg-green">this content is not centered on screen</div>
-</div> -->
-
 <svelte:window bind:innerHeight />
 
 <div class="w-full rounded-t-lg pt-8 md:pt-0" style="height: {innerHeight - 128}px;">
 	<div class="rounded-lg md:border md:border-gray-300">
 		<div class="flex items-center bg-gray-100 md:rounded-t-lg">
 			<div class="flex w-full items-center p-4 md:rounded-t-lg">
-				<Avatar alt={chatNow} />
-				<span class="ml-2 block text-base font-bold text-gray-600">{chatNow}</span>
+				<Avatar alt={activeChatUsername} src={undefined} />
+				<span class="ml-2 block text-base font-bold text-gray-600">{activeChatUsername}</span>
 				<span class="connected ml-2 text-green-500">
 					<svg width="6" height="6">
 						<circle cx="3" cy="3" r="3" fill="currentColor"></circle>
@@ -83,7 +69,7 @@
 
 			<button
 				class="m-2 flex justify-end border bg-white px-2 text-sm md:hidden"
-				on:click={() => (chatNow = null)}
+				on:click={() => (activeChatUsername = '')}
 			>
 				back
 			</button>
@@ -91,7 +77,6 @@
 		<div
 			id="chat"
 			class="relative w-full overflow-y-auto p-2 pb-0 md:p-6"
-			ref="toolbarChat"
 			style="height: {innerHeight - 200}px;"
 		>
 			<ul>
@@ -99,7 +84,9 @@
 					{#each chats as chat}
 						<div
 							in:fade
-							class="flex w-full {chat.from == chatNow ? 'justify-start' : 'justify-end'}"
+							class="flex w-full {chat.from == activeChatUsername
+								? 'justify-start'
+								: 'justify-end'}"
 						>
 							<div
 								class="relative my-1 max-w-[300px] rounded-md border border-gray-200 p-2 text-gray-700"

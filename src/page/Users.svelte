@@ -1,14 +1,14 @@
-<script>
-	import { fade } from 'svelte/transition';
+<script lang="ts">
 	import { onMount } from 'svelte';
+	import { fade } from 'svelte/transition';
 	import client from '../client';
-	import { page, loggedUsername, isLoading } from '../store';
-
-	import UserCard from '../components/UserCard.svelte';
 	import Footer from '../components/Footer.svelte';
 	import Tab from '../components/Tab.svelte';
+	import UserCard from '../components/UserCard.svelte';
+	import { isLoading, loggedUsername, page } from '../store';
+	import type { UserMeta } from '../types';
 
-	let users = [];
+	let users: UserMeta[] = [];
 	let tabs = ['All', 'Followers', 'Following'];
 	let selectedTab = 'All';
 

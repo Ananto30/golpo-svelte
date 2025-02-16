@@ -1,52 +1,61 @@
-<script>
+<script lang="ts">
 	import { fade } from 'svelte/transition';
-	import { loggedUsername, page, isLoading } from '../store';
 	import client from '../client';
-	import { TAGLINE, WORK } from '../defaults';
-
-	import PostBox from '../components/PostBox.svelte';
+	import Avatar from '../components/Avatar.svelte';
 	import Footer from '../components/Footer.svelte';
+	import PostBox from '../components/PostBox.svelte';
 	import Posts from '../components/Posts.svelte';
+	import ProfileEditModal from '../components/ProfileEditModal.svelte';
+	import SendMessageModal from '../components/SendMessageModal.svelte';
+	import Tab from '../components/Tab.svelte';
 	import Tags from '../components/Tags.svelte';
 	import UserCard from '../components/UserCard.svelte';
-	import Tab from '../components/Tab.svelte';
-	import ProfileEditModal from '../components/ProfileEditModal.svelte';
-	import Avatar from '../components/Avatar.svelte';
-	import SendMessageModal from '../components/SendMessageModal.svelte';
+	import { TAGLINE, WORK } from '../defaults';
+	import { isLoading, loggedUsername, page } from '../store';
+	import type { Post, UserMeta, UserResponse } from '../types';
 
-	export let slug;
+	export let slug: string;
 
-	let allPosts = [];
-	let editable = false;
-	let work;
-	let tagline;
-	let image;
-	let followed = false;
-	let selectedTag = '';
-	let displayName = '';
-	let users = [];
-	let editModalHide = true;
-	let user;
-	let hideSendMessage = true;
+	let allPosts: Post[] = [];
+	let selectedTag: string = '';
 
-	const profileButtonClass =
-		'flex-none px-3 py-1 text-sm transition ease-in-out text-white bg-black border border-transparent hover:bg-white hover:text-black hover:border-current focus-visible:ring cursor-pointer';
+	let users: UserMeta[] = [];
+	let user: UserResponse;
+
+	let editable: boolean = false;
+	let work: string = '';
+	let tagline: string = '';
+	let image: string = '';
+	let followed: boolean = false;
+	let displayName: string = '';
+
+	let hideEditProfile: boolean = true;
+	let hideSendMessage: boolean = true;
 
 	let tabs = ['Posts', 'Followers', 'Following'];
 	let selectedTab = 'Posts';
+
+	let newCreatedPost: Post | null = null;
+
+	const profileButtonClass =
+		'flex-none px-3 py-1 text-sm transition ease-in-out text-white bg-black border border-transparent hover:bg-white hover:text-black hover:border-current focus-visible:ring cursor-pointer';
 
 	$: if (slug == '' || slug == $loggedUsername) {
 		editable = true;
 		slug = $loggedUsername;
 	}
 
+	$: if (newCreatedPost) {
+		allPosts = [newCreatedPost, ...allPosts];
+	}
+
 	const getProfileInfo = async () => {
 		const res = await client.User.getByUsername(slug);
 		user = res.data;
-		work = res.data.work;
-		tagline = res.data.tagline;
-		image = res.data.image;
-		displayName = res.data.display_name;
+		work = res.data.work || WORK;
+		tagline = res.data.tagline || TAGLINE;
+		image = res.data.image || '';
+		displayName = res.data.display_name || slug;
 		followed = res.data.followers.includes($loggedUsername);
 		$isLoading = false;
 	};
@@ -95,7 +104,9 @@
 
 <div class="grid min-h-screen grid-cols-12">
 	{#if user}
-		<ProfileEditModal bind:hide={editModalHide} {work} {tagline} />
+		<ProfileEditModal bind:hide={hideEditProfile} {work} {tagline} />
+		<SendMessageModal bind:recipient={slug} bind:hide={hideSendMessage} />
+
 		<div in:fade class="col-span-12 md:col-span-8">
 			<div id="user-details" class="navshadow z-10 bg-white pt-14 md:sticky md:top-0 md:pt-8">
 				<div class="mx-auto w-full">
@@ -126,14 +137,16 @@
 											<span>Follow</span>
 										</button>
 									{/if}
-									<button class={profileButtonClass} on:click={() => (hideSendMessage = false)}>
-										<SendMessageModal bind:recipient={slug} bind:hide={hideSendMessage} />
+									<button
+										class={profileButtonClass}
+										on:click={() => (hideSendMessage = !hideSendMessage)}
+									>
 										<span>Send Message</span>
 									</button>
 								{:else}
 									<button
 										in:fade
-										on:click={() => (editModalHide = !editModalHide)}
+										on:click={() => (hideEditProfile = !hideEditProfile)}
 										class={profileButtonClass}
 									>
 										<span>Edit profile</span>
@@ -157,15 +170,15 @@
 			{/if}
 
 			{#if selectedTab == 'Posts'}
-				{#if editable}
+				{#if editable && newCreatedPost}
 					<div class="mt-8">
-						<PostBox />
+						<PostBox {newCreatedPost} />
 					</div>
 				{/if}
 
 				<div in:fade class="mx-auto mt-4 grid">
 					<div class="mx-auto">
-						<Posts bind:allPosts bind:selectedTag />
+						<Posts bind:allPosts bind:selectedTag {users} />
 					</div>
 				</div>
 			{/if}

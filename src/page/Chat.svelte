@@ -1,23 +1,20 @@
-<script>
+<script lang="ts">
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
-	import { page, isLoading } from '../store';
 	import client from '../client';
-
-	import UserChat from '../components/UserChat.svelte';
 	import ChatUsers from '../components/ChatUsers.svelte';
+	import UserChat from '../components/UserChat.svelte';
+	import { isLoading, page } from '../store';
+	import type { ChatGroup } from '../types';
 
-	let chats = [];
-	let chatNow = '';
+	let chats: ChatGroup[] = [];
+	let activeChatUsername: string = '';
 
 	let hasChatLoaded = false;
 
 	const getChats = async () => {
 		const res = await client.Chat.getChats();
 		chats = res.data.chats.reverse();
-		if (chats.length > 0) {
-			// chatNow = chats[0].participants[1];
-		}
 		$isLoading = false;
 		hasChatLoaded = true;
 	};
@@ -43,12 +40,12 @@
 		</div>
 	{:else}
 		<div class="flex w-full gap-4">
-			<div class="{chatNow ? 'hidden md:block' : ''} w-full max-w-xs">
-				<ChatUsers bind:chats bind:chatNowUsername={chatNow} />
+			<div class="{activeChatUsername ? 'hidden md:block' : ''} w-full max-w-xs">
+				<ChatUsers bind:chats bind:activeChatUsername />
 			</div>
-			<div class="{chatNow ? '' : 'hidden md:block'} w-full">
-				{#if chatNow}
-					<UserChat bind:chatNow />
+			<div class="{activeChatUsername ? '' : 'hidden md:block'} w-full">
+				{#if activeChatUsername}
+					<UserChat bind:activeChatUsername />
 				{/if}
 			</div>
 		</div>

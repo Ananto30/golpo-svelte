@@ -1,20 +1,20 @@
-<script>
-	import { tags, error, info, loggedUserImage, loggedUsername } from '../store';
+<script lang="ts">
 	import client from '../client';
-
+	import { error, info, tags } from '../store';
 	import Multiselect from './Multiselect.svelte';
+	import type { Post } from '../types';
 
-	export let sharedPost;
+	export let newCreatedPost: Post;
 
-	let url = '';
-	let selectedTags = [];
+	let url: string = '';
+	let selectedTags: string[] = [];
 
-	const sharePost = async () => {
+	const sharePost = async (): Promise<void> => {
 		if (selectedTags.length === 0) {
-			$error = 'Atleast select one tag!';
+			$error = 'At least select one tag!';
 			return;
 		}
-		if (url == '') {
+		if (url === '') {
 			$error = 'You want to share something? Put the link/url in the box!';
 			return;
 		}
@@ -23,9 +23,9 @@
 			url = '';
 			selectedTags = [];
 			$info = 'Post shared!';
-			sharedPost = res.data;
-			sharedPost.loveCount = 0;
-			sharedPost.commentCount = 0;
+			newCreatedPost = res.data;
+			newCreatedPost.loveCount = 0;
+			newCreatedPost.commentCount = 0;
 		} catch (e) {
 			$error = 'Sharing not successful';
 		}

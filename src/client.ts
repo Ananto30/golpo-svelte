@@ -5,12 +5,19 @@ import { BASE_URL } from './defaults';
 import { jwt, loggedUsername } from './store';
 import type {
 	AuthResponse,
+	BookmarkResponse,
+	ChatGroup,
 	ChatResponse,
 	GoogleAuthUrlResponse,
 	NotificationResponse,
+	Post,
 	PostResponse,
+	PostWithComments,
+	TagResponse,
 	UpdateUserMetaRequest,
-	UserMetaResponse
+	UserMeta,
+	UserMetaResponse,
+	UserResponse
 } from './types';
 
 const api = axios.create({
@@ -28,11 +35,12 @@ const getHeader = (): { headers: { Authorization: string } } => {
 	};
 };
 
-const errorHandler = (err: AxiosError): void => {
+const errorHandler = (err: AxiosError): never => {
 	if (err.response && (err.response.status === 401 || err.response.status === 403)) {
 		jwt.set('');
 		loggedUsername.set('');
 	}
+	throw err;
 };
 
 const Auth = {
@@ -48,59 +56,59 @@ const Auth = {
 };
 
 const User = {
-	getMe: (): Promise<AxiosResponse<UserMetaResponse>> =>
+	getMe: (): Promise<AxiosResponse<UserMeta>> =>
 		api.get('/user/me', getHeader()).catch(errorHandler),
-	getAllUsers: (): Promise<AxiosResponse<UserMetaResponse[]>> =>
+	getAllUsers: (): Promise<AxiosResponse<UserMetaResponse>> =>
 		api.get('/user', getHeader()).catch(errorHandler),
-	getByUsername: (username: string): Promise<AxiosResponse<UserMetaResponse>> =>
+	getByUsername: (username: string): Promise<AxiosResponse<UserResponse>> =>
 		api.get(`/user/${username}`, getHeader()).catch(errorHandler),
 	updateMeta: (meta: UpdateUserMetaRequest): Promise<AxiosResponse<void>> =>
 		api.post('/user/me/update', meta, getHeader()).catch(errorHandler),
-	getUsersMeta: (usernames: string[]): Promise<AxiosResponse<Meta[]>> =>
+	getUsersMeta: (usernames: string[]): Promise<AxiosResponse<UserMetaResponse>> =>
 		api.post('/user/get_users_meta', { usernames: usernames }, getHeader()).catch(errorHandler),
 	followUser: (username: string): Promise<AxiosResponse<void>> =>
 		api.post(`/user/${username}/follow`, {}, getHeader()).catch(errorHandler),
 	unFollowUser: (username: string): Promise<AxiosResponse<void>> =>
 		api.post(`/user/${username}/unfollow`, {}, getHeader()).catch(errorHandler),
-	getFollowers: (username: string): Promise<AxiosResponse<UserMetaResponse[]>> =>
+	getFollowers: (username: string): Promise<AxiosResponse<UserMetaResponse>> =>
 		api.get(`/user/${username}/followers`, getHeader()).catch(errorHandler),
-	getFollowing: (username: string): Promise<AxiosResponse<UserMetaResponse[]>> =>
+	getFollowing: (username: string): Promise<AxiosResponse<UserMetaResponse>> =>
 		api.get(`/user/${username}/following`, getHeader()).catch(errorHandler)
 };
 
 const Post = {
-	getAll: (): Promise<AxiosResponse<PostResponse[]>> =>
+	getAll: (): Promise<AxiosResponse<PostResponse>> =>
 		api.get('/post', getHeader()).catch(errorHandler),
 	getFeed: (): Promise<AxiosResponse<PostResponse[]>> =>
 		api.get('/post/feed', getHeader()).catch(errorHandler),
-	getById: (id: string): Promise<AxiosResponse<PostResponse>> =>
+	getById: (id: string): Promise<AxiosResponse<PostWithComments>> =>
 		api.get(`/post/${id}`, getHeader()).catch(errorHandler),
-	getByUsername: (username: string): Promise<AxiosResponse<PostResponse[]>> =>
+	getByUsername: (username: string): Promise<AxiosResponse<PostResponse>> =>
 		api.get(`/post/user/${username}`, getHeader()).catch(errorHandler),
-	createPost: (url: string, tags: string[]): Promise<AxiosResponse<PostResponse>> =>
+	createPost: (url: string, tags: string[]): Promise<AxiosResponse<Post>> =>
 		api.post('/post', { url: url, tags: tags }, getHeader()).catch(errorHandler),
-	createComment: (postId: string, text: string): Promise<AxiosResponse<void>> =>
+	createComment: (postId: string, text: string): Promise<AxiosResponse<PostWithComments>> =>
 		api.post(`/post/${postId}/comment`, { text: text }, getHeader()).catch(errorHandler),
-	getAllTags: (): Promise<AxiosResponse<string[]>> =>
+	getAllTags: (): Promise<AxiosResponse<TagResponse>> =>
 		api.get('/post/tags', getHeader()).catch(errorHandler),
 	reactLove: (postId: string): Promise<AxiosResponse<void>> =>
 		api.post(`/post/${postId}/love`, {}, getHeader()).catch(errorHandler),
 	deletePost: (postId: string): Promise<AxiosResponse<void>> =>
 		api.post(`/post/${postId}/delete`, {}, getHeader()).catch(errorHandler),
-	getBookmarks: (): Promise<AxiosResponse<PostResponse[]>> =>
+	getBookmarks: (): Promise<AxiosResponse<BookmarkResponse>> =>
 		api.get('/post/bookmarks', getHeader()).catch(errorHandler),
 	bookmarkPost: (postId: string): Promise<AxiosResponse<void>> =>
 		api.post(`/post/${postId}/bookmark`, {}, getHeader()).catch(errorHandler),
 	unbookmarkPost: (postId: string): Promise<AxiosResponse<void>> =>
 		api.post(`/post/${postId}/unbookmark`, {}, getHeader()).catch(errorHandler),
-	deleteComment: (postId: string, commentId: string): Promise<AxiosResponse<void>> =>
+	deleteComment: (postId: string, commentId: string): Promise<AxiosResponse<PostWithComments>> =>
 		api.post(`/post/${postId}/comment/${commentId}/delete`, {}, getHeader()).catch(errorHandler)
 };
 
 const Chat = {
-	getChats: (): Promise<AxiosResponse<ChatResponse[]>> =>
+	getChats: (): Promise<AxiosResponse<ChatResponse>> =>
 		api.get('/chat', getHeader()).catch(errorHandler),
-	getChatsByReceiver: (receiver: string): Promise<AxiosResponse<ChatResponse[]>> =>
+	getChatsByReceiver: (receiver: string): Promise<AxiosResponse<ChatGroup>> =>
 		api.get(`/chat/${receiver}`, getHeader()).catch(errorHandler),
 	sendChat: (receiver: string, text: string): Promise<AxiosResponse<void>> =>
 		api
@@ -124,18 +132,16 @@ const Chat = {
 			.catch(errorHandler)
 };
 
+const Notification = {
+	getAll: (username: string): Promise<AxiosResponse<NotificationResponse>> =>
+		api.get(`/notification/${username}`, getHeader()).catch(errorHandler),
+	click: (id: string): Promise<AxiosResponse<void>> =>
+		api.post(`/notification/${id}/clicked`, {}, getHeader()).catch(errorHandler)
+};
+
 // const Activity = {
 //     getAll: (): Promise<AxiosResponse<ActivityResponse[]>> => api.get('/activity', getHeader()).catch(errorHandler)
 // };
-
-const Notification = {
-	getAll: (username: string): Promise<AxiosResponse<NotificationResponse[]>> =>
-		api.get(`/notification/${username}`, getHeader()).catch(errorHandler),
-	click: (id: string): Promise<AxiosResponse<void>> =>
-		api.post(`/notification/${id}/clicked`, {}, getHeader()).catch(errorHandler),
-	hasUnclickedNotification: (): Promise<AxiosResponse<NotificationResponse>> =>
-		api.get('/notification/hasunclicked', getHeader()).catch(errorHandler)
-};
 
 export default {
 	Auth,

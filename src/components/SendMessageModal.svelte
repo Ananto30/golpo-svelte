@@ -2,7 +2,7 @@
 	import client from '../client';
 
 	export let hide: boolean;
-	export let recipient;
+	export let recipient: string;
 
 	let message = '';
 

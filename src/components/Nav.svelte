@@ -1,11 +1,9 @@
 <script>
-	import { loggedUsername, jwt, page } from '../store';
-	import client from '../client';
 	import { onMount } from 'svelte';
-
 	import { fade } from 'svelte/transition';
-
+	import client from '../client';
 	import Svg from '../components/Svg.svelte';
+	import { jwt, loggedUsername, page } from '../store';
 
 	let sideBarVisible = true;
 	let hasNotification = false;
@@ -56,9 +54,8 @@
 	};
 
 	const hasNotificationCall = async () => {
-		const res = await client.Notification.hasUnclickedNotification();
-		if (res.data.hasUnclickedNotification) return true;
-		return false;
+		const res = await client.Notification.getAll($loggedUsername);
+		return res.data.notifications?.some((i) => i.clicked === false);
 	};
 
 	const navBorderTracker = () => {

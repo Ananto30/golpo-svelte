@@ -1,20 +1,28 @@
-<script>
-	import { fade } from 'svelte/transition';
-	import { onMount } from 'svelte';
-	import { page, isLoading, loggedUsername } from '../store';
-	import client from '../client';
+<script lang="ts">
 	import moment from 'moment';
-
+	import { onMount } from 'svelte';
+	import { fade } from 'svelte/transition';
+	import client from '../client';
 	import Footer from '../components/Footer.svelte';
+	import { isLoading, loggedUsername, page } from '../store';
+	import type { Notification } from '../types';
 
-	let notifications = {
+	type NotificationGroups = {
+		thisWeek: Notification[];
+		lastWeek: Notification[];
+		lastMonth: Notification[];
+		lastYear: Notification[];
+		ancient: Notification[];
+	};
+
+	let notifications: NotificationGroups = {
 		thisWeek: [],
 		lastWeek: [],
 		lastMonth: [],
 		lastYear: [],
 		ancient: []
 	};
-	let categoryNameMap = {
+	let categoryNameMap: Record<string, string> = {
 		thisWeek: 'This Week',
 		lastWeek: 'Last Week',
 		lastMonth: 'Last Month',
@@ -22,12 +30,14 @@
 		ancient: 'Ancient'
 	};
 
-	const getNotifications = async () => {
+	let hasLoaded = false;
+
+	const getNotifications = async (): Promise<void> => {
 		const res = await client.Notification.getAll($loggedUsername);
-		const allNotifications = res.data.notifications.reverse();
+		const allNotifications: Notification[] = res.data.notifications.reverse();
 		const now = moment();
 
-		let newNotifications = {
+		let newNotifications: NotificationGroups = {
 			thisWeek: [],
 			lastWeek: [],
 			lastMonth: [],
@@ -51,41 +61,58 @@
 		});
 
 		notifications = newNotifications; // Reassign to trigger reactivity
+
 		$isLoading = false;
+		hasLoaded = true;
 	};
 
-	const clickedNotification = async (id) => {
+	const clickedNotification = async (id: string): Promise<void> => {
 		await client.Notification.click(id);
 	};
 
 	onMount(async () => {
 		$page = 'notification';
-		getNotifications();
+		await getNotifications();
 	});
 </script>
 
 <div class="grid grid-cols-12">
 	<div class="col-span-12 md:col-span-8 md:ml-10">
-		{#each Object.entries(notifications) as [category, notis]}
-			{#if notis.length > 0}
-				<div in:fade>
-					<h4 class="font-rubik mt-8 mb-2 text-right text-lg font-medium">
-						{categoryNameMap[category]}
-					</h4>
-					{#each notis as noti}
-						<a href="#/post/{noti.post_id}" on:click={() => clickedNotification(noti._id)}>
-							<div
-								class="flex items-center justify-between gap-4 border-b border-gray-300 p-4 text-sm hover:bg-gray-100
+		{#if !hasLoaded}
+			<div class="flex h-64 items-center justify-center">
+				<p class="text-center text-gray-600">Loading...</p>
+			</div>
+		{:else if hasLoaded && Object.values(notifications).every((notis) => notis.length === 0)}
+			<div class="flex h-64 items-center justify-center">
+				<p class="text-center text-gray-500">No notifications yet...</p>
+			</div>
+		{:else}
+			{#each Object.entries(notifications) as [category, notis]}
+				{#if notis.length > 0}
+					<div in:fade>
+						<h4 class="font-poppins mt-8 mb-2 text-sm font-semibold text-gray-400">
+							{categoryNameMap[category]}
+						</h4>
+						<hr class=" text-gray-300" />
+						{#each notis as noti}
+							<a href="#/post/{noti.post_id}" on:click={() => clickedNotification(noti._id)}>
+								<div
+									class="flex items-center justify-between gap-4 border-b border-gray-300 p-4 text-sm transition ease-in-out hover:bg-gray-100
                                 {noti.clicked ? '' : 'bg-blue-50'}"
-							>
-								<p><b>{noti.comment_author}</b> commented on your post</p>
-								<span class="text-xs text-gray-500">{moment(noti.created_at).fromNow()}</span>
-							</div>
-						</a>
-					{/each}
-				</div>
-			{/if}
-		{/each}
+								>
+									<p>
+										<b>{noti.comment_author}</b> commented on
+										{noti.username == $loggedUsername ? 'your post' : 'a post you commented on'}
+									</p>
+
+									<span class="text-xs text-gray-500">{moment(noti.created_at).fromNow()}</span>
+								</div>
+							</a>
+						{/each}
+					</div>
+				{/if}
+			{/each}
+		{/if}
 	</div>
 </div>
 

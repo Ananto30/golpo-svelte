@@ -1,17 +1,19 @@
-<script>
-	import client from '../client';
-	import Post from './Post.svelte';
-	import DeleteConfirmModal, { modal } from '../components/DeleteConfirmModal.svelte';
+<script lang="ts">
 	import { fade } from 'svelte/transition';
+	import client from '../client';
+	import DeleteConfirmModal, { modal } from '../components/DeleteConfirmModal.svelte';
+	import type { Post as PostType, UserMeta } from '../types';
+	import Post from './Post.svelte';
 
-	export let allPosts;
-	export let selectedTag;
+	export let allPosts: PostType[];
+	export let selectedTag: string;
+	export let users: UserMeta[];
 
-	let filteredPosts = [];
-	let selectedId = null;
+	let filteredPosts: PostType[] = [];
+	let selectedId: string = '';
 
 	const deletePost = async () => {
-		if (selectedId === null) return;
+		if (selectedId === '') return;
 
 		const id = selectedId;
 		const res = await client.Post.deletePost(id);
@@ -19,10 +21,10 @@
 		allPosts = allPosts.filter((post) => post._id !== id);
 		filteredPosts = allPosts;
 
-		selectedId = null;
+		selectedId = '';
 	};
 
-	const filterByTag = (tag) => {
+	const filterByTag = (tag: string) => {
 		if (tag == 'all') {
 			filteredPosts = allPosts;
 		} else {
@@ -32,27 +34,9 @@
 		}
 	};
 
-	const getPostUsersMeta = async () => {
-		const usernames = [...new Set(allPosts.map((i) => i.author))];
-		const res = await client.User.getUsersMeta(usernames);
-
-		const users = res.data.users.reduce((acc, user) => {
-			acc[user.username] = user;
-			return acc;
-		}, {});
-
-		allPosts.forEach((post) => {
-			post.authorName = users[post.author].display_name;
-			post.authorImage = users[post.author].image;
-		});
-
-		filteredPosts = allPosts;
-	};
-
 	$: if (selectedTag) filterByTag(selectedTag);
 	$: if (allPosts && allPosts.length > 0) {
 		filteredPosts = allPosts;
-		getPostUsersMeta();
 	}
 </script>
 
@@ -61,6 +45,7 @@
 		<div in:fade>
 			<Post
 				{post}
+				{users}
 				onDelete={() => {
 					selectedId = post._id;
 					modal.open();

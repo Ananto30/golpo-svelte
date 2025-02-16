@@ -1,6 +1,6 @@
-<script>
-	export let items;
-	export let selectedItem;
+<script lang="ts">
+	export let items: string[];
+	export let selectedItem: string;
 </script>
 
 <nav class="flex flex-row">

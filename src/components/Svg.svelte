@@ -1,8 +1,8 @@
-<script>
-	export let name;
-	export let width = '16';
-	export let height = '16';
-	export let focusable = true;
+<script lang="ts">
+	export let name: string;
+	export let width: string = '16';
+	export let height: string = '16';
+	export let focusable: number = 1;
 	let icons = [
 		{
 			box: 256,
@@ -199,6 +199,6 @@
 	{focusable}
 	{width}
 	{height}
-	viewBox="0 0 {displayIcon.box} {displayIcon.box}"
-	>{@html displayIcon.svg}
+	viewBox="0 0 {displayIcon?.box} {displayIcon?.box}"
+	>{@html displayIcon?.svg}
 </svg>

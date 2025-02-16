@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { fly } from 'svelte/transition';
-	import { error } from '../store';
 	import Svg from '../components/Svg.svelte';
 	import { getTagSvgName } from '../helpers';
+	import { error } from '../store';
 
 	export let id: string = '';
 	export let value: string[] = [];

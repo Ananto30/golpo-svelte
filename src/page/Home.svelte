@@ -1,26 +1,33 @@
-<script>
-	import { fade } from 'svelte/transition';
+<script lang="ts">
 	import { onMount } from 'svelte';
-	import { page, isLoading } from '../store';
+	import { fade } from 'svelte/transition';
 	import client from '../client';
-
-	import Tags from '../components/Tags.svelte';
-	import Posts from '../components/Posts.svelte';
 	import Footer from '../components/Footer.svelte';
 	import PostBox from '../components/PostBox.svelte';
+	import Posts from '../components/Posts.svelte';
+	import Tags from '../components/Tags.svelte';
+	import { isLoading, page } from '../store';
+	import type { Post, UserMeta } from '../types';
 
-	let allPosts = [];
-	let selectedTag = '';
-	let sharedPost = null;
+	let allPosts: Post[] = [];
+	let selectedTag: string = '';
+	let users: UserMeta[] = [];
+	let newCreatedPost: Post;
 
 	const getPosts = async () => {
 		const res = await client.Post.getAll();
 		allPosts = res.data.posts.reverse();
+
+		// we also need the user data to show proper names and user images
+		const postUsernames = allPosts.map((post) => post.author);
+		const userRes = await client.User.getUsersMeta(postUsernames);
+		users = userRes.data.users;
+
 		$isLoading = false;
 	};
 
-	$: if (sharedPost) {
-		allPosts = [sharedPost, ...allPosts];
+	$: if (newCreatedPost) {
+		allPosts = [newCreatedPost, ...allPosts];
 	}
 
 	onMount(async () => {
@@ -32,12 +39,12 @@
 <div class="grid grid-cols-12">
 	<div in:fade class="col-span-12 md:col-span-8">
 		<div class="mt-16 min-w-full md:mt-6">
-			<PostBox bind:sharedPost />
+			<PostBox bind:newCreatedPost />
 		</div>
 		{#if allPosts.length > 0}
 			<div class="mx-auto grid">
 				<div class="mx-auto mt-4">
-					<Posts bind:allPosts bind:selectedTag />
+					<Posts bind:allPosts bind:selectedTag bind:users />
 				</div>
 			</div>
 		{:else}

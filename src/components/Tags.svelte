@@ -1,26 +1,20 @@
-<script>
+<script lang="ts">
 	import { onMount } from 'svelte';
-	import client from '../client';
 	import { fade } from 'svelte/transition';
-	import { tags } from '../store';
-	import { getTagSvgName } from '../helpers';
-
+	import client from '../client';
 	import Svg from '../components/Svg.svelte';
+	import { getTagSvgName } from '../helpers';
+	import { tags } from '../store';
 
-	export let selectedTag = '';
+	export let selectedTag: string = '';
 
-	const getTags = () => {
-		client.Post.getAllTags()
-			.then((res) => {
-				$tags = res.data.tags;
-			})
-			.catch((err) => {
-				console.log(err);
-			});
+	const getTags = async (): Promise<void> => {
+		const res = await client.Post.getAllTags();
+		$tags = res.data.tags;
 	};
 
-	const selectTag = (tag) => {
-		if (selectedTag == tag) {
+	const selectTag = (tag: string): void => {
+		if (selectedTag === tag) {
 			selectedTag = 'all';
 		} else {
 			selectedTag = tag;
@@ -28,7 +22,7 @@
 	};
 
 	onMount(async () => {
-		getTags();
+		await getTags();
 	});
 </script>
 
@@ -47,7 +41,7 @@
 					in:fade
 					on:click={() => selectTag(tag)}
 					class="items-center rounded-md border-b border-transparent p-2 text-sm transition duration-200 hover:cursor-pointer hover:bg-gray-200
-					{selectedTag == tag ? 'bg-gray-200 font-bold' : ''} "
+                    {selectedTag == tag ? 'bg-gray-200 font-bold' : ''} "
 				>
 					<span class="flex items-center gap-1">
 						<Svg name={getTagSvgName(tag)} height="16" width="16" />{tag}</span

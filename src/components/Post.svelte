@@ -1,18 +1,19 @@
-<script>
-	import { info, loggedUsername, myBookmarkIds } from '../store';
+<script lang="ts">
 	import moment from 'moment';
 	import client from '../client';
-
 	import Svg from '../components/Svg.svelte';
+	import { info, loggedUsername, myBookmarkIds } from '../store';
+	import type { Post, UserMeta } from '../types';
 	import Avatar from './Avatar.svelte';
 
-	export let post;
-	export let onDelete;
+	export let post: Post;
+	export let users: UserMeta[];
+	export let onDelete: () => void;
 
 	const mediaButtonClass =
 		'flex items-center gap-1 px-2 py-1 text-sm transition duration-200 ease-in-out md:px-3 border border-transparent hover:border-gray-400 focus-visible:ring active:border-current hover:cursor-pointer';
 
-	const lovePost = async (postId) => {
+	const lovePost = async (postId: string) => {
 		if (!post.isLovedByMe) {
 			await client.Post.reactLove(postId);
 			post.isLovedByMe = true;
@@ -22,20 +23,30 @@
 		}
 	};
 
-	const bookmarkPost = async (postId) => {
+	const bookmarkPost = async (postId: string) => {
 		await client.Post.bookmarkPost(postId);
 		$myBookmarkIds = [...$myBookmarkIds, postId];
 		$info = 'Post bookmarked!';
 	};
 
-	const unbokmarkPost = async (postId) => {
+	const unbokmarkPost = async (postId: string) => {
 		await client.Post.unbookmarkPost(postId);
 		$myBookmarkIds = $myBookmarkIds.filter((id) => id !== postId);
 		$info = 'Post unbookmarked!';
 	};
 
-	const isBookmarked = (post) => {
+	const isBookmarked = (post: Post) => {
 		return $myBookmarkIds.includes(post._id);
+	};
+
+	const getAuthorImage = (author: string) => {
+		const user = users?.find((user) => user.username == author);
+		return user?.image;
+	};
+
+	const getAuthorDisplayName = (author: string) => {
+		const user = users?.find((user) => user.username == author);
+		return user?.display_name;
 	};
 </script>
 
@@ -46,12 +57,12 @@
 				<!-- user -->
 				<div class="flex w-full flex-row items-center gap-2 px-4 pb-4">
 					<a href="#/profile/{post.author}">
-						<Avatar src={post.authorImage} alt={post.author} size="m" />
+						<Avatar src={getAuthorImage(post.author)} alt={post.author} size="m" />
 					</a>
 					<div class="flex flex-col gap-1 break-all">
 						<a href="#/profile/{post.author}" class="hover:underline">
 							<div class="text-sm font-semibold text-gray-800">
-								{post.authorName || post.author}
+								{getAuthorDisplayName(post.author) || post.author}
 							</div>
 						</a>
 						<div class="flex w-full flex-wrap">
@@ -126,8 +137,8 @@
 
 						<!-- open -->
 						<!-- <a title="visit link" href="{post.url}" target="_blank" class="{mediaButtonClass}">
-							<Svg name="external" height="16" width="16" />
-						</a> -->
+                            <Svg name="external" height="16" width="16" />
+                        </a> -->
 					</div>
 				</div>
 			</div>

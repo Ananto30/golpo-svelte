@@ -1,88 +1,81 @@
-<script>
-	import { fade } from 'svelte/transition';
-	import { onMount } from 'svelte';
-	import { loggedUsername, isLoading, error } from '../store';
-	import client from '../client';
+<script lang="ts">
 	import moment from 'moment';
-
-	import Post from '../components/Post.svelte';
-	import Footer from '../components/Footer.svelte';
-
-	import Svg from '../components/Svg.svelte';
+	import { onMount } from 'svelte';
+	import { fade } from 'svelte/transition';
+	import client from '../client';
 	import Avatar from '../components/Avatar.svelte';
+	import Footer from '../components/Footer.svelte';
+	import Post from '../components/Post.svelte';
+	import Svg from '../components/Svg.svelte';
+	import { error, info, isLoading, loggedUsername } from '../store';
+	import type { Comment, PostWithComments, UserMeta } from '../types';
 
-	export let slug;
+	export let slug: string;
 
-	let post;
-	let postComment = '';
-	let postComments;
+	let post: PostWithComments;
+	let postComment: string = '';
+	let postComments: Comment[] = [];
+	let users: UserMeta[] = [];
 
-	const getPost = async (postId) => {
+	let hasLoaded = false;
+
+	const getPost = async (postId: string): Promise<void> => {
 		const res = await client.Post.getById(postId);
 		post = res.data;
+
 		post.commentCount = post.comments.length;
 		post.loveCount = post.loves.length;
 		post.isLovedByMe = post.loves.some((love) => love.author == $loggedUsername);
 		post.comments = post.comments.reverse();
 
-		await addAuthorImageToComments();
-
-		$isLoading = false;
-	};
-
-	const addAuthorImageToComments = async () => {
-		const usernames = [...new Set(post.comments.map((i) => i.author))];
-		usernames.push(post.author); // Add the post author to the list
-
-		const res = await client.User.getUsersMeta(usernames);
-
-		const users = res.data.users.reduce((acc, user) => {
-			acc[user.username] = user;
-			return acc;
-		}, {});
-
-		post.authorName = users[post.author].display_name;
-		post.authorImage = users[post.author].image;
-
-		post.comments.forEach((comment) => {
-			comment.authorName = users[comment.author].display_name;
-			comment.authorImage = users[comment.author].image;
-		});
+		const userRelatedToPost = [post.author, ...post.comments.map((comment) => comment.author)];
+		const userRes = await client.User.getUsersMeta(userRelatedToPost);
+		users = userRes.data.users;
 
 		postComments = [...post.comments]; // Create a new array to trigger reactivity
+
+		$isLoading = false;
+		hasLoaded = true;
 	};
 
-	const handleKeyup = (e) => {
-		if (e.keyCode == 13 && !e.shiftKey) {
+	const handleKeyup = (e: KeyboardEvent): void => {
+		if (e.key === 'Enter' && !e.shiftKey) {
 			e.preventDefault();
 			addComment();
 		}
 	};
 
-	const addComment = async () => {
+	const addComment = async (): Promise<void> => {
 		postComment = postComment.trim();
 		if (postComment === '') return;
 
 		try {
 			const res = await client.Post.createComment(post._id, postComment);
-			post.comments = res.data.comments.reverse();
-			post.commentCount++;
+			postComments = res.data.comments.reverse();
 			postComment = '';
-			await addAuthorImageToComments();
 		} catch (err) {
 			$error = "Couldn't add comment!";
 		}
 	};
 
-	const deleteComment = async (commentId) => {
+	const deleteComment = async (commentId: string): Promise<void> => {
 		try {
 			const res = await client.Post.deleteComment(post._id, commentId);
-			post.comments = res.data.post.comments.reverse();
-			post.commentCount--;
-			await addAuthorImageToComments();
+			console.log(res);
+			postComments = res.data.comments.reverse();
 		} catch (err) {
 			$error = "Couldn't delete comment!";
 		}
+	};
+
+	const getCommentAuthorImage = (author: string): string => {
+		const user = users.find((user) => user.username === author);
+		return user?.image || '';
+	};
+
+	const getCommentAuthorDisplayName = (author: string): string => {
+		const user = users.find((user) => user.username === author);
+		return user?.display_name || author;
 	};
 
 	onMount(async () => {
@@ -93,8 +86,14 @@
 <div class="grid grid-cols-12">
 	<div class="col-span-12 md:col-span-10">
 		<div in:fade class="mt-16 grid md:mt-6 md:ml-12">
-			{#if postComments}
-				<Post bind:post />
+			{#if postComments.length > 0}
+				<Post
+					{post}
+					{users}
+					onDelete={() => {
+						$info = 'Cannot delete post from here!';
+					}}
+				/>
 
 				<div class="mt-4 max-w-xl p-4 text-sm">
 					<div class="mb-4 border-gray-300">
@@ -119,13 +118,13 @@
 					{#each postComments as comment}
 						<div in:fade class="py-2">
 							<div class="flex w-full gap-2">
-								<Avatar src={comment.authorImage} alt={comment.author} />
+								<Avatar src={getCommentAuthorImage(comment.author)} alt={comment.author} />
 								<div class="flex w-full flex-col justify-center gap-2">
 									<div>
 										<div class="inline-flex w-full">
 											<a href={`#/profile/${comment.author}`} class="hover:underline">
 												<div class="flex text-sm font-semibold text-gray-600">
-													{comment.authorName || comment.author}
+													{getCommentAuthorDisplayName(comment.author)}
 												</div>
 											</a>
 											{#if comment.author == $loggedUsername}

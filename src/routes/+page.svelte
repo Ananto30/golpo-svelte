@@ -1,7 +1,6 @@
-<script>
+<script lang="ts">
 	import { onMount } from 'svelte';
 	import Nav from '../components/Nav.svelte';
-
 	import Home from '../page/Home.svelte';
 	import Chat from '../page/Chat.svelte';
 	import Users from '../page/Users.svelte';
@@ -10,16 +9,30 @@
 	import Post from '../page/Post.svelte';
 	import Bookmarks from '../page/Bookmarks.svelte';
 	import Notification from '../page/Notification.svelte';
-
 	import Alert from '../components/Alert.svelte';
-
 	import { loggedUsername, error, info, isLoading, myBookmarkIds } from '../store';
 	import client from '../client';
 
-	let currentPage;
-	let props;
+	let currentPage:
+		| typeof Home
+		| typeof Chat
+		| typeof Users
+		| typeof Profile
+		| typeof Bookmarks
+		| typeof Notification
+		| typeof Post
+		| undefined;
+	let props: { slug?: string } = {};
 
-	const pageMapping = {
+	const pageMapping: {
+		[key: string]:
+			| typeof Home
+			| typeof Chat
+			| typeof Users
+			| typeof Profile
+			| typeof Bookmarks
+			| typeof Notification;
+	} = {
 		'': Home,
 		home: Home,
 		chat: Chat,
@@ -29,13 +42,13 @@
 		notification: Notification
 	};
 
-	const slugPageMapping = {
+	const slugPageMapping: { [key: string]: typeof Chat | typeof Profile | typeof Post } = {
 		chat: Chat,
 		profile: Profile,
 		post: Post
 	};
 
-	function hashchange() {
+	function hashchange(): void {
 		// the poor man's router!
 		let path = window.location.hash.slice(1);
 		path = path.split('?')[0];
@@ -60,7 +73,7 @@
 		hashchange();
 		if ($myBookmarkIds.length === 0) {
 			const res = await client.Post.getBookmarks();
-			$myBookmarkIds = res.data.bookmarks.map((i) => i._id);
+			$myBookmarkIds = res.data.bookmarks.map((i: { _id: string }) => i._id);
 		}
 	});
 </script>

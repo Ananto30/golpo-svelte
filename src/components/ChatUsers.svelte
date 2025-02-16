@@ -2,13 +2,12 @@
 	import moment from 'moment';
 	import { loggedUsername } from '../store';
 	import type { ChatGroup } from '../types';
-
 	import Avatar from './Avatar.svelte';
 
 	export let chats: ChatGroup[] = [];
-	export let chatNowUsername: string = '';
+	export let activeChatUsername: string = '';
 
-	const getChatNowUsername = (chat: ChatGroup) => {
+	const getChatUsername = (chat: ChatGroup) => {
 		if (chat.participants[0] == $loggedUsername) {
 			return chat.participants[1];
 		} else {
@@ -49,18 +48,18 @@
 			{#each chats as chat}
 				{#if chat.chats.length > 0}
 					<button
-						on:click={() => (chatNowUsername = getChatNowUsername(chat))}
-						on:keydown={(e) => e.key === 'Enter' && (chatNowUsername = getChatNowUsername(chat))}
+						on:click={() => (activeChatUsername = getChatUsername(chat))}
+						on:keydown={(e) => e.key === 'Enter' && (activeChatUsername = getChatUsername(chat))}
 						tabindex="0"
 						class="w-full cursor-pointer rounded-md bg-gray-100 px-3 py-2 text-sm transition ease-in-out hover:bg-gray-200 focus:outline-none focus-visible:ring
-					{chatNowUsername == getChatNowUsername(chat) ? 'bg-dark1' : 'hover:bg-dark1'}"
+					{activeChatUsername == getChatUsername(chat) ? 'bg-dark1' : 'hover:bg-dark1'}"
 						aria-label="chat"
 					>
 						<div class="flex w-full items-start justify-between">
 							<div class="flex justify-center gap-4 text-left">
-								<Avatar src={undefined} alt={getChatNowUsername(chat)} />
+								<Avatar src={undefined} alt={getChatUsername(chat)} />
 								<div>
-									<p class="font-semibold text-gray-800">{getChatNowUsername(chat)}</p>
+									<p class="font-semibold text-gray-800">{getChatUsername(chat)}</p>
 									<p class="line-clamp-1 text-gray-600">
 										{chat.chats[0].from}: {chat.chats[0].text}
 									</p>

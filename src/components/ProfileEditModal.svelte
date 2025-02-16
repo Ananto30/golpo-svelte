@@ -1,14 +1,14 @@
-<script>
+<script lang="ts">
 	import client from '../client';
 
-	export let hide;
-	export let work;
-	export let tagline;
+	export let hide: boolean;
+	export let work: string;
+	export let tagline: string;
 
-	let updatedWork = work;
-	let updatedTagline = tagline;
+	let updatedWork: string = work;
+	let updatedTagline: string = tagline;
 
-	const updateProfile = async () => {
+	const updateProfile = async (): Promise<void> => {
 		await client.User.updateMeta({
 			work: updatedWork,
 			tagline: updatedTagline

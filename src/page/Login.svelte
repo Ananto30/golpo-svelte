@@ -1,16 +1,16 @@
-<script>
-	import { fade } from 'svelte/transition';
-	import { jwt, loggedUsername, loggedUserImage, error, isLoading } from '../store';
-	import client from '../client';
-
-	import TickSvg from '../svgs/TickSvg.svelte';
+<script lang="ts">
+	import { AxiosError } from 'axios';
 	import { onMount } from 'svelte';
+	import { fade } from 'svelte/transition';
+	import client from '../client';
+	import { error, isLoading, jwt, loggedUserImage, loggedUsername } from '../store';
 	import GoogleSvg from '../svgs/GoogleSvg.svelte';
+	import TickSvg from '../svgs/TickSvg.svelte';
 
-	let username = '';
-	let password = '';
-	let redirecting = false;
-	let googleLoading = false;
+	let username: string = '';
+	let password: string = '';
+	let redirecting: boolean = false;
+	let googleLoading: boolean = false;
 
 	const generalLogin = async () => {
 		try {
@@ -19,7 +19,7 @@
 			const user = await client.User.getMe();
 			$loggedUsername = user.data.username;
 		} catch (err) {
-			if (err.response && err.response.data) {
+			if (err instanceof AxiosError && err.response && err.response.data) {
 				$error = err.response.data.errors;
 			} else {
 				$error = 'Something went wrong!';
@@ -34,7 +34,7 @@
 			window.location.href = res.data.auth_url;
 		} catch (err) {
 			googleLoading = false;
-			if (err.response && err.response.data) {
+			if (err instanceof AxiosError && err.response && err.response.data) {
 				$error = err.response.data.errors;
 			} else {
 				$error = 'Something went wrong!';
@@ -42,15 +42,15 @@
 		}
 	};
 
-	const redirectToHome = async (code) => {
+	const redirectToHome = async (code: string) => {
 		try {
 			const res = await client.Auth.getTokenByGoogleCode(code);
 			$jwt = res.data.access_token;
 			const user = await client.User.getMe();
 			$loggedUsername = user.data.username;
-			$loggedUserImage = user.data.image;
+			$loggedUserImage = user.data.image || '';
 		} catch (err) {
-			if (err.response && err.response.data) {
+			if (err instanceof AxiosError && err.response && err.response.data) {
 				$error = err.response.data.errors;
 			} else {
 				console.log(err);
@@ -63,7 +63,7 @@
 
 	if (searchParams.has('code')) {
 		redirecting = true;
-		const code = searchParams.get('code');
+		const code = searchParams.get('code') || '';
 		redirectToHome(code);
 		window.history.replaceState({}, document.title, '/');
 	}
