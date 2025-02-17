@@ -10,7 +10,7 @@ import type {
 	ChatResponse,
 	GoogleAuthUrlResponse,
 	NotificationResponse,
-	Post,
+	Post as PostType,
 	PostResponse,
 	PostWithComments,
 	TagResponse,
@@ -85,7 +85,7 @@ const Post = {
 		api.get(`/post/${id}`, getHeader()).catch(errorHandler),
 	getByUsername: (username: string): Promise<AxiosResponse<PostResponse>> =>
 		api.get(`/post/user/${username}`, getHeader()).catch(errorHandler),
-	createPost: (url: string, tags: string[]): Promise<AxiosResponse<Post>> =>
+	createPost: (url: string, tags: string[]): Promise<AxiosResponse<PostType>> =>
 		api.post('/post', { url: url, tags: tags }, getHeader()).catch(errorHandler),
 	createComment: (postId: string, text: string): Promise<AxiosResponse<PostWithComments>> =>
 		api.post(`/post/${postId}/comment`, { text: text }, getHeader()).catch(errorHandler),
