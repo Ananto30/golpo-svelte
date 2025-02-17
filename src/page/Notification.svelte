@@ -85,7 +85,7 @@
 
 	const getUserDisplayName = (username: string) => {
 		const user = usersMeta.find((user) => user.username === username);
-		return user?.display_name;
+		return user?.display_name || username;
 	};
 
 	onMount(async () => {

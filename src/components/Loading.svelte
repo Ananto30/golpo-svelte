@@ -15,8 +15,8 @@
 	});
 </script>
 
-<div class="flex h-screen items-center justify-center">
-	<div class="mx-auto w-40">
+<div class="flex h-60 items-center justify-center">
+	<div class="mx-auto w-20">
 		Loading{dots}
 	</div>
 </div>

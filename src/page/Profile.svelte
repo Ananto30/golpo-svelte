@@ -194,7 +194,7 @@
 			{/if}
 		</div>
 	{:else}
-		<div in:fade class="col-span-12 flex h-screen items-center justify-center md:col-span-8">
+		<div in:fade class="col-span-12 md:col-span-8">
 			<Loading />
 		</div>
 	{/if}

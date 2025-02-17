@@ -34,7 +34,9 @@
 
 <div in:fade class="flex w-full pt-8">
 	{#if !hasChatLoaded}
-		<Loading />
+		<div class="flex h-80 w-full max-w-xs items-center justify-center">
+			<Loading />
+		</div>
 	{:else if hasChatLoaded && chats.length === 0}
 		<div class="flex h-80 w-full items-center justify-center">
 			<p class="text-center text-gray-800">
@@ -48,7 +50,7 @@
 			<div class="{activeChatUsername ? 'hidden md:block' : ''} w-full max-w-xs">
 				<ChatUsers bind:chats bind:activeChatUsername bind:usersMeta />
 			</div>
-			<div class="{activeChatUsername ? '' : 'hidden md:block'} w-full">
+			<div class="{activeChatUsername ? '' : 'hidden md:block'} w-full max-w-5xl">
 				{#if activeChatUsername}
 					<UserChat bind:activeChatUsername bind:usersMeta />
 				{/if}

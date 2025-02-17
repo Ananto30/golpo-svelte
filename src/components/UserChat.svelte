@@ -5,6 +5,7 @@
 	import { loggedUsername } from '../store';
 	import type { Chat, UserMeta } from '../types';
 	import Avatar from './Avatar.svelte';
+	import { onDestroy, onMount } from 'svelte';
 
 	export let activeChatUsername: string;
 	export let usersMeta: UserMeta[] = [];
@@ -58,13 +59,24 @@
 
 	const getUserDisplayName = (username: string) => {
 		const user = usersMeta.find((user) => user?.username === username);
-		return user?.display_name;
+		return user?.display_name || username;
 	};
+
+	let chatPollInterval: number;
+	onMount(() => {
+		chatPollInterval = setInterval(getUserChats, 30000); // 30 seconds
+		console.log('chat polling started, process:', chatPollInterval);
+	});
+
+	onDestroy(() => {
+		clearInterval(chatPollInterval);
+		console.log('chat polling stopped, process:', chatPollInterval);
+	});
 </script>
 
 <svelte:window bind:innerHeight />
 
-<div class="w-full rounded-t-lg pt-8 md:pt-0" style="height: {innerHeight - 128}px;">
+<div class="w-full max-w-4xl rounded-t-lg pt-8 md:pt-0" style="height: {innerHeight - 128}px;">
 	<div class="rounded-lg md:border md:border-gray-300">
 		<div class="flex items-center bg-gray-100 md:rounded-t-lg">
 			<div class="flex w-full items-center p-4 md:rounded-t-lg">
@@ -72,11 +84,11 @@
 				<p class="ml-2 block text-base font-bold text-gray-600 capitalize">
 					{getUserDisplayName(activeChatUsername)}
 				</p>
-				<p class="connected ml-2 text-green-500">
+				<!-- <p class="ml-2 text-green-500">
 					<svg width="6" height="6">
 						<circle cx="3" cy="3" r="3" fill="currentColor"></circle>
 					</svg>
-				</p>
+				</p> -->
 			</div>
 
 			<button
