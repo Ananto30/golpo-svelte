@@ -3,10 +3,11 @@
 	import { fade } from 'svelte/transition';
 	import client from '../client';
 	import { loggedUsername } from '../store';
-	import type { Chat } from '../types';
+	import type { Chat, UserMeta } from '../types';
 	import Avatar from './Avatar.svelte';
 
 	export let activeChatUsername: string;
+	export let usersMeta: UserMeta[] = [];
 
 	let chats: Chat[] = [];
 	let innerHeight: number;
@@ -15,7 +16,6 @@
 
 	const getUserChats = async (): Promise<void> => {
 		const res = await client.Chat.getChatsByReceiver(activeChatUsername);
-		console.log(res);
 		chats = res.data.chats;
 	};
 
@@ -50,6 +50,16 @@
 			sendChat(e);
 		}
 	};
+
+	const getUserImage = (username: string) => {
+		const user = usersMeta.find((user) => user?.username === username);
+		return user?.image;
+	};
+
+	const getUserDisplayName = (username: string) => {
+		const user = usersMeta.find((user) => user?.username === username);
+		return user?.display_name;
+	};
 </script>
 
 <svelte:window bind:innerHeight />
@@ -58,13 +68,15 @@
 	<div class="rounded-lg md:border md:border-gray-300">
 		<div class="flex items-center bg-gray-100 md:rounded-t-lg">
 			<div class="flex w-full items-center p-4 md:rounded-t-lg">
-				<Avatar alt={activeChatUsername} src={undefined} />
-				<span class="ml-2 block text-base font-bold text-gray-600">{activeChatUsername}</span>
-				<span class="connected ml-2 text-green-500">
+				<Avatar alt={activeChatUsername} src={getUserImage(activeChatUsername)} />
+				<p class="ml-2 block text-base font-bold text-gray-600 capitalize">
+					{getUserDisplayName(activeChatUsername)}
+				</p>
+				<p class="connected ml-2 text-green-500">
 					<svg width="6" height="6">
 						<circle cx="3" cy="3" r="3" fill="currentColor"></circle>
 					</svg>
-				</span>
+				</p>
 			</div>
 
 			<button

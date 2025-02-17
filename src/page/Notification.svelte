@@ -3,9 +3,12 @@
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import client from '../client';
+	import Avatar from '../components/Avatar.svelte';
 	import Footer from '../components/Footer.svelte';
+	import Loading from '../components/Loading.svelte';
+	import { getUsersMeta } from '../helpers';
 	import { isLoading, loggedUsername, page } from '../store';
-	import type { Notification } from '../types';
+	import type { Notification, UserMeta } from '../types';
 
 	type NotificationGroups = {
 		thisWeek: Notification[];
@@ -30,12 +33,16 @@
 		ancient: 'Ancient'
 	};
 
+	let usersMeta: UserMeta[] = [];
+
 	let hasLoaded = false;
 
 	const getNotifications = async (): Promise<void> => {
 		const res = await client.Notification.getAll($loggedUsername);
 		const allNotifications: Notification[] = res.data.notifications.reverse();
-		const now = moment();
+
+		const notificationUsernames = allNotifications.map((noti) => noti.comment_author);
+		usersMeta = await getUsersMeta(notificationUsernames);
 
 		let newNotifications: NotificationGroups = {
 			thisWeek: [],
@@ -45,6 +52,7 @@
 			ancient: []
 		};
 
+		const now = moment();
 		allNotifications.forEach((notification) => {
 			const createdAt = moment(notification.created_at);
 			if (createdAt.isSame(now, 'week')) {
@@ -70,6 +78,16 @@
 		await client.Notification.click(id);
 	};
 
+	const getUserImage = (username: string) => {
+		const user = usersMeta.find((user) => user.username === username);
+		return user?.image;
+	};
+
+	const getUserDisplayName = (username: string) => {
+		const user = usersMeta.find((user) => user.username === username);
+		return user?.display_name;
+	};
+
 	onMount(async () => {
 		$page = 'notification';
 		await getNotifications();
@@ -80,7 +98,7 @@
 	<div class="col-span-12 md:col-span-8 md:ml-10">
 		{#if !hasLoaded}
 			<div class="flex h-64 items-center justify-center">
-				<p class="text-center text-gray-600">Loading...</p>
+				<Loading />
 			</div>
 		{:else if hasLoaded && Object.values(notifications).every((notis) => notis.length === 0)}
 			<div class="flex h-64 items-center justify-center">
@@ -97,15 +115,22 @@
 						{#each notis as noti}
 							<a href="#/post/{noti.post_id}" on:click={() => clickedNotification(noti._id)}>
 								<div
+									in:fade
 									class="flex items-center justify-between gap-4 border-b border-gray-300 p-4 text-sm transition ease-in-out hover:bg-gray-100
                                 {noti.clicked ? '' : 'bg-blue-50'}"
 								>
-									<p>
-										<b>{noti.comment_author}</b> commented on
-										{noti.username == $loggedUsername ? 'your post' : 'a post you commented on'}
-									</p>
-
-									<span class="text-xs text-gray-500">{moment(noti.created_at).fromNow()}</span>
+									<div class="flex items-center gap-2">
+										<Avatar
+											src={getUserImage(noti.comment_author)}
+											alt={noti.comment_author}
+											size="xs"
+										/>
+										<p>
+											<b>{getUserDisplayName(noti.comment_author)}</b> commented on
+											{noti.username == $loggedUsername ? 'your post' : 'a post you commented on'}
+										</p>
+									</div>
+									<p class="text-xs text-gray-500">{moment(noti.created_at).fromNow()}</p>
 								</div>
 							</a>
 						{/each}

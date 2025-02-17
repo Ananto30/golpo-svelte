@@ -129,6 +129,7 @@ export interface ErrorResponse {
 }
 
 export interface UserResponse {
+	_id: string;
 	username: string;
 	followers: string[];
 	following: string[];
@@ -137,3 +138,5 @@ export interface UserResponse {
 	image?: string;
 	display_name?: string;
 }
+
+export type UserMetaMap = Map<string, UserMeta>;

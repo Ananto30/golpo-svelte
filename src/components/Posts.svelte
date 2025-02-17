@@ -7,7 +7,7 @@
 
 	export let allPosts: PostType[];
 	export let selectedTag: string;
-	export let users: UserMeta[];
+	export let usersMeta: UserMeta[];
 
 	let filteredPosts: PostType[] = [];
 	let selectedId: string = '';
@@ -45,7 +45,7 @@
 		<div in:fade>
 			<Post
 				{post}
-				{users}
+				{usersMeta}
 				onDelete={() => {
 					selectedId = post._id;
 					modal.open();

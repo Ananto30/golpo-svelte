@@ -5,6 +5,7 @@
 	import client from '../client';
 	import Avatar from '../components/Avatar.svelte';
 	import Footer from '../components/Footer.svelte';
+	import Loading from '../components/Loading.svelte';
 	import Post from '../components/Post.svelte';
 	import Svg from '../components/Svg.svelte';
 	import { error, info, isLoading, loggedUsername } from '../store';
@@ -61,7 +62,6 @@
 	const deleteComment = async (commentId: string): Promise<void> => {
 		try {
 			const res = await client.Post.deleteComment(post._id, commentId);
-			console.log(res);
 			postComments = res.data.comments.reverse();
 		} catch (err) {
 			$error = "Couldn't delete comment!";
@@ -86,10 +86,10 @@
 <div class="grid grid-cols-12">
 	<div class="col-span-12 md:col-span-10">
 		<div in:fade class="mt-16 grid md:mt-6 md:ml-12">
-			{#if postComments.length > 0}
+			{#if post}
 				<Post
 					{post}
-					{users}
+					usersMeta={users}
 					onDelete={() => {
 						$info = 'Cannot delete post from here!';
 					}}
@@ -153,7 +153,7 @@
 					{/each}
 				</div>
 			{:else}
-				<div class="flex h-screen items-center justify-center">Loading...</div>
+				<Loading />
 			{/if}
 		</div>
 	</div>

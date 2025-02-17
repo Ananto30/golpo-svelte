@@ -1,6 +1,6 @@
 <script lang="ts">
 	import client from '../client';
-	import { error, info, tags } from '../store';
+	import { error, info, allTags } from '../store';
 	import Multiselect from './Multiselect.svelte';
 	import type { Post } from '../types';
 
@@ -45,10 +45,10 @@
 			</div>
 		</div>
 		<div class="mx-auto mt-2 flex md:mt-4">
-			{#if $tags.length > 0}
+			{#if $allTags.length > 0}
 				<div class="flex flex-grow">
 					<Multiselect id="tags" bind:value={selectedTags} placeholder="+ Add tags">
-						{#each $tags as tag}
+						{#each $allTags as tag}
 							<option value={tag}>{tag}</option>
 						{/each}
 					</Multiselect>

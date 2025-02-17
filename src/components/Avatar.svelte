@@ -1,9 +1,10 @@
 <script lang="ts">
 	export let src: string | undefined;
 	export let alt: string = 'User avatar';
-	export let size: 's' | 'm' | 'l' = 's';
+	export let size: 's' | 'm' | 'l' | 'xs' = 's';
 
 	let sizes: { [key: string]: string } = {
+		xs: 'h-8 w-8',
 		s: 'h-10 w-10',
 		m: 'h-12 w-12',
 		l: 'h-28 w-28'

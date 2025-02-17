@@ -71,6 +71,7 @@
 
 	onMount(async () => {
 		hashchange();
+
 		if ($myBookmarkIds.length === 0) {
 			const res = await client.Post.getBookmarks();
 			$myBookmarkIds = res.data.bookmarks.map((i: { _id: string }) => i._id);

@@ -7,7 +7,7 @@
 	import Avatar from './Avatar.svelte';
 
 	export let post: Post;
-	export let users: UserMeta[];
+	export let usersMeta: UserMeta[];
 	export let onDelete: () => void;
 
 	const mediaButtonClass =
@@ -40,12 +40,12 @@
 	};
 
 	const getAuthorImage = (author: string) => {
-		const user = users?.find((user) => user.username == author);
+		const user = usersMeta?.find((user) => user.username == author);
 		return user?.image;
 	};
 
 	const getAuthorDisplayName = (author: string) => {
-		const user = users?.find((user) => user.username == author);
+		const user = usersMeta?.find((user) => user.username == author);
 		return user?.display_name;
 	};
 </script>
@@ -61,7 +61,7 @@
 					</a>
 					<div class="flex flex-col gap-1 break-all">
 						<a href="#/profile/{post.author}" class="hover:underline">
-							<div class="text-sm font-semibold text-gray-800">
+							<div class="text-sm font-semibold text-gray-800 capitalize">
 								{getAuthorDisplayName(post.author) || post.author}
 							</div>
 						</a>

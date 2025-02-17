@@ -1,11 +1,12 @@
 <script lang="ts">
 	import moment from 'moment';
 	import { loggedUsername } from '../store';
-	import type { ChatGroup } from '../types';
+	import type { ChatGroup, UserMeta } from '../types';
 	import Avatar from './Avatar.svelte';
 
 	export let chats: ChatGroup[] = [];
 	export let activeChatUsername: string = '';
+	export let usersMeta: UserMeta[] = [];
 
 	const getChatUsername = (chat: ChatGroup) => {
 		if (chat.participants[0] == $loggedUsername) {
@@ -13,6 +14,16 @@
 		} else {
 			return chat.participants[0];
 		}
+	};
+
+	const getUserDisplayName = (username: string) => {
+		const user = usersMeta.find((user) => user?.username == username);
+		return user?.display_name;
+	};
+
+	const getUserImage = (username: string) => {
+		const user = usersMeta.find((user) => user?.username == username);
+		return user?.image;
 	};
 </script>
 
@@ -57,11 +68,13 @@
 					>
 						<div class="flex w-full items-start justify-between">
 							<div class="flex justify-center gap-4 text-left">
-								<Avatar src={undefined} alt={getChatUsername(chat)} />
+								<Avatar src={getUserImage(getChatUsername(chat))} alt={getChatUsername(chat)} />
 								<div>
-									<p class="font-semibold text-gray-800">{getChatUsername(chat)}</p>
+									<p class="font-semibold text-gray-800 capitalize">
+										{getUserDisplayName(getChatUsername(chat))}
+									</p>
 									<p class="line-clamp-1 text-gray-600">
-										{chat.chats[0].from}: {chat.chats[0].text}
+										{chat.chats[0].text}
 									</p>
 								</div>
 							</div>

@@ -3,6 +3,7 @@
 	import client from '../client';
 	import Avatar from '../components/Avatar.svelte';
 	import Footer from '../components/Footer.svelte';
+	import Loading from '../components/Loading.svelte';
 	import PostBox from '../components/PostBox.svelte';
 	import Posts from '../components/Posts.svelte';
 	import ProfileEditModal from '../components/ProfileEditModal.svelte';
@@ -21,6 +22,7 @@
 
 	let users: UserMeta[] = [];
 	let user: UserResponse;
+	let currentUserMeta: UserMeta;
 
 	let editable: boolean = false;
 	let work: string = '';
@@ -57,6 +59,14 @@
 		image = res.data.image || '';
 		displayName = res.data.display_name || slug;
 		followed = res.data.followers.includes($loggedUsername);
+		currentUserMeta = {
+			_id: res.data._id,
+			username: res.data.username,
+			display_name: res.data.display_name,
+			image: res.data.image,
+			__v: 0
+		};
+		users = [...users, currentUserMeta];
 		$isLoading = false;
 	};
 
@@ -77,12 +87,12 @@
 
 	const getFollowers = async () => {
 		const res = await client.User.getFollowers(slug);
-		users = res.data.users;
+		users = [...res.data.users, currentUserMeta];
 	};
 
 	const getFollowing = async () => {
 		const res = await client.User.getFollowing(slug);
-		users = res.data.users;
+		users = [...res.data.users, currentUserMeta];
 	};
 
 	$: if (slug) {
@@ -176,16 +186,16 @@
 					</div>
 				{/if}
 
-				<div in:fade class="mx-auto mt-4 grid">
-					<div class="mx-auto">
-						<Posts bind:allPosts bind:selectedTag {users} />
+				<div in:fade class="mx-auto mt-4 grid w-full">
+					<div class="mx-auto min-w-xl">
+						<Posts bind:allPosts bind:selectedTag usersMeta={users} />
 					</div>
 				</div>
 			{/if}
 		</div>
 	{:else}
 		<div in:fade class="col-span-12 flex h-screen items-center justify-center md:col-span-8">
-			<h3 class="text-md text-center">Loading...</h3>
+			<Loading />
 		</div>
 	{/if}
 	<div class="col-span-4">

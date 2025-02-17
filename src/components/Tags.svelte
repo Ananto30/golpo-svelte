@@ -1,16 +1,15 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
-	import client from '../client';
 	import Svg from '../components/Svg.svelte';
-	import { getTagSvgName } from '../helpers';
-	import { tags } from '../store';
+	import { getAllTags, getTagSvgName } from '../helpers';
 
 	export let selectedTag: string = '';
 
+	let tags: string[] = [];
+
 	const getTags = async (): Promise<void> => {
-		const res = await client.Post.getAllTags();
-		$tags = res.data.tags;
+		tags = await getAllTags();
 	};
 
 	const selectTag = (tag: string): void => {
@@ -30,13 +29,13 @@
 	<div in:fade class="rounded-2xl bg-white">
 		<h2 class="font-rubik text-yellow px-2 text-2xl font-bold">Tags</h2>
 		<div class="flex flex-wrap pt-4">
-			{#if $tags.length == 0}
+			{#if tags.length == 0}
 				{#each Array(10) as _}
 					<div class="m-2 h-4 w-10 animate-pulse bg-gray-300"></div>
 				{/each}
 			{/if}
 
-			{#each $tags as tag}
+			{#each tags as tag}
 				<button
 					in:fade
 					on:click={() => selectTag(tag)}
