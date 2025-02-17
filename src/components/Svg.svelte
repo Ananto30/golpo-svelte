@@ -37,32 +37,37 @@
 		{
 			box: 256,
 			name: 'love',
-			svg: `<path d="M128,216S28,160,28,92A52.00881,52.00881,0,0,1,128.00008,71.965l-.00019.00008A52.00881,52.00881,0,0,1,228,92C228,160,128,216,128,216Z" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path>`
+			svg: `<path d="M128,216S28,160,28,92A52.00881,52.00881,0,0,1,128.00008,71.965l-.00019.00008A52.00881,52.00881,0,0,1,228,92C228,160,128,216,128,216Z" fill="none" stroke="#6b7280" stroke-linecap="round" stroke-linejoin="round" stroke-width="20"></path>`
 		},
 		{
 			box: 256,
 			name: 'red-love',
-			svg: `<path d="M128,216S28,160,28,92A52.00881,52.00881,0,0,1,128.00008,71.965l-.00019.00008A52.00881,52.00881,0,0,1,228,92C228,160,128,216,128,216Z" fill="red" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path>`
+			svg: `<path d="M128,216S28,160,28,92A52.00881,52.00881,0,0,1,128.00008,71.965l-.00019.00008A52.00881,52.00881,0,0,1,228,92C228,160,128,216,128,216Z" fill="red" stroke="red" stroke-linecap="round" stroke-linejoin="round" stroke-width="20"></path>`
 		},
 		{
 			box: 256,
 			name: 'comment',
-			svg: `<line x1="96.00049" y1="103.99951" x2="160.00049" y2="103.99951" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line><line x1="96.00049" y1="135.99951" x2="160.00049" y2="135.99951" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line><path d="M149.66907,195.88358l-14.80961,24.68269a8,8,0,0,1-13.71989,0l-14.80964-24.68272a8,8,0,0,0-6.85994-3.884H39.99951a8,8,0,0,1-8-8V56a8,8,0,0,1,8-8h176a8,8,0,0,1,8,8V184a8,8,0,0,1-8,8l-59.47039-.00041A8,8,0,0,0,149.66907,195.88358Z" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path>`
+			svg: `<path d="M105.07,192l16,28a8,8,0,0,0,13.9,0l16-28H216a8,8,0,0,0,8-8V56a8,8,0,0,0-8-8H40a8,8,0,0,0-8,8V184a8,8,0,0,0,8,8Z" fill="none" stroke="#6b7280" stroke-linecap="round" stroke-linejoin="round" stroke-width="20"/>`
 		},
 		{
 			box: 256,
 			name: 'bookmark',
+			svg: `<path d="M192,224l-64.0074-40L64,224V48a8,8,0,0,1,8-8H184a8,8,0,0,1,8,8Z" fill="none" stroke="#6b7280" stroke-linecap="round" stroke-linejoin="round" stroke-width="20"></path>`
+		},
+		{
+			box: 256,
+			name: 'bookmarkbig',
 			svg: `<path d="M192,224l-64.0074-40L64,224V48a8,8,0,0,1,8-8H184a8,8,0,0,1,8,8Z" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path>`
 		},
 		{
 			box: 256,
 			name: 'bookmarked',
-			svg: `<path d="M192,224l-64.0074-40L64,224V48a8,8,0,0,1,8-8H184a8,8,0,0,1,8,8Z" fill="black" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path>`
+			svg: `<path d="M192,224l-64.0074-40L64,224V48a8,8,0,0,1,8-8H184a8,8,0,0,1,8,8Z" fill="#0369a1" stroke="#0369a1" stroke-linecap="round" stroke-linejoin="round" stroke-width="20"></path>`
 		},
 		{
 			box: 256,
 			name: 'delete',
-			svg: `<line x1="215.99609" y1="56" x2="39.99609" y2="56.00005" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line><line x1="104" y1="104" x2="104" y2="168" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line><line x1="152" y1="104" x2="152" y2="168" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line><path d="M200,56V208a8,8,0,0,1-8,8H64a8,8,0,0,1-8-8V56" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path><path d="M168,56V40a16,16,0,0,0-16-16H104A16,16,0,0,0,88,40V56" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path>`
+			svg: `<line x1="216" y1="56" x2="40" y2="56" fill="none" stroke="#6b7280" stroke-linecap="round" stroke-linejoin="round" stroke-width="20"/><line x1="104" y1="104" x2="104" y2="168" fill="none" stroke="#6b7280" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="152" y1="104" x2="152" y2="168" fill="none" stroke="#6b7280" stroke-linecap="round" stroke-linejoin="round" stroke-width="20"/><path d="M200,56V208a8,8,0,0,1-8,8H64a8,8,0,0,1-8-8V56" fill="none" stroke="#6b7280" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M168,56V40a16,16,0,0,0-16-16H104A16,16,0,0,0,88,40V56" fill="none" stroke="#6b7280" stroke-linecap="round" stroke-linejoin="round" stroke-width="20"/>`
 		},
 		{
 			box: 256,

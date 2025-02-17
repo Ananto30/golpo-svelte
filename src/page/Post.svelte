@@ -95,23 +95,26 @@
 					}}
 				/>
 
-				<div class="mt-4 max-w-xl p-4 text-sm">
+				<div class="mt-4 max-w-xl p-2 text-sm">
 					<div class="mb-4 border-gray-300">
 						<textarea
-							class="w-full border p-2 outline-none"
+							class="w-full rounded-md border border-gray-300 bg-gray-100 p-4 outline-none"
 							on:keyup={handleKeyup}
 							bind:value={postComment}
 							rows="3"
 							style="resize: none;"
 						>
 						</textarea>
-						<div class="flex justify-end">
-							<button
-								on:click={addComment}
-								class="border border-transparent bg-black px-2 py-1 text-sm text-white transition duration-200 hover:cursor-pointer hover:border-current hover:bg-white hover:text-black focus-visible:ring"
-							>
-								<span class="text-xs">Comment</span>
-							</button>
+						<div class="flex items-start justify-between">
+							<p class="text-xs text-gray-500">*pressing enter will send the comment</p>
+							<div class="flex justify-end">
+								<button
+									on:click={addComment}
+									class="border border-transparent bg-black px-2 py-1 text-sm text-white transition duration-200 hover:cursor-pointer hover:border-current hover:bg-white hover:text-black focus-visible:ring"
+								>
+									<span class="text-xs">Comment</span>
+								</button>
+							</div>
 						</div>
 					</div>
 

@@ -32,7 +32,7 @@
 		{
 			name: 'Bookmarks',
 			href: '#/bookmarks',
-			icon: 'bookmark'
+			icon: 'bookmarkbig'
 		},
 		{
 			name: 'Users',
@@ -42,7 +42,7 @@
 	];
 
 	const navButtonClass =
-		'flex items-center gap-2 -ml-4 mr-4 transition ease-in-out cursor-pointer rounded-lg p-4 hover:bg-gray-200 w-full font-medium font-poppins';
+		'flex items-center gap-2 -ml-4 mr-4 transition ease-in-out cursor-pointer rounded-md p-4 hover:bg-gray-200 w-full font-medium font-poppins';
 
 	const logout = () => {
 		$loggedUsername = '';

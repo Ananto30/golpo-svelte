@@ -1,4 +1,5 @@
 # Golpo Svelte
+
 [![DeepScan grade](https://deepscan.io/api/teams/15735/projects/28867/branches/930391/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=15735&pid=28867&bid=930391)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/18825ae665cd4e2eb96c8b704f0a85db)](https://app.codacy.com/gh/Ananto30/golpo-svelte/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 [![CodeQL](https://github.com/Ananto30/golpo-svelte/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/Ananto30/golpo-svelte/actions/workflows/codeql-analysis.yml)

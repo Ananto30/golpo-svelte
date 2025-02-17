@@ -11,7 +11,7 @@
 	export let onDelete: () => void;
 
 	const mediaButtonClass =
-		'flex items-center gap-1 px-2 py-1 text-sm transition duration-200 ease-in-out md:px-3 border border-transparent hover:border-gray-400 focus-visible:ring active:border-current hover:cursor-pointer';
+		'flex items-center gap-1 p-2 text-sm transition duration-200 ease-in-out md:px-3 border border-transparent rounded-full hover:bg-gray-200 focus-visible:ring active:border-current cursor-pointer';
 
 	const lovePost = async (postId: string) => {
 		if (!post.isLovedByMe) {
@@ -94,18 +94,26 @@
 				<div class="mt-4 flex justify-start">
 					<div class="flex gap-4 px-2">
 						<!-- love -->
-						<button title="loves" on:click={() => lovePost(post._id)} class={mediaButtonClass}>
+						<button
+							title="loves"
+							on:click={() => lovePost(post._id)}
+							class="{mediaButtonClass} hover:bg-red-200"
+						>
 							{#if post.isLovedByMe}
-								<Svg name="red-love" height="16" width="16" />
+								<Svg name="red-love" height="18" width="18" />
 							{:else}
-								<Svg name="love" height="16" width="16" />
+								<Svg name="love" height="18" width="18" />
 							{/if}
 							<span>{post.loveCount}</span>
 						</button>
 
 						<!-- comment -->
-						<a href="#/post/{post._id}" title="comments" class={mediaButtonClass}>
-							<Svg name="comment" height="16" width="16" />
+						<a
+							href="#/post/{post._id}"
+							title="comments"
+							class="{mediaButtonClass} hover:bg-blue-200"
+						>
+							<Svg name="comment" height="18" width="18" />
 							<span>{post.commentCount}</span>
 						</a>
 
@@ -114,9 +122,9 @@
 							<button
 								title="unbookmark"
 								on:click={() => unbokmarkPost(post._id)}
-								class={mediaButtonClass}
+								class="{mediaButtonClass} "
 							>
-								<Svg name="bookmarked" height="16" width="16" />
+								<Svg name="bookmarked" height="18" width="18" />
 							</button>
 						{:else}
 							<button
@@ -124,14 +132,14 @@
 								on:click={() => bookmarkPost(post._id)}
 								class={mediaButtonClass}
 							>
-								<Svg name="bookmark" height="16" width="16" />
+								<Svg name="bookmark" height="18" width="18" />
 							</button>
 						{/if}
 
 						<!-- delete -->
 						{#if post.author == $loggedUsername}
 							<button title="delete" on:click={onDelete} class={mediaButtonClass}>
-								<Svg name="delete" height="16" width="16" />
+								<Svg name="delete" height="18" width="18" />
 							</button>
 						{/if}
 
