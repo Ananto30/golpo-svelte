@@ -7,7 +7,7 @@ export default defineConfig({
 	plugins: [sveltekit(), tailwindcss()],
 
 	test: {
-		workspace: [
+		projects: [
 			{
 				extends: './vite.config.ts',
 				plugins: [svelteTesting()],
